@@ -1,4 +1,10 @@
+import { useRouter } from 'next/router'
+
 export default function Categories() {
+  const router = useRouter()
+
+  if(router.pathname === "/search") return
+
   return (
     <div className="bg-white sticky top-0">
       <span>カテゴリー</span>
