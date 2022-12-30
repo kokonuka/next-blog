@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, DatePicker } from 'antd';
 
 export default function Index() {
   return (
@@ -6,6 +6,7 @@ export default function Index() {
       <div>
         検索バー
         <Button type="primary">Primary Button</Button>
+        <DatePicker />
       </div>
       <div>
         タグ一覧
