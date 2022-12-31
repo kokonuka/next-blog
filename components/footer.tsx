@@ -1,9 +1,13 @@
+import { Container } from "@chakra-ui/react"
+
 export default function Footer() {
   return (
-    <footer className=''>
-      フッター
-      カテゴリ一覧
-      SNS
+    <footer>
+      <Container maxW="6xl">
+        フッター
+        カテゴリ一覧
+        SNS
+      </Container>
     </footer>
   )
 }

@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import { Box } from '@chakra-ui/react'
+import { Container, Box, Text } from '@chakra-ui/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,34 +16,36 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section>
-        <Box height="96" bg="gray.600">
-        サイトタイトル<br />
-        駆け出しエンジニアの備忘録です<br />
+        <Box height="96" bg="gray.600" display="flex" justifyContent="center" alignItems="center" flexDirection="column">
+        <Text fontWeight="bold" fontSize="2xl">サイトタイトル</Text>
+        <Text fontSize="xl">駆け出しエンジニアの備忘録です</Text>
         入力アニメーション
         （カテゴリ等）
         背景：3Dアニメーション
         </Box>
       </section>
-      <section>
-        <Box height="96">
-          新着
-        </Box>
-      </section>
-      <section>
-        <Box height="96">
-          自己紹介
-        </Box>
-      </section>
-      <section>
-        <Box height="96">
-          Twitterカード
-        </Box>
-      </section>
-      <section>
-        <Box height="96">
-          タグ一覧
-        </Box>
-      </section>
+      <Container maxW="6xl">
+        <section>
+          <Box height="96">
+            新着
+          </Box>
+        </section>
+        <section>
+          <Box height="96">
+            自己紹介
+          </Box>
+        </section>
+        <section>
+          <Box height="96">
+            Twitterカード
+          </Box>
+        </section>
+        <section>
+          <Box height="96">
+            タグ一覧
+          </Box>
+        </section>
+      </Container>
     </>
   )
 }

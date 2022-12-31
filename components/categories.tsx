@@ -1,3 +1,4 @@
+import { Tabs, TabList, Tab, Container } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
 export default function Categories() {
@@ -6,13 +7,14 @@ export default function Categories() {
   if(router.pathname === "/search") return null
 
   return (
-    <div className="bg-white sticky top-0">
-      <span>カテゴリー</span>
-      <span>カテゴリー</span>
-      <span>カテゴリー</span>
-      <span>カテゴリー</span>
-      <span>カテゴリー</span>
-      <span>カテゴリー</span>
-    </div>
+    <Tabs bg="white" position="sticky" top="0">
+      <Container maxW="6xl">
+      <TabList>
+        <Tab>One</Tab>
+        <Tab>Two</Tab>
+        <Tab>Three</Tab>
+      </TabList>
+      </Container>
+    </Tabs>
   )
 }
