@@ -128,5 +128,6 @@ a {
 .video {
   position: absolute;
   top: 0;
-  overflow: hidden;
+  bottom: 0;
+  transform: scale(4);
 }
