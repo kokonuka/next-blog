@@ -106,3 +106,9 @@ a {
     color-scheme: dark;
   }
 }
+
+.video {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}

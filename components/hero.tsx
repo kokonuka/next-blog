@@ -33,11 +33,14 @@ export default function Hero() {
 
   return (
     <section>
-      <Box height="96" bg="gray.600" display="flex" justifyContent="center" alignItems="center" flexDirection="column">
-        <Text fontWeight="bold" fontSize="2xl">サイトタイトル</Text>
-        <Text fontSize="xl">
-          <span ref={el}></span>
-        </Text>
+      <Box position="relative" height="96" display="flex" justifyContent="center" flexDirection="column" overflow="hidden">
+        <Box position="relative" zIndex="1">
+          <Text fontSize="2xl" color="white" fontWeight="bold" textAlign="center">サイトタイトル</Text>
+          <Text fontSize="xl" color="white" textAlign="center">
+            <span ref={el}></span>
+          </Text>
+        </Box>
+        <video className="video" src="/movies/14019_1280x720.mp4" autoPlay loop muted playsInline  ></video>
       </Box>
     </section>
   )
