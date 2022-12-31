@@ -17,7 +17,7 @@ import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = useRef()
+  const btnRef = useRef(null)
 
   return (
     <header>
