@@ -1,15 +1,53 @@
+import { useRef } from "react";
 import Link from "next/link"
+import {
+  useDisclosure,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+
+  Input,
+  Button,
+} from '@chakra-ui/react'
+import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 
 export default function Header() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef()
+
   return (
     <header className='bg-white flex justify-between'>
       <Link href="/search">
-        検索
+        <AiOutlineSearch />
       </Link>
       <Link href="/">
         Hoge
       </Link>
-      <button>サイドバー</button>
+      <Button bg="inherit" ref={btnRef} onClick={onOpen}>
+        <AiOutlineMenu />
+      </Button>
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Menu</DrawerHeader>
+          <DrawerBody>
+            hoge
+          </DrawerBody>
+          <DrawerFooter>
+            hoge
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </header>
   )
 }
