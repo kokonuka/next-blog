@@ -40,7 +40,7 @@ export default function Hero() {
             <span ref={el}></span>
           </Text>
         </Box>
-        <video className="video" src="/movies/14019_1280x720.mp4" autoPlay loop muted playsInline  ></video>
+        <video className="video" src="/movies/14019_1280x720.mp4" autoPlay loop muted playsInline></video>
       </Box>
     </section>
   )

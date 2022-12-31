@@ -1,9 +1,32 @@
+import { useState, useRef, useEffect } from 'react'
 import Head from 'next/head'
 import { Container, Box } from '@chakra-ui/react'
+import { Blocks } from 'react-loader-spinner'
 
 import Hero from '../components/hero'
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true)
+  let loadingWrap = useRef<HTMLDivElement>(null)
+  let loading = useRef<HTMLDivElement>(null)
+  const keyName = 'visited';
+
+  // ローディング処理
+  useEffect(() => {
+    if(sessionStorage.getItem(keyName)) {
+      setIsLoading(false)
+      return
+    }
+    loading.current?.classList.add("active")
+    setTimeout(() => {
+      loadingWrap.current?.classList.remove("active")
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1000)
+    }, 2000)
+    sessionStorage.setItem(keyName, "true")
+  }, [])
+
   return (
     <>
       <Head>
@@ -35,6 +58,24 @@ export default function Home() {
           </Box>
         </section>
       </Container>
+      {isLoading && (
+        <Box 
+          ref={loadingWrap} 
+          className="loadingWrap active" 
+          position="absolute" top="0" w="100%" h="100vh" bg="white" display="flex" justifyContent="center" alignItems="center" zIndex="1"
+        >
+          <Box ref={loading} className='loading'>
+            <Blocks
+              visible={true}
+              height="100"
+              width="100"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+            />
+          </Box>
+        </Box>
+      )}
     </>
   )
 }

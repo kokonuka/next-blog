@@ -107,6 +107,24 @@ a {
   }
 }
 
+.loadingWrap {
+  opacity: 0;
+  transition: all 1s;
+}
+
+.loadingWrap.active {
+  opacity: 1;
+  transition: all 1s; 
+}
+
+.loading {
+  opacity: 0;
+}
+
+.loading.active {
+  opacity: 1;
+}
+
 .video {
   position: absolute;
   top: 0;
