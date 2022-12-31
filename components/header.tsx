@@ -2,6 +2,7 @@ import { useRef } from "react";
 import Link from "next/link"
 import {
   useDisclosure,
+  Box,
   Drawer,
   DrawerBody,
   DrawerFooter,
@@ -9,7 +10,6 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-
   Input,
   Button,
 } from '@chakra-ui/react'
@@ -20,16 +20,18 @@ export default function Header() {
   const btnRef = useRef()
 
   return (
-    <header className='bg-white flex justify-between'>
-      <Link href="/search">
-        <AiOutlineSearch />
-      </Link>
-      <Link href="/">
-        Hoge
-      </Link>
-      <Button bg="inherit" ref={btnRef} onClick={onOpen}>
-        <AiOutlineMenu />
-      </Button>
+    <header>
+      <Box bg="white" display="flex" justifyContent="space-between">
+        <Link href="/search">
+          <AiOutlineSearch />
+        </Link>
+        <Link href="/">
+          Hoge
+        </Link>
+        <Box ref={btnRef} onClick={onOpen}>
+          <AiOutlineMenu />
+        </Box>
+      </Box>
       <Drawer
         isOpen={isOpen}
         placement='right'

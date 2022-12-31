@@ -1,12 +1,14 @@
+import { Box } from '@chakra-ui/react'
+
 export default function Index() {
   return (
-    <section className="bg-white h-96">
+    <Box bg="white" height="96" minH="100vh">
       <div>
         検索バー
       </div>
       <div>
         タグ一覧
       </div>
-    </section>
+    </Box>
   )
 }

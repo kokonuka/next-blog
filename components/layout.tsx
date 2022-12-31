@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Box } from '@chakra-ui/react'
 
 interface Props {
   children: ReactNode
@@ -13,7 +14,11 @@ export default function Layout({ children }: Props) {
     <>
       <Header />
       <Categories />
-      <main className="bg-blue-50">{children}</main>
+      <main>
+        <Box bg="blue.50" minH="100vh">
+          {children}
+        </Box>
+      </main>
       <Footer />
     </>
   )
