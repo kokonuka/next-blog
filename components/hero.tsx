@@ -17,8 +17,8 @@ export default function Hero() {
         "GraphQL", 
         "Tailwind CSS", 
         "Chakra UI",
+        "駆け出しエンジニアの備忘録です",
       ],
-      // Speed settings, try diffrent values untill you get good results
       startDelay: 500,
       typeSpeed: 100,
       backSpeed: 50,
