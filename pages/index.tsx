@@ -135,15 +135,7 @@ const Home:NextPage<Props> = (props) => {
           className="loadingWrap active" 
           position="absolute" top="0" w="100%" h="100vh" bg="white" display="flex" justifyContent="center" alignItems="center" zIndex="1"
         >
-          <Box ref={loading} className='loading'>
-            {/* <Blocks
-              visible={true}
-              height="100"
-              width="100"
-              ariaLabel="blocks-loading"
-              wrapperStyle={{}}
-              wrapperClass="blocks-wrapper"
-            /> */}
+          <Box ref={loading} className='loading' mt="-24">
             <Triangle
               height="80"
               width="80"
