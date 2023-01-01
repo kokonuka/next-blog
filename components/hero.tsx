@@ -35,7 +35,7 @@ export default function Hero() {
     <section>
       <Box position="relative" height="96" display="flex" justifyContent="center" flexDirection="column" overflow="hidden">
         <Box position="relative" zIndex="1">
-          <Text fontSize="2xl" color="white" fontWeight="bold" textAlign="center">サイトタイトル</Text>
+          <Text fontSize="2xl" color="white" fontWeight="bold" textAlign="center">HogeHoge</Text>
           <Text fontSize="xl" color="white" textAlign="center">
             <span ref={el}></span>
           </Text>
