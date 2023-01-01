@@ -7,7 +7,7 @@ export default function Categories() {
   if(router.pathname === "/search") return null
 
   return (
-    <Tabs bg="white" position="sticky" top="0" zIndex="1">
+    <Tabs className='categoriesWrap' bg="white" w="100vw" overflowX="scroll" position="sticky" top="0" zIndex="1">
       <Container maxW="6xl">
       <TabList>
         <Tab>Category1</Tab>
