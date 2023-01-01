@@ -18,6 +18,7 @@ const queryFunc = (keyword: string | string[] | undefined) => {
   return `query getPosts {
     posts(where: {search: "${keyword}"}) {
       nodes {
+        id
         postId
         date
         title
