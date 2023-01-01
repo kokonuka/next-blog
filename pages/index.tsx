@@ -133,7 +133,7 @@ const Home:NextPage<Props> = (props) => {
         <Box 
           ref={loadingWrap} 
           className="loadingWrap active" 
-          position="absolute" top="0" w="100%" h="100vh" bg="white" display="flex" justifyContent="center" alignItems="center" zIndex="1"
+          position="absolute" top="0" w="100%" h="100vh" bg="white" display="flex" justifyContent="center" alignItems="center" zIndex="2"
         >
           <Box ref={loading} className='loading' mt="-24">
             <Triangle
