@@ -114,7 +114,6 @@ a {
 
 .loadingWrap.active {
   opacity: 1;
-  transition: all 1s; 
 }
 
 .loading {
@@ -123,6 +122,16 @@ a {
 
 .loading.active {
   opacity: 1;
+  transition: all 0.5s; 
+}
+
+.categoriesWrap {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.categoriesWrap::-webkit-scrollbar {
+  display: none;
 }
 
 .video {
