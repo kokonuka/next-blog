@@ -52,9 +52,6 @@ export default function Header() {
           <DrawerBody>
             hoge
           </DrawerBody>
-          <DrawerFooter>
-            hoge
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </header>
