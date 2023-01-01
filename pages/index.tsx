@@ -16,7 +16,8 @@ type Props = {
 const query = `query getPosts {
   posts(first: 4) {
     nodes {
-      postId
+      id
+      slug
       date
       title
       featuredImage {
@@ -54,7 +55,7 @@ export const getStaticProps = async () => {
 }
 
 const Home:NextPage<Props> = (props) => {
-  const posts = props.posts
+  const { posts } = props
 
   const [isLoading, setIsLoading] = useState(true)
   let loadingWrap = useRef<HTMLDivElement>(null)
