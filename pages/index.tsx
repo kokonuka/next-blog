@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 import Head from 'next/head'
-import { Container, Box } from '@chakra-ui/react'
+import Link from 'next/link'
+import { Container, Box, Text } from '@chakra-ui/react'
 import { Blocks } from 'react-loader-spinner'
 
 import Hero from '../components/hero'
+import CardList from '../components/cardList'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -38,8 +40,10 @@ export default function Home() {
       <Hero />
       <Container maxW="6xl">
         <section>
-          <Box height="96">
-            新着
+          <Box py="10">
+            <Text fontSize="3xl" fontWeight="bold" py="3">New Posts</Text>
+            <CardList />
+            <Link href="/posts">記事をもっと見る</Link>
           </Box>
         </section>
         <section>
