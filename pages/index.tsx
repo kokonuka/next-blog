@@ -40,24 +40,28 @@ export default function Home() {
       <Hero />
       <Container maxW="6xl">
         <section>
-          <Box py="10">
-            <Text fontSize="3xl" fontWeight="bold" py="3">New Posts</Text>
+          <Box py="16">
+            <Box py="3" display="flex" justifyContent="space-between">
+              <Text fontSize="3xl" fontWeight="bold">New Posts</Text>
+              <Text display="flex" alignItems="flex-end">
+                <Link href="/posts">全ての記事を見る</Link>
+              </Text>
+            </Box>
             <CardList />
-            <Link href="/posts">記事をもっと見る</Link>
           </Box>
         </section>
         <section>
-          <Box height="96">
+          <Box height="96" py="16">
             自己紹介
           </Box>
         </section>
         <section>
-          <Box height="96">
+          <Box height="96" py="16">
             Twitterカード
           </Box>
         </section>
         <section>
-          <Box height="96">
+          <Box height="96" py="16">
             タグ一覧
           </Box>
         </section>
