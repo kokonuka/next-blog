@@ -137,6 +137,9 @@ a {
 .video {
   position: absolute;
   top: 0;
-  bottom: 0;
-  transform: scale(4);
+  width: 100%;
+  background-image: url(/images/image_0103_01.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* transform: scale(4); */
 }
