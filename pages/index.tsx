@@ -150,7 +150,6 @@ const Home:NextPage<Props> = (props) => {
               color="#4fa94d"
               ariaLabel="triangle-loading"
               wrapperStyle={{}}
-              wrapperClassName=""
               visible={true}
             />
           </Box>
