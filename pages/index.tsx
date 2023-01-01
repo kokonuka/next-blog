@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { Container, Box, Text } from '@chakra-ui/react'
-import { Blocks } from 'react-loader-spinner'
+import { Blocks, Triangle } from 'react-loader-spinner'
 
 import type { NextPage } from 'next'
 
@@ -84,7 +84,7 @@ const Home:NextPage<Props> = (props) => {
       setIsLoading(false)
       return
     }
-    loading.current?.classList.add("active")
+    setTimeout(() => loading.current?.classList.add("active"), 500)
     setTimeout(() => {
       loadingWrap.current?.classList.remove("active")
       setTimeout(() => {
@@ -106,13 +106,11 @@ const Home:NextPage<Props> = (props) => {
       <Container maxW="6xl">
         <section>
           <Box py="16">
-            <Box py="3" display="flex" justifyContent="space-between">
-              <Text fontSize="3xl" fontWeight="bold">New Posts</Text>
-              <Text display="flex" alignItems="flex-end">
-                <Link href="/posts">全ての記事を見る</Link>
-              </Text>
-            </Box>
+            <Text pb="5" fontSize="3xl" fontWeight="bold">New Posts</Text>
             <CardList posts={posts}/>
+            <Text mt="10" textAlign="center">
+              <Link href="/posts">全ての記事を見る</Link>
+            </Text>
           </Box>
         </section>
         <section>
@@ -138,13 +136,22 @@ const Home:NextPage<Props> = (props) => {
           position="absolute" top="0" w="100%" h="100vh" bg="white" display="flex" justifyContent="center" alignItems="center" zIndex="1"
         >
           <Box ref={loading} className='loading'>
-            <Blocks
+            {/* <Blocks
               visible={true}
               height="100"
               width="100"
               ariaLabel="blocks-loading"
               wrapperStyle={{}}
               wrapperClass="blocks-wrapper"
+            /> */}
+            <Triangle
+              height="80"
+              width="80"
+              color="#4fa94d"
+              ariaLabel="triangle-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
             />
           </Box>
         </Box>
