@@ -19,7 +19,7 @@ export default function Hero() {
         "Chakra UI",
         "駆け出しエンジニアの備忘録です",
       ],
-      startDelay: 500,
+      startDelay: 3000,
       typeSpeed: 100,
       backSpeed: 50,
       backDelay: 1000
