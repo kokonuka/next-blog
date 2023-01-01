@@ -10,9 +10,11 @@ export default function Categories() {
     <Tabs bg="white" position="sticky" top="0" zIndex="1">
       <Container maxW="6xl">
       <TabList>
-        <Tab>One</Tab>
-        <Tab>Two</Tab>
-        <Tab>Three</Tab>
+        <Tab>Category1</Tab>
+        <Tab>Category2</Tab>
+        <Tab>Category3</Tab>
+        <Tab>Category4</Tab>
+        <Tab>Category5</Tab>
       </TabList>
       </Container>
     </Tabs>
