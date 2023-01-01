@@ -2,12 +2,28 @@ import { GetServerSideProps } from "next"
 import { Container, Image, Text, Box } from "@chakra-ui/react"
 
 type Props = {
-  post: object
+  post: Post
 }
 
-const Post = (props: Props) => {
-  const { post } = props
+type Post = {
+  id: string
+  title: string
+  slug: string
+  date: string
+  content: string
+  featuredImage: {
+    node: {
+      mediaItemUrl: string
+    }
+  }
+  categories: {
+    nodes: Array<{
+      name: string
+    }>
+  }
+}
 
+const Post = ({ post }: Props) => {
   return (
     <>
       <Container maxW="6xl" py="10">
@@ -45,7 +61,7 @@ const Post = (props: Props) => {
 export default Post
 
 
-const queryFunc = (slug) => {
+const queryFunc = (slug: string | string[] | undefined) => {
   return `query getPosts {
     post(id: "${slug}" idType: SLUG) {
       postId
@@ -71,7 +87,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let query = queryFunc(slug)
 
   const response = await fetch(
-    process.env.GRAPHQL_ENDPOINT,
+    process.env.GRAPHQL_ENDPOINT!,
     {
       method: "POST",
       headers: {

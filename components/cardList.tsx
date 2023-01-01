@@ -1,15 +1,33 @@
-import { 
-  Box
-} from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 
 import CardSp from './cardSp'
 import CardPc from './cardPc'
 
-export default function cardList({ posts }) {
+interface Props {
+  posts: Array<Post>
+}
+
+type Post = {
+  id: string
+  title: string
+  slug: string
+  featuredImage: {
+    node: {
+      mediaItemUrl: string
+    }
+  }
+  categories: {
+    nodes: Array<{
+      name: string
+    }>
+  }
+}
+
+export default function cardList({ posts }: Props) {
   return (
     <>
       <Box display={{ base: "flex", md: "none"}} flexDirection="column" gap="10">
-        {posts.length !== 0 && posts.map((post) => (
+        {posts.length !== 0 && posts.map((post: Post) => (
           <CardSp key={post.id} post={post}/>
         ))}
       </Box>

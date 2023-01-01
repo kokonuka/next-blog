@@ -14,7 +14,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 import CardList from "../../components/cardList";
 
-const queryFunc = (keyword) => {
+const queryFunc = (keyword: string | string[] | undefined) => {
   return `query getPosts {
     posts(where: {search: "${keyword}"}) {
       nodes {
@@ -45,7 +45,7 @@ export default function Index() {
   const fetchPosts = async () => {
     let query = queryFunc(q)
     const response = await fetch(
-      process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+      process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT!,
       {
         method: "POST",
         headers: {

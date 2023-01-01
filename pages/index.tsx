@@ -10,7 +10,23 @@ import Hero from '../components/hero'
 import CardList from '../components/cardList'
 
 type Props = {
-  posts: Array<Object>
+  posts: Array<Post>
+}
+
+type Post = {
+  id: string
+  title: string
+  slug: string
+  featuredImage: {
+    node: {
+      mediaItemUrl: string
+    }
+  }
+  categories: {
+    nodes: Array<{
+      name: string
+    }>
+  }
 }
 
 const query = `query getPosts {
@@ -36,7 +52,7 @@ const query = `query getPosts {
 
 export const getStaticProps = async () => {
   const response = await fetch(
-    process.env.GRAPHQL_ENDPOINT,
+    process.env.GRAPHQL_ENDPOINT!,
     {
       method: "POST",
       headers: {

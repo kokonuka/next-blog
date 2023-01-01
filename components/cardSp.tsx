@@ -10,7 +10,27 @@ import {
   LinkOverlay 
 } from '@chakra-ui/react'
 
-export default function CardSp({ post }) {
+type Props = {
+  post: Post
+}
+
+type Post = {
+  id: string
+  title: string
+  slug: string
+  featuredImage: {
+    node: {
+      mediaItemUrl: string
+    }
+  }
+  categories: {
+    nodes: Array<{
+      name: string
+    }>
+  }
+}
+
+export default function CardSp({ post }: Props) {
   return (
     <>
       <LinkBox>
