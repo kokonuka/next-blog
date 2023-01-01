@@ -19,7 +19,7 @@ const queryFunc = (keyword: string | string[] | undefined) => {
     posts(where: {search: "${keyword}"}) {
       nodes {
         id
-        postId
+        slug
         date
         title
         featuredImage {
