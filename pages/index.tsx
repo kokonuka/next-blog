@@ -4,10 +4,58 @@ import Link from 'next/link'
 import { Container, Box, Text } from '@chakra-ui/react'
 import { Blocks } from 'react-loader-spinner'
 
+import type { NextPage } from 'next'
+
 import Hero from '../components/hero'
 import CardList from '../components/cardList'
 
-export default function Home() {
+type Props = {
+  posts: Array<Object>
+}
+
+const query = `query getPosts {
+  posts(first: 4) {
+    nodes {
+      postId
+      date
+      title
+      featuredImage {
+        node {
+          mediaItemUrl
+        }
+      }
+      categories {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+}`;
+
+export const getStaticProps = async () => {
+  const response = await fetch(
+    process.env.GRAPHQL_ENDPOINT,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ query }),
+    },
+  )
+  const data = await response.json()
+
+  return {
+    props:{
+      posts: data.data.posts.nodes
+    }
+  }
+}
+
+const Home:NextPage<Props> = (props) => {
+  const posts = props.posts
+
   const [isLoading, setIsLoading] = useState(true)
   let loadingWrap = useRef<HTMLDivElement>(null)
   let loading = useRef<HTMLDivElement>(null)
@@ -47,7 +95,7 @@ export default function Home() {
                 <Link href="/posts">全ての記事を見る</Link>
               </Text>
             </Box>
-            <CardList />
+            <CardList posts={posts}/>
           </Box>
         </section>
         <section>
@@ -87,3 +135,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

@@ -8,7 +8,7 @@ import {
   CardBody, 
 } from '@chakra-ui/react'
 
-export default function CardSp() {
+export default function CardSp({ post }) {
   return (
     <>
       <Card
@@ -28,9 +28,9 @@ export default function CardSp() {
         />
         <Stack>
           <CardBody p="0" pl="3">
-            <Heading size='md' color="gray.700">Next.jsでモダンなJamstackブログを作ってみる</Heading>
+            <Heading size='md' color="gray.700">{post.title}</Heading>
             <Box mt="3" display="flex" gap="2">
-              <Text fontSize="xs">カテゴリ名</Text>
+              <Text fontSize="xs">{post.categories.nodes[0].name}</Text>
               <Text fontSize="xs">〇日前</Text>
             </Box>
           </CardBody>
