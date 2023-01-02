@@ -99,7 +99,7 @@ body {
 main {
   background-color: #ebf8ff;
   flex: 1;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
 }
 
@@ -167,7 +167,6 @@ code::-webkit-scrollbar {
 }
 
 .post-content {
-  font-size: 12px;
   line-height: 1.5em;
 }
 
@@ -292,7 +291,6 @@ code::-webkit-scrollbar {
 
 .post-content pre {
   white-space: pre;
-  white-space: pre-wrap;
   word-wrap: break-word;
 }
 
