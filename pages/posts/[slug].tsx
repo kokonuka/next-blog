@@ -29,7 +29,7 @@ type Post = {
 const Post = ({ post }: Props) => {
   return (
     <>
-      <Container maxW="6xl" py="10">
+      <Container maxW="6xl" py="10" px={{ base: "0", lg: "4" }}>
         <Text fontSize="4xl" fontWeight="bold" textAlign="center" color="gray.700">
           {post.title}
         </Text>
@@ -37,7 +37,7 @@ const Post = ({ post }: Props) => {
           {post.date}
         </Text>
         <Box display={{ base: "block", lg: "flex" }} mt="10">
-          <Box bg="white" p="5" borderRadius="10" width={{ base: "100%", lg: "60%" }}>
+          <Box bg="white" p="5" borderRadius={{ base: "0", lg: "10" }} width={{ base: "100%", lg: "60%" }}>
             <Image
               objectFit='cover'
               width="100%"
