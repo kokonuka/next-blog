@@ -144,3 +144,12 @@ a {
   background-repeat: no-repeat;
   transform: scale(5);
 }
+
+code {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+code::-webkit-scrollbar {
+  display: none;
+}

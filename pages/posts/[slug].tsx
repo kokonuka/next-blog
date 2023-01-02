@@ -1,5 +1,8 @@
 import { GetServerSideProps } from "next"
 import { Container, Image, Text, Box } from "@chakra-ui/react"
+import { load } from 'cheerio';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/base16/nova.css';
 
 type Props = {
   post: Post
@@ -97,6 +100,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   )
   const data = await response.json()
+
+  const $ = load(data.data.post.content);
+  $('pre code').each((_, elm) => {
+    const result = hljs.highlightAuto($(elm).text());
+    $(elm).html(result.value);
+    $(elm).addClass('hljs');
+  });
+  data.data.post.content = $.html();
   
   const props: Props = {
     post: data.data.post
