@@ -15,9 +15,7 @@ export default function Layout({ children }: Props) {
       <Header />
       <Categories />
       <main>
-        <Box bg="blue.50" minH="100vh">
-          {children}
-        </Box>
+        {children}
       </main>
       <Footer />
     </>

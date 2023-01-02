@@ -46,8 +46,8 @@ const Post = ({ post }: Props) => {
               src={post.featuredImage.node.mediaItemUrl}
               alt='Caffe Latte'
             />
-            <Box py="10" px="5">
-              <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+            <Box py="10">
+              <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
             </Box>
           </Box>
           <Box display={{ base: "none", lg: "block" }} width={{ base: "100%", lg: "40%" }} pl="5">

@@ -87,8 +87,8 @@ export default function Index() {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box bg="white">
-        <Container maxW="6xl" minH="100vh">
+      <Box bg="white" flex="1">
+        <Container maxW="6xl">
           <VStack mt="10">
             <VStack w={{ 
               base: "90%", 
