@@ -6,9 +6,7 @@ import {
   Text,
   Image, 
   Card, 
-  CardBody, 
-  LinkBox,
-  LinkOverlay 
+  CardBody,
 } from '@chakra-ui/react'
 
 type Props = {
