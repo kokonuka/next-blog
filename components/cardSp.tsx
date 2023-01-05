@@ -59,7 +59,7 @@ export default function CardSp({ post }: Props) {
           <Stack>
             <CardBody p="0" pl="3">
               <Heading size='md' color="gray.700">
-                <LinkOverlay>
+                <LinkOverlay href={`posts/${post.slug}`}>
                   {post.title}
                 </LinkOverlay>
               </Heading>
