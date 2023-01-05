@@ -32,10 +32,9 @@ export default function cardList({ posts }: Props) {
         ))}
       </Box>
       <Box display={{ base: "none", md: "grid"}} gridTemplateColumns="1fr 1fr" gridGap="5">
-        <CardPc />
-        <CardPc />
-        <CardPc />
-        <CardPc />
+        {posts.length !== 0 && posts.map((post: Post) => (
+          <CardPc key={post.id} post={post}/>
+        ))}
       </Box>
     </>
   )
