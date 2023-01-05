@@ -7,6 +7,8 @@ import {
   Image, 
   Card, 
   CardBody,
+  LinkBox,
+  LinkOverlay
 } from '@chakra-ui/react'
 
 type Props = {
@@ -37,7 +39,7 @@ export default function CardSp({ post }: Props) {
 
   return (
     <>
-      <a href={`posts/${post.slug}`}>
+      <LinkBox>
         <Card
           w="100%"
           border="0"
@@ -56,7 +58,11 @@ export default function CardSp({ post }: Props) {
           />
           <Stack>
             <CardBody p="0" pl="3">
-              <Heading size='md' color="gray.700">{post.title}</Heading>
+              <Heading size='md' color="gray.700">
+                <LinkOverlay>
+                  {post.title}
+                </LinkOverlay>
+              </Heading>
               <Box mt="3" display="flex" gap="2">
                 <Text fontSize="xs">{post.categories.nodes[0].name}</Text>
                 <Text fontSize="xs">〇日前</Text>
@@ -64,7 +70,7 @@ export default function CardSp({ post }: Props) {
             </CardBody>
           </Stack>
         </Card>
-      </a>
+      </LinkBox>
     </>
   )
 }

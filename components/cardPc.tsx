@@ -6,6 +6,8 @@ import {
   Image, 
   Card, 
   CardBody,
+  LinkBox,
+  LinkOverlay
 } from '@chakra-ui/react'
 
 type Props = {
@@ -36,10 +38,10 @@ export default function CardPc({ post }: Props) {
 
   return (
     <>
-      <a href={`posts/${post.slug}`}>
-        <Card 
-          w="100%"
+      <LinkBox>
+        <Card
           display={{ base: "none", md: "block"}}
+          h="100%"
         >
           <CardBody>
             <Image
@@ -47,30 +49,34 @@ export default function CardPc({ post }: Props) {
               alt='Green double couch with wooden legs'
               bg="white"
               w="100%"
-              h="56"
+              h="64"
               objectFit='contain'
               borderRadius='lg'
             />
-            <Stack mt='6' spacing='3'>
-              <Heading size='md'>{post.title}</Heading>
-              <div dangerouslySetInnerHTML={{ __html: post.excerpt }}></div>
-              {/* <Text>
-                This sofa is perfect for modern tropical spaces, baroque inspired
-                spaces, earthy toned spaces and for people who love a chic design with a
-                sprinkle of vintage design.
-              </Text> */}
-              <Box display="flex" gap="2">
-                <Text>
-                  フロントエンド
-                </Text>
-                <Text>
-                  〇日前
-                </Text>
+            <Stack 
+              mt='6' 
+              spacing="3"
+            >
+              <Heading size='md'>
+                <LinkOverlay href={`posts/${post.slug}`}>
+                  {post.title}
+                </LinkOverlay>
+              </Heading>
+              <Box fontSize="sm">
+                <div dangerouslySetInnerHTML={{ __html: post.excerpt }}></div>
+                {/* <Text>
+                  This sofa is perfect for modern tropical spaces, baroque inspired
+                  spaces, earthy toned spaces and for people who love a chic design with a
+                  sprinkle of vintage design.
+                </Text> */}
               </Box>
+              <Text>
+                〇日前
+              </Text>
             </Stack>
           </CardBody>
         </Card>
-      </a>
+      </LinkBox>
     </>
   )
 }

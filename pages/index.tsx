@@ -111,7 +111,7 @@ const Home:NextPage<Props> = (props) => {
             <Text pb="5" fontSize="3xl" fontWeight="bold">New Posts</Text>
             <CardList posts={posts}/>
             <Text mt="10" color="blue.500" textAlign="center">
-              <Link href="/posts">全ての記事を見る</Link>
+              <a href="/posts">全ての記事を見る</a>
             </Text>
           </Box>
         </section>
