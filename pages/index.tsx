@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
-import { Container, Box, Text } from '@chakra-ui/react'
+import { Container, Box, Text, Link } from '@chakra-ui/react'
 import { Blocks, Triangle } from 'react-loader-spinner'
 
 import type { NextPage } from 'next'
@@ -111,7 +110,7 @@ const Home:NextPage<Props> = (props) => {
             <Text pb="5" fontSize="3xl" fontWeight="bold">New Posts</Text>
             <CardList posts={posts}/>
             <Text mt="10" color="blue.500" textAlign="center">
-              <a href="/posts">全ての記事を見る</a>
+              <Link href="/posts">全ての記事を見る</Link>
             </Text>
           </Box>
         </section>

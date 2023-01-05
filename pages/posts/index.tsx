@@ -1,4 +1,4 @@
-import { Container, Image, Text, Box } from "@chakra-ui/react"
+import { Container, Link, Text, Box } from "@chakra-ui/react"
 import CardList from "../../components/cardList"
 
 type Props = {
@@ -30,7 +30,7 @@ const Index = ({ posts }: Props) => {
         <Box mt="10">
           <CardList posts={posts}/>
           <Text mt="10" color="blue.500" textAlign="center">
-            <a href="/posts">もっと見る</a>
+            <Link href="/">もっと見る</Link>
           </Text>
         </Box>
       </Container>
