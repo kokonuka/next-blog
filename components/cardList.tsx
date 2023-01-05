@@ -16,6 +16,7 @@ type Post = {
       mediaItemUrl: string
     }
   }
+  excerpt: string
   categories: {
     nodes: Array<{
       name: string

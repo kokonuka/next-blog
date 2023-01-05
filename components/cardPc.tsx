@@ -1,5 +1,6 @@
 import { 
   Stack,
+  Box,
   Heading,
   Text,
   Image, 
@@ -20,6 +21,7 @@ type Post = {
       mediaItemUrl: string
     }
   }
+  excerpt: string
   categories: {
     nodes: Array<{
       name: string
@@ -51,11 +53,20 @@ export default function CardPc({ post }: Props) {
             />
             <Stack mt='6' spacing='3'>
               <Heading size='md'>{post.title}</Heading>
-              <Text>
+              <div dangerouslySetInnerHTML={{ __html: post.excerpt }}></div>
+              {/* <Text>
                 This sofa is perfect for modern tropical spaces, baroque inspired
                 spaces, earthy toned spaces and for people who love a chic design with a
                 sprinkle of vintage design.
-              </Text>
+              </Text> */}
+              <Box display="flex" gap="2">
+                <Text>
+                  フロントエンド
+                </Text>
+                <Text>
+                  〇日前
+                </Text>
+              </Box>
             </Stack>
           </CardBody>
         </Card>

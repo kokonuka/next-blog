@@ -22,6 +22,7 @@ type Post = {
       mediaItemUrl: string
     }
   }
+  excerpt: string
   categories: {
     nodes: Array<{
       name: string
@@ -41,6 +42,7 @@ const query = `query getPosts {
           mediaItemUrl
         }
       }
+      excerpt
       categories {
         nodes {
           name
