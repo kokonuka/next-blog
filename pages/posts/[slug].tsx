@@ -33,7 +33,9 @@ const Post = ({ post }: Props) => {
   return (
     <>
       <Container maxW="6xl" py="10" px={{ base: "0", lg: "4" }}>
-        <Text fontSize="4xl" fontWeight="bold" textAlign="center" color="gray.700">
+        <Text 
+        fontSize={{base: "2xl", lg: "4xl" }}
+        fontWeight="bold" textAlign="center" color="gray.700">
           {post.title}
         </Text>
         <Text mt="5" fontWeight="bold" textAlign="center" color="gray.500">
@@ -44,7 +46,7 @@ const Post = ({ post }: Props) => {
             <Image
               objectFit='cover'
               width="100%"
-              maxH="96"
+              maxH={{base: "36", lg: "96" }}
               borderRadius='2xl'
               src={imageUrl}
               alt='Caffe Latte'
