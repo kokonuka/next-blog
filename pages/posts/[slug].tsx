@@ -44,9 +44,9 @@ const Post = ({ post }: Props) => {
         <Box display={{ base: "block", lg: "flex" }} mt="10">
           <Box bg="white" p="5" borderRadius={{ base: "0", lg: "10" }} width={{ base: "100%", lg: "60%" }}>
             <Image
-              objectFit='cover'
+              objectFit='contain'
               width="100%"
-              maxH={{base: "36", lg: "96" }}
+              maxH={{base: "36", lg: "64" }}
               borderRadius='2xl'
               src={imageUrl}
               alt='Caffe Latte'

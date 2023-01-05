@@ -46,7 +46,7 @@ export default function CardPc({ post }: Props) {
               bg="white"
               w="100%"
               h="56"
-              objectFit='cover'
+              objectFit='contain'
               borderRadius='lg'
             />
             <Stack mt='6' spacing='3'>
