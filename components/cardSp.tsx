@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { 
+import {
   Box,
   Stack,
   Heading,
@@ -36,7 +36,7 @@ export default function CardSp({ post }: Props) {
 
   return (
     <>
-      <Link href={`posts/${post.slug}`}>
+      <a href={`posts/${post.slug}`}>
         <Card
           w="100%"
           border="0"
@@ -63,7 +63,7 @@ export default function CardSp({ post }: Props) {
             </CardBody>
           </Stack>
         </Card>
-      </Link>
+      </a>
     </>
   )
 }
