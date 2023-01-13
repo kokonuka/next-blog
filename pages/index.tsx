@@ -97,6 +97,14 @@ const Home:NextPage<Props> = (props) => {
     sessionStorage.setItem(keyName, "true")
   }, [])
 
+  // Twitterタイムライン埋め込み用JSの読み込み
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://platform.twitter.com/widgets.js";
+    document.body.appendChild(script);
+    return () => {document.body.removeChild(script) };
+ }, [])
+
   return (
     <>
       <Head>
