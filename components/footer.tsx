@@ -1,12 +1,18 @@
-import { Container, Box } from "@chakra-ui/react"
+import { Container, Box, Text, Link } from "@chakra-ui/react"
+import { AiOutlineTwitter } from "react-icons/ai";
 
 export default function Footer() {
   return (
     <Box as="footer">
-      <Container maxW="6xl">
-        フッター
-        カテゴリ一覧
-        SNS
+      <Container maxW="6xl" p="5">
+        <Box display="flex" justifyContent="center">
+          <Link href="https://twitter.com/sunrise_web_dev" target="_blank" fontSize="2xl">
+            <AiOutlineTwitter/>
+          </Link>
+        </Box>
+        <Text mt="3" fontSize="xs" textAlign="center">
+          © Copyright 2023 Kimagurecode. All rights reserved.
+        </Text>
       </Container>
     </Box>
   )
