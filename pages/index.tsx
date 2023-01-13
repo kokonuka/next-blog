@@ -10,6 +10,8 @@ import Hero from '../components/hero'
 import CardList from '../components/cardList'
 import Twitter from '../components/twitter'
 
+import { getDateDiff } from '../lib/getDateDiff'
+
 type Props = {
   posts: Array<Post>
 }
@@ -18,6 +20,7 @@ type Post = {
   id: string
   title: string
   slug: string
+  date: string
   featuredImage: {
     node: {
       mediaItemUrl: string
@@ -65,10 +68,14 @@ export const getStaticProps = async () => {
     },
   )
   const data = await response.json()
+  const posts = data.data.posts.nodes.map((post: Post) => {
+    post.date = getDateDiff(post.date)
+    return post
+  })
 
   return {
     props:{
-      posts: data.data.posts.nodes
+      posts
     }
   }
 }
