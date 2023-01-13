@@ -37,7 +37,7 @@ export default function CardBox({ post }: Props) {
     <>
       <Link href={`posts/${post.id}`}>
       <Box as='article' bg="white" borderRadius='2xl' overflow="hidden" boxShadow="0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)">
-        <Box position="relative" h="28">
+        <Box position="relative" h="100px">
           <Image
             position="absolute"
             top="0"
@@ -61,7 +61,7 @@ export default function CardBox({ post }: Props) {
             {post.categories.nodes[0].name}
           </Text>
         </Box>
-        <Box h="28" py="5" px="3" display="flex" flexDirection="column">
+        <Box h="100px" pt="2" pb="3" px="3" display="flex" flexDirection="column">
             <Text  fontWeight="bold" flex="1">
               {post.title}
             </Text>
