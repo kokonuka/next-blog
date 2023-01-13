@@ -5,16 +5,11 @@ import {
   Container,
   Box,
   Text,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
 } from '@chakra-ui/react'
 import { IconContext } from "react-icons/lib";
 import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
+
+import Drawer from "./drawer";
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -39,30 +34,7 @@ export default function Header() {
           </IconContext.Provider>
         </Container>
       </Box>
-      <Drawer
-        isOpen={isOpen}
-        placement='right'
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Menu</DrawerHeader>
-          <DrawerBody>
-            <Link href="/">
-              <Text fontSize='lg'>
-                Home
-              </Text>
-            </Link>
-            <Link href="/posts">
-              <Text fontSize='lg'>
-                Posts
-              </Text>
-            </Link>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} btnRef={btnRef} />
     </header>
   )
 }
