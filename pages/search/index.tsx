@@ -15,28 +15,28 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 import CardList from "../../components/cardList";
 
-const queryFunc = (keyword: string | string[] | undefined) => {
-  return `query getPosts {
-    posts(where: {search: "${keyword}"}) {
-      nodes {
-        id
-        slug
-        date
-        title
-        featuredImage {
-          node {
-            mediaItemUrl
-          }
+const query = `query getPosts (
+  $keyword: String
+) {
+  posts(where: {search: $keyword}) {
+    nodes {
+      id
+      slug
+      date
+      title
+      featuredImage {
+        node {
+          mediaItemUrl
         }
-        categories {
-          nodes {
-            name
-          }
+      }
+      categories {
+        nodes {
+          name
         }
       }
     }
-  }`
-}
+  }
+}`
 
 export default function Index() {
   const [value, setValue] = useState("")
@@ -45,7 +45,6 @@ export default function Index() {
   const { q } = router.query
 
   const fetchPosts = async () => {
-    let query = queryFunc(q)
     const response = await fetch(
       process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT!,
       {
@@ -53,7 +52,10 @@ export default function Index() {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ query }),
+        body: JSON.stringify({
+          query,
+          variables: {keyword: q},
+        }),
       },
     )
     const data = await response.json()
@@ -61,9 +63,7 @@ export default function Index() {
   }
 
   useEffect(() => {
-    if(q) {
-      fetchPosts()
-    }
+    if(q) fetchPosts()
   }, [q])
 
   const handleChange = (e: any) => {
