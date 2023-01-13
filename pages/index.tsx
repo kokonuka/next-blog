@@ -7,6 +7,7 @@ import type { NextPage } from 'next'
 
 import Hero from '../components/hero'
 import CardList from '../components/cardList'
+import Twitter from '../components/twitter'
 
 type Props = {
   posts: Array<Post>
@@ -114,21 +115,13 @@ const Home:NextPage<Props> = (props) => {
             </Text>
           </Box>
         </section>
-        <section>
-          <Box height="96" py="16">
-            自己紹介
-          </Box>
-        </section>
-        <section>
-          <Box height="96" py="16">
-            Twitterカード
-          </Box>
-        </section>
-        <section>
-          <Box height="96" py="16">
-            タグ一覧
-          </Box>
-        </section>
+
+        {/* 自己紹介 */}
+
+        <Twitter />
+
+        {/* タグ一覧 */}
+        
       </Container>
       {isLoading && (
         <Box 
