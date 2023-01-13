@@ -26,7 +26,7 @@ type Post = {
   }
 }
 
-export default function cardList({ posts }: Props) {
+export default function CardList({ posts }: Props) {
   const router = useRouter()
 
   return (
