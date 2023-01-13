@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { useRouter } from "next/router"
 import {
   Text,
   Drawer as ChakraDrawer,
@@ -19,6 +20,12 @@ type Props = {
 }
 
 export default function Drawer(props: Props) {
+  const router = useRouter()
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if(router.pathname === e.currentTarget.pathname) return
+    props.onClose()
+  }
 
   return (
     <ChakraDrawer
@@ -32,12 +39,12 @@ export default function Drawer(props: Props) {
           <DrawerCloseButton />
           <DrawerHeader>Menu</DrawerHeader>
           <DrawerBody>
-            <Link href="/">
+            <Link href="/" onClick={handleClick}>
               <Text fontSize='lg'>
                 Home
               </Text>
             </Link>
-            <Link href="/posts">
+            <Link href="/posts" onClick={handleClick}>
               <Text fontSize='lg'>
                 Posts
               </Text>
