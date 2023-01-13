@@ -50,7 +50,16 @@ export default function Header() {
           <DrawerCloseButton />
           <DrawerHeader>Menu</DrawerHeader>
           <DrawerBody>
-            hoge
+            <Link href="/">
+              <Text fontSize='lg'>
+                Home
+              </Text>
+            </Link>
+            <Link href="/posts">
+              <Text fontSize='lg'>
+                Posts
+              </Text>
+            </Link>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
