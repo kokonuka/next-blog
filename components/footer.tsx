@@ -11,7 +11,7 @@ export default function Footer() {
           </Link>
         </Box>
         <Text mt="3" fontSize="xs" textAlign="center">
-          © Copyright 2023 Kimagurecode. All rights reserved.
+          © Copyright 2023 Hogehoge. All rights reserved.
         </Text>
       </Container>
     </Box>
