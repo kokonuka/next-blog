@@ -1,4 +1,3 @@
-import { useState } from "react";
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Router from 'next/router';
