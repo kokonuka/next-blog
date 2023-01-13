@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Container, Button, Text, Box } from "@chakra-ui/react"
 
 import { getDateDiff } from "../../lib/getDateDiff"
+import { sliceText } from '../../lib/sliceText'
 
 import CardList from "../../components/cardList"
 
@@ -111,8 +112,11 @@ export const getStaticProps = async () => {
   const data = await response.json()
   const posts = data.data.posts.nodes.map((post: Post) => {
     post.date = getDateDiff(post.date)
+    post.title = sliceText(post.title)
     return post
   })
+
+  // テキスト
 
   return {
     props:{
