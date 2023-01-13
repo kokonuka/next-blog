@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
+import Link from 'next/link'
 import Head from 'next/head'
-import { Container, Box, Text, Link } from '@chakra-ui/react'
+import { Container, Box, Text } from '@chakra-ui/react'
 import { Blocks, Triangle } from 'react-loader-spinner'
 
 import type { NextPage } from 'next'
@@ -121,7 +122,7 @@ const Home:NextPage<Props> = (props) => {
         <Twitter />
 
         {/* タグ一覧 */}
-        
+
       </Container>
       {isLoading && (
         <Box 
