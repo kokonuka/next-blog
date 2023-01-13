@@ -58,7 +58,7 @@ export default function CardPc({ post }: Props) {
               spacing="3"
             >
               <Heading size='md'>
-                <LinkOverlay href={`posts/${post.slug}`}>
+                <LinkOverlay href={`posts/${post.id}`}>
                   {post.title}
                 </LinkOverlay>
               </Heading>
