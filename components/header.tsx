@@ -16,8 +16,8 @@ export default function Header() {
   const btnRef = useRef(null)
 
   return (
-    <header>
-      <Box bg="white" py="2">
+    <>
+      <Box bg="white" py="2" as="header">
         <Container maxW='6xl' display="flex" justifyContent="space-between">
           <IconContext.Provider value={{ size: '25px' }}>
             <Link href="/search">
@@ -35,6 +35,6 @@ export default function Header() {
         </Container>
       </Box>
       <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} btnRef={btnRef} />
-    </header>
+    </>
   )
 }

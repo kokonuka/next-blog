@@ -107,15 +107,16 @@ const Home:NextPage<Props> = (props) => {
       </Head>
       <Hero />
       <Container maxW="6xl">
-        <section>
-          <Box py="16">
-            <Text pb="5" fontSize="3xl" fontWeight="bold">New Posts</Text>
-            <CardList posts={posts}/>
-            <Text mt="10" color="blue.500" textAlign="center">
-              <Link href="/posts">全ての記事を見る</Link>
-            </Text>
-          </Box>
-        </section>
+        <Box 
+          as='section'
+          py="16"
+          >
+          <Text pb="5" fontSize="3xl" fontWeight="bold">New Posts</Text>
+          <CardList posts={posts}/>
+          <Text mt="10" color="blue.500" textAlign="center">
+            <Link href="/posts">全ての記事を見る</Link>
+          </Text>
+        </Box>
 
         {/* 自己紹介 */}
 

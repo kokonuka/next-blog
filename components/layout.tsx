@@ -14,9 +14,15 @@ export default function Layout({ children }: Props) {
     <>
       <Header />
       <Categories />
-      <main>
+      <Box 
+        as="main"
+        bg="gray.50"
+        display="flex"
+        flexDirection="column"
+        flex="1"
+        >
         {children}
-      </main>
+      </Box>
       <Footer />
     </>
   )

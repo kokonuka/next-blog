@@ -26,12 +26,14 @@ const Index = ({ posts }: Props) => {
   return (
     <>
       <Container maxW="6xl">
+        <Box as="section">
         <Text mt="10" fontSize="3xl" fontWeight="bold" textAlign="center">Posts</Text>
         <Box mt="10">
           <CardList posts={posts}/>
           <Text mt="10" color="blue.500" textAlign="center">
             <Link href="/">もっと見る</Link>
           </Text>
+        </Box>
         </Box>
       </Container>
     </>

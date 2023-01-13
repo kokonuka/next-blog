@@ -32,16 +32,22 @@ export default function Hero() {
   }, []);
 
   return (
-    <section>
-      <Box position="relative" height="96" display="flex" justifyContent="center" flexDirection="column" overflow="hidden">
-        <Box position="relative" zIndex="1">
-          <Text fontSize="2xl" color="white" fontWeight="bold" textAlign="center">HogeHoge</Text>
-          <Text fontSize="xl" color="white" textAlign="center">
-            <span ref={el}></span>
-          </Text>
-        </Box>
-        <video className="video" src="/movies/14019_1280x720.mp4" autoPlay loop muted playsInline></video>
+    <Box 
+      as="section"
+      position="relative" 
+      height="96" 
+      display="flex" 
+      justifyContent="center" 
+      flexDirection="column" 
+      overflow="hidden"
+      >
+      <Box position="relative" zIndex="1">
+        <Text fontSize="2xl" color="white" fontWeight="bold" textAlign="center">HogeHoge</Text>
+        <Text fontSize="xl" color="white" textAlign="center">
+          <span ref={el}></span>
+        </Text>
       </Box>
-    </section>
+      <video className="video" src="/movies/14019_1280x720.mp4" autoPlay loop muted playsInline></video>
+    </Box>
   )
 }
