@@ -35,7 +35,7 @@ type Post = {
 }
 
 const query = `query getPosts {
-  posts(first: 4) {
+  posts(first: 8) {
     nodes {
       id
       slug
