@@ -38,14 +38,14 @@ export default function Drawer(props: Props) {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Menu</DrawerHeader>
-          <DrawerBody>
+          <DrawerBody mt="5" display="flex" flexDirection="column" gap="2">
             <Link href="/" onClick={handleClick}>
-              <Text fontSize='lg'>
+              <Text color="blackAlpha.700" fontSize='lg' fontWeight="bold">
                 Home
               </Text>
             </Link>
             <Link href="/posts" onClick={handleClick}>
-              <Text fontSize='lg'>
+              <Text color="blackAlpha.700" fontSize='lg' fontWeight="bold">
                 Posts
               </Text>
             </Link>
