@@ -8,12 +8,15 @@ import {
   InputGroup, 
   InputLeftElement, 
   Input, 
-  Tag,
+  Tag as ChakraTag,
   Text
 } from '@chakra-ui/react'
 import { AiOutlineSearch } from "react-icons/ai";
-
+import { getTagsQuery, getNextTagsQuery } from "../../queries/tags";
+import { fetchGraph, fetchGraphWithVariable } from "../../lib/fetchGraphql";
 import CardList from "../../components/cardList";
+
+import { Tag } from "../../types/tags";
 
 const query = `query getPosts (
   $keyword: String
@@ -41,6 +44,7 @@ const query = `query getPosts (
 export default function Index() {
   const [value, setValue] = useState("")
   const [posts, setPosts] = useState([])
+  const [tags, setTags] = useState([])
   const router = useRouter();
   const { q } = router.query
 
@@ -65,6 +69,30 @@ export default function Index() {
   useEffect(() => {
     if(q) fetchPosts()
   }, [q])
+
+  const getTags = async() => {
+    const data = await fetchGraph(getTagsQuery)
+    let tags = data.tags.nodes
+
+    let flug = false
+    let endCursor= data.tags.pageInfo.endCursor
+    if(tags.length === 10) flug = true
+    while(flug) {
+      const data = await fetchGraphWithVariable(getNextTagsQuery, { "endCursor": endCursor })
+      if(data.tags.nodes.length === 0) {
+        flug = false
+        break
+      }
+      tags = [...tags, ...data.tags.nodes]
+      endCursor = data.tags.pageInfo.endCursor
+    }
+
+    setTags(tags)
+  }
+
+  useEffect(() => {
+    getTags()
+  })
 
   const handleChange = (e: any) => {
     setValue(e.target.value)
@@ -111,21 +139,13 @@ export default function Index() {
               </InputGroup>
             </VStack>
           </VStack>
-          {!q ? (
+          {!q && tags ? (
             <Box mt="10">
               <Text fontWeight="bold">Tags</Text>
               <Box mt="5" display="flex" flexWrap="wrap" gap="3">
-                <Tag>Sample Tag</Tag>
-                <Tag>Sample Tag</Tag>
-                <Tag>Sample Tag</Tag>
-                <Tag>Sample Tag</Tag>
-                <Tag>Sample Tag</Tag>
-                <Tag>Sample Tag</Tag>
-                <Tag>Sample Tag</Tag>
-                <Tag>Sample Tag</Tag>
-                <Tag>Sample Tag</Tag>
-                <Tag>Sample Tag</Tag>
-                <Tag>Sample Tag</Tag>
+                {tags.map((tag: Tag) => (
+                  <ChakraTag key={tag.tagId}>{tag.name}</ChakraTag>
+                ))}
               </Box>
             </Box>
           ) : (
