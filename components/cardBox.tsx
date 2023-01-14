@@ -35,40 +35,39 @@ export default function CardBox({ post }: Props) {
 
   return (
     <>
-      <Link href={`posts/${post.id}`}>
       <Box as='article' bg="white" borderRadius='2xl' overflow="hidden" boxShadow="0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)">
-        <Box position="relative" h="100px">
-          <Image
-            position="absolute"
-            top="0"
-            objectFit='cover'
-            w="100%"
-            h="100%"
-            src={imageUrl}
-            alt='Caffe Latte'
-          />
-          <Text 
-            position="absolute" 
-            top="2" 
-            left="2" 
-            py="1"
-            px="2"
-            bg="blue.500"
-            borderRadius="24"
-            fontSize="xs"
-            color="white"
-            >
-            {post.categories.nodes[0].name}
-          </Text>
-        </Box>
-        <Box h="100px" pt="2" pb="3" px="3" display="flex" flexDirection="column">
-            <Text  fontWeight="bold" flex="1">
-              {post.title}
+        <Link href={`posts/${post.id}`}>
+          <Box position="relative" h="100px">
+            <Image
+              position="absolute"
+              top="0"
+              objectFit='cover'
+              w="100%"
+              h="100%"
+              src={imageUrl}
+            />
+            <Text 
+              position="absolute" 
+              top="2" 
+              left="2" 
+              py="1"
+              px="2"
+              bg="blue.500"
+              borderRadius="24"
+              fontSize="xs"
+              color="white"
+              >
+              {post.categories.nodes[0].name}
             </Text>
-          <Text fontSize="xs" color="gray.400">{post.date}</Text>
-        </Box>
+          </Box>
+          <Box h="100px" pt="2" pb="3" px="3" display="flex" flexDirection="column">
+              <Text  fontWeight="bold" flex="1">
+                {post.title}
+              </Text>
+            <Text fontSize="xs" color="gray.400">{post.date}</Text>
+          </Box>
+        </Link>
       </Box>
-      </Link>
     </>
   )
 }
