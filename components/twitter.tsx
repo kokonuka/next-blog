@@ -7,11 +7,11 @@ export default function Twitter() {
       py="16"
       >
       <Text pb="5" color="gray.700" fontSize="3xl" fontWeight="bold">Twitter</Text>
-      <Box px="10">
+      <Box px="5">
         <a 
           className="twitter-timeline" 
           data-lang="ja" 
-          data-height="800" 
+          data-height="400" 
           data-theme="light" 
           href="https://twitter.com/sunrise_web_dev?ref_src=twsrc%5Etfw"
         >Tweets by sunrise_web_dev</a> 
