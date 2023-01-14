@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Box, Text } from '@chakra-ui/react'
 import Typed from "typed.js";
 
-export default function mainBisual() {
+export default function MainBisual() {
   const el = useRef(null!);
 
   useEffect(() => {
