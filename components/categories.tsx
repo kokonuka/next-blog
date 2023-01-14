@@ -44,7 +44,7 @@ export default function Categories() {
           top="0" 
           zIndex="2"
           >
-          <Container maxW="6xl">
+          <Container maxW="6xl" position="relative">
             <Box className='categoriesWrap' display="flex" gap="7" w="100%" pt="2" overflowX="scroll">
               {categories.length > 0 && categories.map((category: Category) => (
                 // 現在のパスとカテゴリーIDが一致していたら
@@ -55,6 +55,15 @@ export default function Categories() {
                   <Link href="/">{category.name}</Link>
                 </Text>
               ))}
+            </Box>
+            <Box 
+              position="absolute" 
+              top="0" 
+              right="4" 
+              w="14"
+              height="100%" 
+              bg="linear-gradient(to left, white, #ffffff10)"
+              >
             </Box>
           </Container>
         </Box>
