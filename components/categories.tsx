@@ -45,7 +45,7 @@ export default function Categories() {
           zIndex="2"
           >
           <Container maxW="6xl" position="relative">
-            <Box className='categoriesWrap' display="flex" gap="7" w="100%" pt="2" overflowX="scroll">
+            <Box className='categoriesWrap' display="flex" gap="7" w="100%" pt="2" pr="14" overflowX="scroll">
               {categories.length > 0 && categories.map((category: Category) => (
                 // 現在のパスとカテゴリーIDが一致していたら
                 // <Text fontWeight="bold" color="gray.600" borderBottom="2px solid" pb="3">
