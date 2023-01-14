@@ -1,4 +1,4 @@
-import { Box, Text, Image } from "@chakra-ui/react"
+import { Box, Text, Image, Link } from "@chakra-ui/react"
 import { AiOutlineTwitter } from "react-icons/ai";
 
 export default function About() {
@@ -18,9 +18,13 @@ export default function About() {
         <Text color="blue.400" fontSize="lg">
           <AiOutlineTwitter />
         </Text>
-        <Text pl="1" fontSize="sm">
-          <a href="https://twitter.com/sunrise_web_dev" target="_blank">@sunrise_web_dev</a>
-        </Text>
+        <Link
+          href="https://twitter.com/sunrise_web_dev" 
+          target="_blank" 
+          pl="1" 
+          fontSize="sm"
+          >@sunrise_web_dev
+        </Link>
       </Box>
       <Text mt="3" fontSize="xs">
         駆け出しエンジニアです<br />
