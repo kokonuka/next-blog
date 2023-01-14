@@ -51,7 +51,7 @@ export default function Categories() {
                 // <Text fontWeight="bold" color="gray.600" borderBottom="2px solid" pb="3">
                 //   <Link href="/">{category.name}</Link>
                 // </Text>
-                <Text fontWeight="bold" color="gray.500" pb="3" whiteSpace="nowrap" key={category.categoryId}>
+                <Text fontSize="sm" fontWeight="bold" color="gray.500" pb="3" whiteSpace="nowrap" key={category.categoryId}>
                   <Link href="/">{category.name}</Link>
                 </Text>
               ))}
