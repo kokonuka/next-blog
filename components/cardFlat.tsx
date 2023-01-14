@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { 
   Stack,
   Box,
@@ -40,38 +41,29 @@ export default function CardFlat({ post }: Props) {
 
   return (
     <>
-      <LinkBox>
-        <Card
-          w="100%"
-          border="0"
-          flexDirection="row"
-          overflow='hidden'
-          variant='outline'
-        >
-          <Image
-            objectFit='cover'
-            bg="white"
-            width={{ base: '75px' }}
-            height={{ base: '75px' }}
-            borderRadius='2xl'
-            src={imageUrl}
-            alt='Caffe Latte'
-          />
-          <Stack>
-            <CardBody p="0" pl="3">
+      <Box as="article">
+        <Link href={`posts/${post.id}`}>
+          <Box w="100%" display="flex">
+            <Image
+              objectFit='cover'
+              bg="white"
+              width='75px'
+              height='75px'
+              borderRadius='2xl'
+              src={imageUrl}
+            />
+            <Box p="0" pl="3" flex="1">
               <Heading size='md' color="gray.700">
-                <LinkOverlay href={`posts/${post.id}`}>
-                  {post.title}
-                </LinkOverlay>
+                {post.title}
               </Heading>
               <Box mt="3" display="flex" gap="2">
                 <Text fontSize="xs">{post.categories.nodes[0].name}</Text>
                 <Text fontSize="xs">{post.date}</Text>
               </Box>
-            </CardBody>
-          </Stack>
-        </Card>
-      </LinkBox>
+            </Box>
+          </Box>
+        </Link>
+      </Box>
     </>
   )
 }
