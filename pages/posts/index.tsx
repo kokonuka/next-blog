@@ -116,8 +116,6 @@ export const getStaticProps = async () => {
     return post
   })
 
-  // テキスト
-
   return {
     props:{
       posts,
