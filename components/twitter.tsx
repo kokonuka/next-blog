@@ -6,8 +6,16 @@ export default function Twitter() {
       as='section'
       py="16"
       >
-      <Text pb="5" fontSize="3xl" fontWeight="bold">Twitter</Text>
-      <a className="twitter-timeline" data-lang="ja" data-height="800" data-theme="light" href="https://twitter.com/sunrise_web_dev?ref_src=twsrc%5Etfw">Tweets by sunrise_web_dev</a> 
+      <Text pb="5" color="gray.700" fontSize="3xl" fontWeight="bold">Twitter</Text>
+      <Box px="10">
+        <a 
+          className="twitter-timeline" 
+          data-lang="ja" 
+          data-height="800" 
+          data-theme="light" 
+          href="https://twitter.com/sunrise_web_dev?ref_src=twsrc%5Etfw"
+        >Tweets by sunrise_web_dev</a> 
+      </Box>
     </Box>
   )
 }
