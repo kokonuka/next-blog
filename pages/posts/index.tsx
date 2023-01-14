@@ -144,6 +144,7 @@ const Index = ({ posts, pageInfo }: Props) => {
     const data = await response.json()
     const posts = data.data.posts.nodes.map((post: Post) => {
       post.date = getDateDiff(post.date)
+      post.title = sliceText(post.title)
       return post
     })
     setPostsState([...postsState, ...posts])
