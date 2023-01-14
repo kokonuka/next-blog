@@ -1,31 +1,12 @@
 import { useRouter } from 'next/router'
 import { Box } from '@chakra-ui/react'
-
 import CardBox from './cardBox'
 import CardFlat from './cardFlat'
+import { Post } from '../types/posts'
 
 interface Props {
   posts: Array<Post>
 }
-
-type Post = {
-  id: string
-  title: string
-  slug: string
-  date: string
-  featuredImage: {
-    node: {
-      mediaItemUrl: string
-    }
-  }
-  excerpt: string
-  categories: {
-    nodes: Array<{
-      name: string
-    }>
-  }
-}
-
 export default function CardList({ posts }: Props) {
   const router = useRouter()
 
@@ -34,7 +15,7 @@ export default function CardList({ posts }: Props) {
       {router.pathname === "/" ? (
         <Box display="flex" flexDirection="column" gap="10">
           {posts.length !== 0 && posts.map((post: Post) => (
-            <CardFlat post={post} key={post.id}/>
+            <CardFlat post={post} key={post.databaseId}/>
           ))}
         </Box>
       ) : (
@@ -44,7 +25,7 @@ export default function CardList({ posts }: Props) {
           gridGap="5"
           >
           {posts.length !== 0 && posts.map((post: Post) => (
-            <CardBox post={post} key={post.id}/>
+            <CardBox post={post} key={post.databaseId}/>
           ))}
         </Box>
       )}

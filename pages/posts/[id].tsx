@@ -1,72 +1,26 @@
 import { GetServerSideProps } from "next"
-import { Container, Image, Text, Box } from "@chakra-ui/react"
+import { Container, Image, Text, Box, Tag as ChakraTag } from "@chakra-ui/react"
 import { load } from 'cheerio';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/base16/nova.css';
-
 import { getDateDiff } from "../../lib/getDateDiff";
+import { Post } from "../../types/posts";
+import { fetchGraphWithVariable } from "../../lib/fetchGraphql";
+import { getPostQuery } from "../../queries/posts";
 
 type Props = {
   post: Post
 }
 
-type Post = {
-  id: string
-  title: string
-  slug: string
-  date: string
-  content: string
-  featuredImage: {
-    node: {
-      mediaItemUrl: string
-    }
-  }
-  categories: {
-    nodes: Array<{
-      name: string
-    }>
-  }
+type Tag = {
+  databaseId: number
+  name: string
 }
-
-const query = `query getPosts(
-  $id: ID!
-) {
-  post(id: $id) {
-    postId
-    date
-    title
-    content
-    featuredImage {
-      node {
-        mediaItemUrl
-      }
-    }
-    categories {
-      nodes {
-        name
-      }
-    }
-  }
-}`
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query
-
-  const response = await fetch(
-    process.env.GRAPHQL_ENDPOINT!,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        query,
-        variables: {id: id},
-      }),
-    },
-  )
-  const data = await response.json()
-  const post = data.data.post
+  const data = await fetchGraphWithVariable(getPostQuery, { id })
+  const post = data.post
 
   const $ = load(post.content);
   $('pre code').each((_, elm) => {
@@ -76,12 +30,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   post.content = $.html();
   post.date = getDateDiff(post.date)
-  
-  const props: Props = {
-    post,
-  }
 
-  return { props }
+  return {
+    props: {
+      post
+    }
+  }
 }
 
 const Post = ({ post }: Props) => {
@@ -93,45 +47,35 @@ const Post = ({ post }: Props) => {
   return (
     <>
       <Container maxW="6xl" py="10" px={{ base: "0", lg: "4" }}>
-        <Text 
-          fontSize={{base: "2xl", lg: "4xl" }}
-          fontWeight="bold" textAlign="center" color="gray.700"
-          >
-          {post.title}
-        </Text>
-        <Text mt="5" fontWeight="bold" textAlign="center" color="gray.500">
-          {post.date}
-        </Text>
-        <Box 
-          display={{ base: "block", lg: "flex" }} 
-          mt="10"
-          >
-          <Box 
-            bg="white" 
-            p="5" 
-            borderRadius={{ base: "0", lg: "10" }} 
-            width={{ base: "100%", lg: "60%" }}
-            >
-            <Image
-              objectFit='cover'
-              width="100%"
-              maxH={{base: "36", sm: "56", md: "72", lg: "64" }}
-              borderRadius='2xl'
-              src={imageUrl}
-              alt='Caffe Latte'
-            />
-            <Box py="10">
-              <div 
-                className="post-content" 
-                dangerouslySetInnerHTML={{ __html: post.content }}>
-              </div>
+        <Box>
+          <Image
+            mx="auto"
+            objectFit='cover'
+            width={{ base: "200px", lg: "400px" }}
+            height={{ base: "100px", lg: "200px" }}
+            borderRadius='2xl'
+            src={imageUrl}
+            alt='Caffe Latte'
+          />
+          <Text mt="10" fontSize={{base: "2xl", lg: "4xl" }} fontWeight="bold" textAlign="center" color="gray.700">
+            {post.title}
+          </Text>
+          <Text mt="5" fontWeight="bold" textAlign="center" color="gray.500">
+            {post.date}
+          </Text>
+        </Box>
+        <Box mt="10" display={{ base: "block", lg: "flex" }}>
+          <Box width={{ base: "100%", lg: "60%" }} bg="white" p="5" borderRadius={{ base: "0", lg: "10" }} py="10">
+            <Box pb="10" display="flex" flexWrap="wrap" gap="2">
+              {post.tags.nodes.length > 0 && post.tags.nodes.map((tag: Tag) => (
+                <ChakraTag key={tag.databaseId}>
+                  {tag.name}
+                </ChakraTag>
+              ))}
             </Box>
+            <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
           </Box>
-          <Box 
-            display={{ base: "none", lg: "block" }} 
-            width={{ base: "100%", lg: "40%" }} 
-            pl="5"
-            >
+          <Box display={{ base: "none", lg: "block" }} width={{ base: "100%", lg: "40%" }} pl="5">
             <Box bg="white" p="5" borderRadius="10">
               サイドバー
             </Box>

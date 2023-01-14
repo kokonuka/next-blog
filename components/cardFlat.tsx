@@ -1,36 +1,14 @@
 import Link from 'next/link'
-import { 
-  Stack,
+import {
   Box,
   Heading,
   Text,
-  Image, 
-  Card, 
-  CardBody,
-  LinkBox,
-  LinkOverlay
+  Image,
 } from '@chakra-ui/react'
+import { Post } from '../types/posts'
 
 type Props = {
   post: Post
-}
-
-type Post = {
-  id: string
-  title: string
-  slug: string
-  date: string
-  featuredImage: {
-    node: {
-      mediaItemUrl: string
-    }
-  }
-  excerpt: string
-  categories: {
-    nodes: Array<{
-      name: string
-    }>
-  }
 }
 
 export default function CardFlat({ post }: Props) {
@@ -42,7 +20,7 @@ export default function CardFlat({ post }: Props) {
   return (
     <>
       <Box as="article">
-        <Link href={`posts/${post.id}`}>
+        <Link href={`posts/${post.databaseId}`}>
           <Box w="100%" display="flex">
             <Image
               objectFit='cover'

@@ -9,70 +9,22 @@ import CardList from '../components/cardList'
 import Twitter from '../components/twitter'
 import About from '../components/about'
 import { getDateDiff } from '../lib/getDateDiff'
+import { Post } from '../types/posts'
+import { getPostsQuery } from '../queries/posts'
+import { fetchGraphWithVariable } from '../lib/fetchGraphql'
 
 type Props = {
   posts: Array<Post>
 }
 
-type Post = {
-  id: string
-  title: string
-  slug: string
-  date: string
-  featuredImage: {
-    node: {
-      mediaItemUrl: string
-    }
-  }
-  excerpt: string
-  categories: {
-    nodes: Array<{
-      name: string
-    }>
-  }
-}
-
-const query = `query getPosts {
-  posts(first: 8) {
-    nodes {
-      id
-      slug
-      date
-      title
-      featuredImage {
-        node {
-          mediaItemUrl
-        }
-      }
-      excerpt
-      categories {
-        nodes {
-          name
-        }
-      }
-    }
-  }
-}`;
-
 export const getStaticProps = async () => {
-  const response = await fetch(
-    process.env.GRAPHQL_ENDPOINT!,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ query }),
-    },
-  )
-  const data = await response.json()
-  const posts = data.data.posts.nodes.map((post: Post) => {
+  const data = await fetchGraphWithVariable(getPostsQuery, { "count": 5 })
+  const posts = data.posts.nodes.map((post: Post) => {
     post.date = getDateDiff(post.date)
     return post
   })
-
   return {
-    props:{
+    props: {
       posts
     }
   }
@@ -80,7 +32,6 @@ export const getStaticProps = async () => {
 
 const Home:NextPage<Props> = (props) => {
   const { posts } = props
-
   const [isLoading, setIsLoading] = useState(true)
   let loadingWrap = useRef<HTMLDivElement>(null)
   let loading = useRef<HTMLDivElement>(null)

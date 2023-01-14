@@ -4,27 +4,10 @@ import {
   Text,
   Image,
 } from '@chakra-ui/react'
+import { Post } from '../types/posts'
 
 type Props = {
   post: Post
-}
-
-type Post = {
-  id: string
-  title: string
-  slug: string
-  date:string
-  featuredImage: {
-    node: {
-      mediaItemUrl: string
-    }
-  }
-  excerpt: string
-  categories: {
-    nodes: Array<{
-      name: string
-    }>
-  }
 }
 
 export default function CardBox({ post }: Props) {
@@ -36,7 +19,7 @@ export default function CardBox({ post }: Props) {
   return (
     <>
       <Box as='article' bg="white" borderRadius='2xl' overflow="hidden" boxShadow="0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)">
-        <Link href={`posts/${post.id}`}>
+        <Link href={`posts/${post.databaseId}`}>
           <Box position="relative" h="100px">
             <Image
               position="absolute"

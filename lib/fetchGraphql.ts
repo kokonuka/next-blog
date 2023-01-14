@@ -1,4 +1,6 @@
-export const fetchGraph = async (query: string) => {
+export const fetchGraph = async (
+  query: string
+) => {
   const response = await fetch(
     process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT!,
     {
@@ -20,13 +22,11 @@ export const fetchGraphWithVariable = async (
     {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ 
-        query: query,
-        variables: {
-          ...variables
-        },
-      }),
-    },
+      body: JSON.stringify({
+        query,
+        variables: { ...variables }
+      })
+    }
   )
   const data = await response.json()
   return data.data

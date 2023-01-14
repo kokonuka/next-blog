@@ -1,116 +1,24 @@
-import { useState, useEffect } from 'react' 
+import { useState } from 'react' 
 import { Container, Button, Text, Box } from "@chakra-ui/react"
-
 import { getDateDiff } from "../../lib/getDateDiff"
 import { sliceText } from '../../lib/sliceText'
-
 import CardList from "../../components/cardList"
+import { Post } from '../../types/posts'
+import { fetchGraphWithVariable } from '../../lib/fetchGraphql'
+import { getPostsQuery, getNextPostsQuery } from '../../queries/posts'
 
 type Props = {
   posts: Array<Post>,
   pageInfo: PageInfo
 }
 
-type Post = {
-  id: string
-  title: string
-  slug: string
-  date: string
-  featuredImage: {
-    node: {
-      mediaItemUrl: string
-    }
-  }
-  excerpt: string
-  categories: {
-    nodes: Array<{
-      name: string
-    }>
-  }
-}
-
 type PageInfo = {
   endCursor: string
-  hasNextPage: boolean
-  hasPreviousPage: boolean
-  startCursor: string
-  total: number
 }
 
-const postsQuery = `query getPosts {
-  posts(first: 10) {
-    nodes {
-      id
-      slug
-      date
-      title
-      featuredImage {
-        node {
-          mediaItemUrl
-        }
-      }
-      excerpt
-      categories {
-        nodes {
-          name
-        }
-      }
-    }
-    pageInfo {
-      total
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
-  }
-}`;
-
-const nextPostsQuery = `query GetNextPostsQuery(
-  $endCursor: String!
-)
-{
-  posts(after: $endCursor) {
-    nodes {
-      id
-      slug
-      date
-      title
-      featuredImage {
-        node {
-          mediaItemUrl
-        }
-      }
-      excerpt
-      categories {
-        nodes {
-          name
-        }
-      }
-    }
-    pageInfo {
-      total
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
-  }
-}`;
-
 export const getStaticProps = async () => {
-  const response = await fetch(
-    process.env.GRAPHQL_ENDPOINT!,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ query: postsQuery }),
-    },
-  )
-  const data = await response.json()
-  const posts = data.data.posts.nodes.map((post: Post) => {
+  const data = await fetchGraphWithVariable(getPostsQuery, { "count": 10 })
+  const posts = data.posts.nodes.map((post: Post) => {
     post.date = getDateDiff(post.date)
     post.title = sliceText(post.title)
     return post
@@ -119,7 +27,7 @@ export const getStaticProps = async () => {
   return {
     props:{
       posts,
-      pageInfo: data.data.posts.pageInfo
+      pageInfo: data.posts.pageInfo
     }
   }
 }
@@ -127,28 +35,17 @@ export const getStaticProps = async () => {
 const Index = ({ posts, pageInfo }: Props) => {
   const [postsState, setPostsState] = useState(posts)
   const [endCursor, setEndCursor] = useState(pageInfo.endCursor)
-  const [isNextPage, setIsNextPage] = useState(pageInfo.hasNextPage)
+  const [isNextPage, setIsNextPage] = useState(posts.length === 10)
 
   const getNextPosts = async() => {
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT!,
-      {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          query: nextPostsQuery,
-          variables: {endCursor: endCursor},
-        }),
-      },
-    )
-    const data = await response.json()
-    const posts = data.data.posts.nodes.map((post: Post) => {
+    const data = await fetchGraphWithVariable(getNextPostsQuery, { "endCursor": endCursor })
+    const posts = data.posts.nodes.map((post: Post) => {
       post.date = getDateDiff(post.date)
       post.title = sliceText(post.title)
       return post
     })
     setPostsState([...postsState, ...posts])
-    setEndCursor(data.data.posts.pageInfo.endCursor)
+    setEndCursor(data.posts.pageInfo.endCursor)
     if(posts.length < 10) setIsNextPage(false)
   }
 
