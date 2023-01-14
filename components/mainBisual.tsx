@@ -2,13 +2,21 @@ import { useEffect, useRef } from "react";
 import { Box, Text } from '@chakra-ui/react'
 import Typed from "typed.js";
 
-export default function Hero() {
+export default function mainBisual() {
   const el = useRef(null!);
 
   useEffect(() => {
     const typed = new Typed(el.current, {
       strings: [
-        "駆け出しエンジニアの備忘録です", 
+        "駆け出しエンジニアの備忘録です",
+        "Linux",
+        "AWS",
+        "Docker",
+        "SQL",
+        "Ruby",
+        "Ruby on Rails",
+        "Java",
+        "Spring Boot",
         "JavaScript",
         "TypeScript",
         "React",
@@ -35,7 +43,7 @@ export default function Hero() {
     <Box 
       as="section"
       position="relative" 
-      height="96" 
+      height="30vh" 
       display="flex" 
       justifyContent="center" 
       flexDirection="column" 

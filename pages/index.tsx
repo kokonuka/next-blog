@@ -6,7 +6,7 @@ import { Blocks, Triangle } from 'react-loader-spinner'
 
 import type { NextPage } from 'next'
 
-import Hero from '../components/hero'
+import MainBisual from '../components/mainBisual'
 import CardList from '../components/cardList'
 import Twitter from '../components/twitter'
 
@@ -120,7 +120,7 @@ const Home:NextPage<Props> = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Hero />
+      <MainBisual />
       <Container maxW="6xl">
         <Box 
           as='section'
