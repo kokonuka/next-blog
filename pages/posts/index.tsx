@@ -56,15 +56,12 @@ const Index = ({ posts, pageInfo }: Props) => {
   return (
     <>
       <Container maxW="6xl">
-        <Box 
-          as="section"
-          py="10"
-          >
-          <Text fontSize="3xl" fontWeight="bold" textAlign="center">Posts</Text>
+        <Box as="section"pt="10" pb="36">
+          <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">Posts</Text>
           <Box mt="10">
             <CardList posts={postsState}/>
             {isNextPage && (
-              <Box mt="10" textAlign="center">
+              <Box mt="14" textAlign="center">
                 <Button 
                   onClick={handleClick}
                   colorScheme='blue' 
