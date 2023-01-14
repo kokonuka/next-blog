@@ -9,7 +9,6 @@ import { Category } from "../types/categories"
 export default function Categories() {
   const [categories, setCategories] = useState([])
   const router = useRouter()
-  if(router.pathname === "/search") return null
 
   const getCategories = async() => {
     const data = await fetchGraph(getCategoriesQuery)
@@ -17,7 +16,7 @@ export default function Categories() {
 
     let flug = false
     let endCursor= data.categories.pageInfo.endCursor
-    if(categories.length === 6) flug = true
+    if(categories.length === 10) flug = true
     while(flug) {
       const data = await fetchGraphWithVariable(getNextCategoriesQuery, { "endCursor": endCursor })
       if(data.categories.nodes.length === 0) {
@@ -36,26 +35,30 @@ export default function Categories() {
   }, [])
 
   return (
-    <Box 
-      as="section"
-      bg="white" 
-      position="sticky" 
-      top="0" 
-      zIndex="2"
-      >
-      <Container maxW="6xl">
-        <Box className='categoriesWrap' display="flex" gap="7" w="100%" pt="2" overflowX="scroll">
-          {categories.length > 0 && categories.map((category: Category) => (
-            // 現在のパスとカテゴリーIDが一致していたら
-            // <Text fontWeight="bold" color="gray.600" borderBottom="2px solid" pb="3">
-            //   <Link href="/">{category.name}</Link>
-            // </Text>
-            <Text fontWeight="bold" color="gray.500" pb="3" whiteSpace="nowrap" key={category.categoryId}>
-              <Link href="/">{category.name}</Link>
-            </Text>
-          ))}
+    <>
+      {router.pathname !== "/search" && (
+        <Box 
+          as="section"
+          bg="white" 
+          position="sticky" 
+          top="0" 
+          zIndex="2"
+          >
+          <Container maxW="6xl">
+            <Box className='categoriesWrap' display="flex" gap="7" w="100%" pt="2" overflowX="scroll">
+              {categories.length > 0 && categories.map((category: Category) => (
+                // 現在のパスとカテゴリーIDが一致していたら
+                // <Text fontWeight="bold" color="gray.600" borderBottom="2px solid" pb="3">
+                //   <Link href="/">{category.name}</Link>
+                // </Text>
+                <Text fontWeight="bold" color="gray.500" pb="3" whiteSpace="nowrap" key={category.categoryId}>
+                  <Link href="/">{category.name}</Link>
+                </Text>
+              ))}
+            </Box>
+          </Container>
         </Box>
-      </Container>
-    </Box>
+      )}
+    </>
   )
 }
