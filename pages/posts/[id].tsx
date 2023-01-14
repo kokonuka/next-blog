@@ -113,9 +113,9 @@ const Post = ({ post }: Props) => {
             width={{ base: "100%", lg: "60%" }}
             >
             <Image
-              objectFit='contain'
+              objectFit='cover'
               width="100%"
-              maxH={{base: "36", lg: "64" }}
+              maxH={{base: "36", sm: "56", md: "72", lg: "64" }}
               borderRadius='2xl'
               src={imageUrl}
               alt='Caffe Latte'
