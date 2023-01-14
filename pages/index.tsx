@@ -2,14 +2,12 @@ import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { Container, Box, Text } from '@chakra-ui/react'
-import { Blocks, Triangle } from 'react-loader-spinner'
-
+import { Triangle } from 'react-loader-spinner'
 import type { NextPage } from 'next'
-
 import MainBisual from '../components/mainBisual'
 import CardList from '../components/cardList'
 import Twitter from '../components/twitter'
-
+import About from '../components/about'
 import { getDateDiff } from '../lib/getDateDiff'
 
 type Props = {
@@ -126,19 +124,14 @@ const Home:NextPage<Props> = (props) => {
           as='section'
           py="16"
           >
-          <Text pb="5" fontSize="3xl" fontWeight="bold">New Posts</Text>
+          <Text pb="5" color="gray.700" fontSize="3xl" fontWeight="bold">New Posts</Text>
           <CardList posts={posts}/>
           <Text mt="10" color="blue.500" textAlign="center">
             <Link href="/posts">全ての記事を見る</Link>
           </Text>
         </Box>
-
-        {/* 自己紹介 */}
-
+        <About />
         <Twitter />
-
-        {/* タグ一覧 */}
-
       </Container>
       {isLoading && (
         <Box 
