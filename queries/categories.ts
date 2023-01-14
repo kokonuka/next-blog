@@ -1,5 +1,5 @@
 export const getCategoriesQuery = `query getCategories {
-  categories(first: 6) {
+  categories(first: 10) {
     nodes {
       name
       categoryId
