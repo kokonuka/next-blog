@@ -2,6 +2,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import {
   Text,
+  Box,
   Drawer as ChakraDrawer,
   DrawerBody,
   DrawerFooter,
@@ -11,6 +12,8 @@ import {
   DrawerCloseButton,
 } from "@chakra-ui/react"
 import { MutableRefObject } from "react"
+import { BsInboxes } from "react-icons/bs";
+import { RiHome2Line } from "react-icons/ri";
 
 type Props = {
   isOpen: boolean,
@@ -38,16 +41,18 @@ export default function Drawer(props: Props) {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Menu</DrawerHeader>
-          <DrawerBody mt="5" display="flex" flexDirection="column" gap="2">
+          <DrawerBody mt="5" display="flex" flexDirection="column" gap="3" color="blackAlpha.700">
             <Link href="/" onClick={handleClick}>
-              <Text color="blackAlpha.700" fontSize='lg' fontWeight="bold">
-                Home
-              </Text>
+              <Box display="flex" alignItems="center" gap="2">
+                <Box fontSize='xl'><RiHome2Line /></Box>
+                <Box fontSize='lg' fontWeight="bold">Home</Box>
+              </Box>
             </Link>
             <Link href="/posts" onClick={handleClick}>
-              <Text color="blackAlpha.700" fontSize='lg' fontWeight="bold">
-                Posts
-              </Text>
+              <Box display="flex" alignItems="center" gap="2">
+                <Box fontSize='xl'><BsInboxes /></Box>
+                <Box fontSize='lg' fontWeight="bold">Posts</Box>
+              </Box>
             </Link>
           </DrawerBody>
         </DrawerContent>

@@ -6,8 +6,11 @@ import {
   Box,
   Text,
 } from '@chakra-ui/react'
-import { IconContext } from "react-icons/lib";
 import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
+import { BiCodeBlock } from "react-icons/bi";
+import { TiCodeOutline } from "react-icons/ti";
+import { FaLaptopCode } from "react-icons/fa";
+import { GoCode } from "react-icons/go";
 
 import Drawer from "./drawer";
 
@@ -19,19 +22,15 @@ export default function Header() {
     <>
       <Box bg="white" py="2" as="header">
         <Container maxW='6xl' display="flex" justifyContent="space-between">
-          <IconContext.Provider value={{ size: '25px' }}>
-            <Link href="/search">
-              <AiOutlineSearch />
-            </Link>
-            <Link href="/">
-              <Text fontSize='lg' fontWeight="bold">
-                Hoge
-              </Text>
-            </Link>
-            <Box ref={btnRef} onClick={onOpen} cursor="pointer">
-              <AiOutlineMenu />
-            </Box>
-          </IconContext.Provider>
+          <Box display="flex" alignItems="center" fontSize="2xl" color="gray.600">
+            <Link href="/search"><AiOutlineSearch /></Link>
+          </Box>
+          <Box display="flex" alignItems="center" fontSize="3xl" color="gray.800">
+            <Link href="/"><GoCode /></Link>
+          </Box>
+          <Box ref={btnRef} onClick={onOpen} display="flex" alignItems="center" fontSize="2xl" color="gray.600" cursor="pointer">
+            <AiOutlineMenu />
+          </Box>
         </Container>
       </Box>
       <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} btnRef={btnRef} />

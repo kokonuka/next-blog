@@ -50,7 +50,6 @@ export default function MainBisual() {
       overflow="hidden"
       >
       <Box position="relative" zIndex="1">
-        <Text fontSize="2xl" color="white" fontWeight="bold" textAlign="center">HogeHoge</Text>
         <Text fontSize="xl" color="white" textAlign="center">
           <span ref={el}></span>
         </Text>
