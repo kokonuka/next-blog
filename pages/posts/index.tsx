@@ -1,4 +1,5 @@
 import { useState } from 'react' 
+import Head from 'next/head'
 import { Container, Button, Text, Box } from "@chakra-ui/react"
 import { getDateDiff } from "../../lib/getDateDiff"
 import { sliceText } from '../../lib/sliceText'
@@ -55,6 +56,12 @@ const Index = ({ posts, pageInfo }: Props) => {
 
   return (
     <>
+      <Head>
+        <title>Posts | kimagurecode</title>
+        <meta name="description" content="駆け出しエンジニアの備忘録" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Container maxW="6xl">
         <Box as="section"pt="10" pb="36">
           <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">Posts</Text>

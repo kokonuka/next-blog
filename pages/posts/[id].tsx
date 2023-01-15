@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { GetServerSideProps } from "next"
 import { Container, Image, Text, Box, Tag as ChakraTag } from "@chakra-ui/react"
 import { load } from 'cheerio';
@@ -46,6 +47,12 @@ const Post = ({ post }: Props) => {
 
   return (
     <>
+      <Head>
+        <title>{post.title} | kimagurecode</title>
+        <meta name="description" content="駆け出しエンジニアの備忘録" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Container maxW="6xl" py="10" px={{ base: "0", lg: "4" }}>
         <Box>
           <Image

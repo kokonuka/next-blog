@@ -6,7 +6,7 @@ export default function Twitter() {
       as='section'
       py="16"
       >
-      <Text pb="5" color="gray.700" fontSize="3xl" fontWeight="bold">Twitter</Text>
+      <Text pb="5" color="gray.700" fontSize="3xl" fontWeight="bold">Tweets</Text>
       <Box>
         <a 
           className="twitter-timeline" 

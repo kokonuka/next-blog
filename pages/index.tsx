@@ -64,7 +64,7 @@ const Home:NextPage<Props> = (props) => {
   return (
     <>
       <Head>
-        <title>HogeHoge</title>
+        <title>kimagurecode</title>
         <meta name="description" content="駆け出しエンジニアの備忘録" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
