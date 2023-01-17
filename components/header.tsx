@@ -4,14 +4,9 @@ import {
   useDisclosure,
   Container,
   Box,
-  Text,
 } from '@chakra-ui/react'
 import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
-import { BiCodeBlock } from "react-icons/bi";
-import { TiCodeOutline } from "react-icons/ti";
-import { FaLaptopCode } from "react-icons/fa";
-import { GoCode } from "react-icons/go";
-
+import { AiFillHome } from "react-icons/ai";
 import Drawer from "./drawer";
 
 export default function Header() {
@@ -25,8 +20,8 @@ export default function Header() {
           <Box display="flex" alignItems="center" fontSize="2xl" color="gray.600">
             <Link href="/search"><AiOutlineSearch /></Link>
           </Box>
-          <Box display="flex" alignItems="center" fontSize="3xl" color="gray.800">
-            <Link href="/"><GoCode /></Link>
+          <Box display="flex" alignItems="center" fontSize="2xl" color="gray.800">
+            <Link href="/"><AiFillHome /></Link>
           </Box>
           <Box ref={btnRef} onClick={onOpen} display="flex" alignItems="center" fontSize="2xl" color="gray.600" cursor="pointer">
             <AiOutlineMenu />
