@@ -54,12 +54,12 @@ const Post = ({ post }: Props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container maxW="6xl" py="10" px={{ base: "0", lg: "4" }}>
-        <Box>
+        <Box px="10">
           <Image
             mx="auto"
             objectFit='cover'
-            width={{ base: "200px", lg: "400px" }}
-            height={{ base: "100px", lg: "200px" }}
+            width={{ base: "100%", lg: "60%" }}
+            // height={{ lg: "200px" }}
             borderRadius='2xl'
             src={imageUrl}
             alt='Caffe Latte'
