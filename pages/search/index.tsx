@@ -23,10 +23,10 @@ const query = `query getPosts (
 ) {
   posts(where: {search: $keyword}) {
     nodes {
-      id
-      slug
-      date
+      databaseId
       title
+      date
+      content
       featuredImage {
         node {
           mediaItemUrl
