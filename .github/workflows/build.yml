@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GRAPHQL_ENDPOINT: ${{ secrets.GRAPHQL_ENDPOINT }}
+      NEXT_PUBLIC_GRAPHQL_ENDPOINT: ${{ secrets.NEXT_PUBLIC_GRAPHQL_ENDPOINT }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
