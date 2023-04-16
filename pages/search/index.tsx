@@ -15,8 +15,10 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { getTagsQuery, getNextTagsQuery } from "../../queries/tags";
 import { fetchGraph, fetchGraphWithVariable } from "../../lib/fetchGraphql";
 import CardList from "../../components/cardList";
-
+import { ViewPost } from "../../types/posts";
 import { Tag } from "../../types/tags";
+import { sliceText } from "../../lib/sliceText";
+import { getDateDiff } from "../../lib/getDateDiff";
 
 const query = `query getPosts (
   $keyword: String
@@ -43,7 +45,7 @@ const query = `query getPosts (
 
 export default function Index() {
   const [value, setValue] = useState("")
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState<ViewPost[]>([])
   const [tags, setTags] = useState([])
   const router = useRouter();
   const { q } = router.query
@@ -63,7 +65,13 @@ export default function Index() {
       },
     )
     const data = await response.json()
-    setPosts(data.data.posts.nodes)
+    const posts: ViewPost[] = data.data.posts.nodes;
+    const formatedPosts = posts.map(post => {
+      post.clippedTitle = sliceText(post.title);
+      post.dateDiff = getDateDiff(post.date);
+      return post;
+    })
+    setPosts(formatedPosts);
   }
 
   useEffect(() => {
