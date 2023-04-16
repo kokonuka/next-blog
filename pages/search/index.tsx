@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react"
+import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from 'next/router'
+import { getTagsQuery, getNextTagsQuery } from "../../graphql/queries/tags";
+import { getPostsOfSearch } from "../../graphql/queries/posts";
+import { fetchGraphWithVariable } from "../../graphql/fetchGraphql";
+import { ViewPost } from "../../graphql/types/posts";
+import { Tag } from "../../graphql/types/tags";
+import CardList from "../../components/cardList";
+import { sliceText } from "../../lib/sliceText";
+import { getDateDiff } from "../../lib/getDateDiff";
 import { 
   VStack, 
   Container, 
@@ -12,108 +21,62 @@ import {
   Text
 } from '@chakra-ui/react'
 import { AiOutlineSearch } from "react-icons/ai";
-import { getTagsQuery, getNextTagsQuery } from "../../queries/tags";
-import { fetchGraph, fetchGraphWithVariable } from "../../lib/fetchGraphql";
-import CardList from "../../components/cardList";
-import { ViewPost } from "../../types/posts";
-import { Tag } from "../../types/tags";
-import { sliceText } from "../../lib/sliceText";
-import { getDateDiff } from "../../lib/getDateDiff";
+import Link from "next/link";
 
-const query = `query getPosts (
-  $keyword: String
-) {
-  posts(where: {search: $keyword}) {
-    nodes {
-      databaseId
-      title
-      date
-      content
-      featuredImage {
-        node {
-          mediaItemUrl
-        }
-      }
-      categories {
-        nodes {
-          name
-        }
-      }
-    }
-  }
-}`
+type Props = {
+  tags: Tag[]
+}
 
-export default function Index() {
-  const [value, setValue] = useState("")
-  const [posts, setPosts] = useState<ViewPost[]>([])
-  const [tags, setTags] = useState([])
+const fetchPostsOfQuery = async (q: string | string[]) => {
+  const data = await fetchGraphWithVariable(getPostsOfSearch, { keyword: q })
+  return data.posts.nodes.map((post: ViewPost) => {
+    post.clippedTitle = sliceText(post.title);
+    post.dateDiff = getDateDiff(post.date);
+    return post;
+  });
+};
+
+const Index: NextPage<Props> = ({ tags }) => {
+  const [viewTags, setViewTags] = useState<Tag[]>(tags);
   const router = useRouter();
   const { q } = router.query
-
-  const fetchPosts = async () => {
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT!,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          query,
-          variables: {keyword: q},
-        }),
-      },
-    )
-    const data = await response.json()
-    const posts: ViewPost[] = data.data.posts.nodes;
-    const formatedPosts = posts.map(post => {
-      post.clippedTitle = sliceText(post.title);
-      post.dateDiff = getDateDiff(post.date);
-      return post;
-    })
-    setPosts(formatedPosts);
-  }
-
-  useEffect(() => {
-    if(q) fetchPosts()
-  }, [q])
-
-  const getTags = async() => {
-    const data = await fetchGraph(getTagsQuery)
-    let tags = data.tags.nodes
-
-    let flug = false
-    let endCursor= data.tags.pageInfo.endCursor
-    if(tags.length === 10) flug = true
-    while(flug) {
-      const data = await fetchGraphWithVariable(getNextTagsQuery, { "endCursor": endCursor })
-      if(data.tags.nodes.length === 0) {
-        flug = false
-        break
-      }
-      tags = [...tags, ...data.tags.nodes]
-      endCursor = data.tags.pageInfo.endCursor
-    }
-
-    setTags(tags)
-  }
-
-  useEffect(() => {
-    getTags()
-  })
+  const [value, setValue] = useState("")
+  const [posts, setPosts] = useState<ViewPost[]>([])
 
   const handleChange = (e: any) => {
-    setValue(e.target.value)
-  }
+    const value = e.target.value;
+    setValue(e.target.value);
+
+    const filterdTags = tags.filter(tag => {
+      return tag.name.toLowerCase().includes(value.toLowerCase()) ? true : false;
+    });
+    setViewTags(filterdTags);
+  };
 
   const handleSubmit = (e: any) => {
     if (e.key === 'Enter') {
       router.push({
         pathname: "search",
-        query: { q: value },
+        query: { q: value }
       });
     }
-  }
+  };
+
+  useEffect(() => {
+    if(!q) {
+      setPosts([]);
+      setViewTags(tags);
+      return;
+    };
+    ( async() => {
+      setPosts(await fetchPostsOfQuery(q));
+      const filterdTags = tags.filter(tag => {
+        return tag.name.toLowerCase().includes(typeof q == "string" ? q.toLowerCase() : "") ? true : false;
+      });
+      setViewTags(filterdTags);
+      setValue(typeof q == "string" ? q : "");
+    } )();
+  }, [q]);
 
   return (
     <>
@@ -147,22 +110,50 @@ export default function Index() {
               </InputGroup>
             </VStack>
           </VStack>
-          {!q && tags ? (
             <Box mt="10">
               <Text fontWeight="bold">Tags</Text>
               <Box mt="5" display="flex" flexWrap="wrap" gap="3">
-                {tags.map((tag: Tag) => (
-                  <ChakraTag key={tag.tagId}>{tag.name}</ChakraTag>
+                {viewTags.map((tag: Tag) => (
+                  <Link href={`/tags/${tag.id}`}>
+                    <ChakraTag key={tag.id} px={4} py={3} >{tag.name}</ChakraTag>
+                  </Link>
                 ))}
               </Box>
             </Box>
-          ) : (
             <Box mt="10">
-              <CardList posts={posts}/>
+              <Text fontWeight="bold">Posts</Text>
+              <Box mt="5">
+                <CardList posts={posts}/>
+              </Box>
             </Box>
-          )}
         </Container>
       </Box>
     </>
   )
-}
+};
+
+export default Index;
+
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  let tags: Tag[] = [];
+
+  let hasNextPage = true;
+  let endCursor = "";
+  while (hasNextPage) {
+    const data = tags.length == 0 
+      ? await fetchGraphWithVariable(getTagsQuery, { "count": 10 }) 
+      : await fetchGraphWithVariable(getNextTagsQuery, { "endCursor": endCursor });
+
+    tags.push(...data.tags.nodes);
+    endCursor = data.tags.pageInfo.endCursor;
+
+    if(!data.tags.pageInfo.hasNextPage) hasNextPage = false;
+  };
+
+  return {
+    props:{
+      tags
+    }
+  }
+};

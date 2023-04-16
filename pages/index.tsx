@@ -9,9 +9,9 @@ import CardList from '../components/cardList'
 import Twitter from '../components/twitter'
 import About from '../components/about'
 import { getDateDiff } from '../lib/getDateDiff'
-import { ViewPost } from '../types/posts'
-import { getPostsQuery } from '../queries/posts'
-import { fetchGraphWithVariable } from '../lib/fetchGraphql'
+import { ViewPost } from '../graphql/types/posts'
+import { getPostsQuery } from '../graphql/queries/posts'
+import { fetchGraphWithVariable } from '../graphql/fetchGraphql'
 
 type Props = {
   posts: ViewPost[]

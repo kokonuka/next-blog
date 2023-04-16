@@ -94,3 +94,26 @@ export const getPostQuery = `query getPost(
     }
   }
 }`
+
+export const getPostsOfSearch = `query getPostsOfSearch (
+  $keyword: String
+) {
+  posts(where: {search: $keyword}) {
+    nodes {
+      databaseId
+      title
+      date
+      content
+      featuredImage {
+        node {
+          mediaItemUrl
+        }
+      }
+      categories {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+}`
