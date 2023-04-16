@@ -12,22 +12,11 @@ export default function Categories() {
 
   const getCategories = async() => {
     const data = await fetchGraph(getCategoriesQuery)
-    let categories = data.categories.nodes
-
-    let flug = false
-    let endCursor= data.categories.pageInfo.endCursor
-    if(categories.length === 10) flug = true
-    while(flug) {
-      const data = await fetchGraphWithVariable(getNextCategoriesQuery, { "endCursor": endCursor })
-      if(data.categories.nodes.length === 0) {
-        flug = false
-        break
-      }
-      categories = [...categories, ...data.categories.nodes]
-      endCursor = data.categories.pageInfo.endCursor
-    }
-
-    setCategories(categories)
+    const filterdCategories = data.categories.nodes.filter((category: Category) => {
+      return category.name != "未分類" ? true : false;
+    })
+    filterdCategories.sort((a: Category, b: Category) => a.name > b.name ? -1 : 1);
+    setCategories(filterdCategories)
   }
 
   useEffect(() => {
@@ -37,13 +26,7 @@ export default function Categories() {
   return (
     <>
       {router.pathname !== "/search" && (
-        <Box 
-          as="section"
-          bg="white" 
-          position="sticky" 
-          top="0" 
-          zIndex="2"
-          >
+        <Box as="section" bg="white" position="sticky" top="0" zIndex="2">
           <Container maxW="6xl" position="relative">
             <Box className='categoriesWrap' display="flex" gap="7" w="100%" pt="2" pr="14" overflowX="scroll">
               {categories.length > 0 && categories.map((category: Category) => (
@@ -51,8 +34,8 @@ export default function Categories() {
                 // <Text fontWeight="bold" color="gray.600" borderBottom="2px solid" pb="3">
                 //   <Link href="/">{category.name}</Link>
                 // </Text>
-                <Text fontSize="sm" fontWeight="bold" color="gray.500" pb="3" whiteSpace="nowrap" key={category.categoryId}>
-                  <Link href="/">{category.name}</Link>
+                <Text fontSize="sm" fontWeight="bold" color="gray.500" pb="3" whiteSpace="nowrap" key={category.id}>
+                  <Link href={`/categories/${category.id}`}>{category.name}</Link>
                 </Text>
               ))}
             </Box>
@@ -63,7 +46,7 @@ export default function Categories() {
               w="14"
               height="100%" 
               bg="linear-gradient(to left, white, #ffffff10)"
-              >
+            >
             </Box>
           </Container>
         </Box>
