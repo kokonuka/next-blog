@@ -4,13 +4,17 @@ import { Container, Image, Text, Box, Tag as ChakraTag } from "@chakra-ui/react"
 import { load } from 'cheerio';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/base16/nova.css';
-import { getDateDiff } from "../../lib/getDateDiff";
+import { formatDate } from "../../lib/formatDate";
 import { Post } from "../../types/posts";
 import { fetchGraphWithVariable } from "../../lib/fetchGraphql";
 import { getPostQuery } from "../../queries/posts";
 
 type Props = {
-  post: Post
+  post: ViewPost
+}
+
+type ViewPost = Post & {
+  formattedDate: string
 }
 
 type Tag = {
@@ -30,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     $(elm).addClass('hljs');
   });
   post.content = $.html();
-  post.date = getDateDiff(post.date)
+  // post.dateDiff = getDateDiff(post.date);
 
   return {
     props: {
@@ -40,6 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 }
 
 const Post = ({ post }: Props) => {
+  post.formattedDate = formatDate(post.date);
   const tmpImageUrl = "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
   const imageUrl = post.featuredImage
     ? post.featuredImage.node.mediaItemUrl 
@@ -68,7 +73,7 @@ const Post = ({ post }: Props) => {
             {post.title}
           </Text>
           <Text mt="5" fontWeight="bold" textAlign="center" color="gray.500">
-            {post.date}
+            {post.formattedDate}
           </Text>
         </Box>
         <Box mt="10" display={{ base: "block", lg: "flex" }}>

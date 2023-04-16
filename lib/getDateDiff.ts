@@ -1,21 +1,23 @@
-export const getDateDiff = (date: string): string => {
-  let dateOfDate = new Date(date);
-  let diff = new Date().getTime() - dateOfDate.getTime();
-  let progress = new Date(diff);
+export const getDateDiff = (date: string) => {
+  const postTimezone = '+09:00';
+  const postTimestamp = Date.parse(date + postTimezone);
+  const currentTimestamp = Date.now();
+  const progress = new Date(currentTimestamp - postTimestamp);
 
+  let dateDiff: string;
   if (progress.getUTCFullYear() - 1970) {
-    date = progress.getUTCFullYear() - 1970 + '年前';
+    dateDiff = progress.getUTCFullYear() - 1970 + '年前';
   } else if (progress.getUTCMonth()) {
-    date = progress.getUTCMonth() + 'ヶ月前';
+    dateDiff = progress.getUTCMonth() + 'ヶ月前';
   } else if (progress.getUTCDate() - 1) {
-    date = progress.getUTCDate() - 1 + '日前';
+    dateDiff = progress.getUTCDate() - 1 + '日前';
   } else if (progress.getUTCHours()) {
-    date = progress.getUTCHours() + '時間前';
+    dateDiff = progress.getUTCHours() + '時間前';
   } else if (progress.getUTCMinutes()) {
-    date = progress.getUTCMinutes() + '分前';
+    dateDiff = progress.getUTCMinutes() + '分前';
   } else {
-    date = 'たった今';
+    dateDiff = 'たった今';
   }
 
-  return date
+  return dateDiff;
 }
