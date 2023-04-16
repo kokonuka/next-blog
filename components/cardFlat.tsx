@@ -29,6 +29,7 @@ export default function CardFlat({ post }: Props) {
               height='75px'
               borderRadius='2xl'
               src={imageUrl}
+              alt='article'
             />
             <Box p="0" pl="3" flex="1">
               <Heading size='md' color="gray.700">

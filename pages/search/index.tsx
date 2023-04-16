@@ -76,7 +76,7 @@ const Index: NextPage<Props> = ({ tags }) => {
       setViewTags(filterdTags);
       setValue(typeof q == "string" ? q : "");
     } )();
-  }, [q]);
+  }, [q, tags]);
 
   return (
     <>
@@ -114,8 +114,8 @@ const Index: NextPage<Props> = ({ tags }) => {
               <Text fontWeight="bold">Tags</Text>
               <Box mt="5" display="flex" flexWrap="wrap" gap="3">
                 {viewTags.map((tag: Tag) => (
-                  <Link href={`/tags/${tag.id}`}>
-                    <ChakraTag key={tag.id} px={4} py={3} >{tag.name}</ChakraTag>
+                  <Link href={`/tags/${tag.id}`} key={tag.id} >
+                    <ChakraTag px={4} py={3} >{tag.name}</ChakraTag>
                   </Link>
                 ))}
               </Box>
