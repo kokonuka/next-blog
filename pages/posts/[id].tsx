@@ -34,7 +34,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     $(elm).addClass('hljs');
   });
   post.content = $.html();
-  // post.dateDiff = getDateDiff(post.date);
 
   return {
     props: {
