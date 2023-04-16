@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { GetServerSideProps } from "next"
+import { GetStaticProps, GetStaticPaths, NextPage } from "next"
 import { Container, Image, Text, Box, Tag as ChakraTag } from "@chakra-ui/react"
 import { load } from 'cheerio';
 import hljs from 'highlight.js';
@@ -7,7 +7,7 @@ import 'highlight.js/styles/base16/nova.css';
 import { formatDate } from "../../lib/formatDate";
 import { Post } from "../../types/posts";
 import { fetchGraphWithVariable } from "../../lib/fetchGraphql";
-import { getPostQuery } from "../../queries/posts";
+import { getPostQuery, getPostsQuery, getNextPostsQuery } from "../../queries/posts";
 
 type Props = {
   post: ViewPost
@@ -22,27 +22,7 @@ type Tag = {
   name: string
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query
-  const data = await fetchGraphWithVariable(getPostQuery, { id })
-  const post = data.post
-
-  const $ = load(post.content);
-  $('pre code').each((_, elm) => {
-    const result = hljs.highlightAuto($(elm).text());
-    $(elm).html(result.value);
-    $(elm).addClass('hljs');
-  });
-  post.content = $.html();
-
-  return {
-    props: {
-      post
-    }
-  }
-}
-
-const Post = ({ post }: Props) => {
+const Post: NextPage<Props> = ({ post }) => {
   post.formattedDate = formatDate(post.date);
   const tmpImageUrl = "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
   const imageUrl = post.featuredImage
@@ -97,4 +77,55 @@ const Post = ({ post }: Props) => {
   )
 }
 
-export default Post
+export default Post;
+
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+  const id = params!.id;
+  const data = await fetchGraphWithVariable(getPostQuery, { id })
+  const post = data.post
+
+  const $ = load(post.content);
+  $('pre code').each((_, elm) => {
+    const result = hljs.highlightAuto($(elm).text());
+    $(elm).html(result.value);
+    $(elm).addClass('hljs');
+  });
+  post.content = $.html();
+
+  return {
+    props: {
+      post
+    }
+  }
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+
+  let posts: Post[] = [];
+
+  let hasNextPage = true;
+  let endCursor = "";
+  while (hasNextPage) {
+    const data = posts.length == 0 
+      ? await fetchGraphWithVariable(getPostsQuery, { "count": 10 }) 
+      : await fetchGraphWithVariable(getNextPostsQuery, { "endCursor": endCursor });
+
+    posts.push(...data.posts.nodes);
+    endCursor = data.posts.pageInfo.endCursor;
+
+    if(!data.posts.pageInfo.hasNextPage) hasNextPage = false;
+  };
+
+  const paths = posts.map((post: Post) => {
+    return {
+      params: {
+        id: `${post.databaseId}`
+      }
+    }
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
