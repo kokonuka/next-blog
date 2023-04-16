@@ -21,3 +21,9 @@ export type Post = {
     }>
   }
 }
+
+export type ViewPost = Post & {
+  dateDiff: string,
+  formattedDate: string,
+  clippedTitle: string
+}

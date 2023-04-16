@@ -1,10 +1,10 @@
-import { useState } from 'react' 
+import { useState, useEffect } from 'react' 
 import Head from 'next/head'
 import { Container, Button, Text, Box } from "@chakra-ui/react"
 import { getDateDiff } from "../../lib/getDateDiff"
 import { sliceText } from '../../lib/sliceText'
 import CardList from "../../components/cardList"
-import { Post } from '../../types/posts'
+import { ViewPost } from '../../types/posts'
 import { fetchGraphWithVariable } from '../../lib/fetchGraphql'
 import { getPostsQuery, getNextPostsQuery } from '../../queries/posts'
 
@@ -13,19 +13,14 @@ type Props = {
   pageInfo: PageInfo
 }
 
-type ViewPost = Post & {
-  dateDiff: string
-}
-
 type PageInfo = {
   endCursor: string
 }
 
 export const getStaticProps = async () => {
   const data = await fetchGraphWithVariable(getPostsQuery, { "count": 10 })
-  const posts = data.posts.nodes.map((post: Post) => {
-    post.date = getDateDiff(post.date)
-    post.title = sliceText(post.title)
+  const posts = data.posts.nodes.map((post: ViewPost) => {
+    post.clippedTitle = sliceText(post.title);
     return post
   })
 
@@ -38,15 +33,25 @@ export const getStaticProps = async () => {
 }
 
 const Index = ({ posts, pageInfo }: Props) => {
+
   const [postsState, setPostsState] = useState(posts)
   const [endCursor, setEndCursor] = useState(pageInfo.endCursor)
   const [isNextPage, setIsNextPage] = useState(posts.length === 10)
+
+  useEffect(() => {
+    setPostsState(
+      posts.map((post: ViewPost) => {
+        post.dateDiff = getDateDiff(post.date);
+        return post;
+      })
+    )
+  }, [posts])
 
   const getNextPosts = async() => {
     const data = await fetchGraphWithVariable(getNextPostsQuery, { "endCursor": endCursor })
     const posts = data.posts.nodes.map((post: ViewPost) => {
       post.dateDiff = getDateDiff(post.date);
-      post.title = sliceText(post.title)
+      post.clippedTitle = sliceText(post.title);
       return post
     })
     setPostsState([...postsState, ...posts])
