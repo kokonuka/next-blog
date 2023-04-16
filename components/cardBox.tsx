@@ -4,10 +4,10 @@ import {
   Text,
   Image,
 } from '@chakra-ui/react'
-import { Post } from '../types/posts'
+import { ViewPost } from '../types/posts'
 
 type Props = {
-  post: Post
+  post: ViewPost
 }
 
 export default function CardBox({ post }: Props) {
@@ -45,9 +45,9 @@ export default function CardBox({ post }: Props) {
           </Box>
           <Box h="100px" pt="2" pb="3" px="3" display="flex" flexDirection="column">
               <Text  fontWeight="bold" flex="1">
-                {post.title}
+                {post.clippedTitle}
               </Text>
-            <Text fontSize="xs" color="gray.400">{post.date}</Text>
+            <Text fontSize="xs" color="gray.400">{post.dateDiff}</Text>
           </Box>
         </Link>
       </Box>

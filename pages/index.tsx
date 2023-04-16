@@ -9,29 +9,31 @@ import CardList from '../components/cardList'
 import Twitter from '../components/twitter'
 import About from '../components/about'
 import { getDateDiff } from '../lib/getDateDiff'
-import { Post } from '../types/posts'
+import { ViewPost } from '../types/posts'
 import { getPostsQuery } from '../queries/posts'
 import { fetchGraphWithVariable } from '../lib/fetchGraphql'
 
 type Props = {
-  posts: Array<Post>
+  posts: ViewPost[]
 }
 
 export const getStaticProps = async () => {
   const data = await fetchGraphWithVariable(getPostsQuery, { "count": 5 })
-  const posts = data.posts.nodes.map((post: Post) => {
-    post.date = getDateDiff(post.date)
-    return post
-  })
+
   return {
     props: {
-      posts
+      posts: data.posts.nodes
     }
   }
 }
 
 const Home:NextPage<Props> = (props) => {
-  const { posts } = props
+  const { posts } = props;
+
+  posts.forEach((post: ViewPost) => {
+    post.dateDiff = getDateDiff(post.date)
+  });
+
   const [isLoading, setIsLoading] = useState(true)
   let loadingWrap = useRef<HTMLDivElement>(null)
   let loading = useRef<HTMLDivElement>(null)
@@ -59,7 +61,7 @@ const Home:NextPage<Props> = (props) => {
     script.src = "https://platform.twitter.com/widgets.js";
     document.body.appendChild(script);
     return () => {document.body.removeChild(script) };
- }, [])
+  }, [])
 
   return (
     <>

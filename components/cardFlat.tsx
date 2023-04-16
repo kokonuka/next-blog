@@ -5,10 +5,10 @@ import {
   Text,
   Image,
 } from '@chakra-ui/react'
-import { Post } from '../types/posts'
+import { ViewPost } from '../types/posts'
 
 type Props = {
-  post: Post
+  post: ViewPost
 }
 
 export default function CardFlat({ post }: Props) {
@@ -32,11 +32,11 @@ export default function CardFlat({ post }: Props) {
             />
             <Box p="0" pl="3" flex="1">
               <Heading size='md' color="gray.700">
-                {post.title}
+                {post.clippedTitle || post.title}
               </Heading>
               <Box mt="3" display="flex" gap="2">
                 <Text fontSize="xs">{post.categories.nodes[0].name}</Text>
-                <Text fontSize="xs">{post.date}</Text>
+                <Text fontSize="xs">{post.dateDiff}</Text>
               </Box>
             </Box>
           </Box>
