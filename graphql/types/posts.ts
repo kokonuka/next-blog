@@ -1,5 +1,8 @@
+import { Tag } from "./tags"
+
 export type Post = {
   databaseId: number
+  id: string
   title: string
   date: string
   content: string
@@ -15,10 +18,7 @@ export type Post = {
     }>
   }
   tags: {
-    nodes: Array<{
-      databaseId: number
-      name: string
-    }>
+    nodes: Tag[]
   }
 }
 

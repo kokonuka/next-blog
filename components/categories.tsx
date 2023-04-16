@@ -2,9 +2,9 @@ import { useState, useEffect } from "react"
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Container, Box, Text } from '@chakra-ui/react'
-import { getCategoriesQuery, getNextCategoriesQuery } from "../queries/categories"
-import { fetchGraph, fetchGraphWithVariable } from "../lib/fetchGraphql"
-import { Category } from "../types/categories"
+import { getCategoriesQuery, getNextCategoriesQuery } from "../graphql/queries/categories"
+import { fetchGraph, fetchGraphWithVariable } from "../graphql/fetchGraphql"
+import { Category } from "../graphql/types/categories"
 
 export default function Categories() {
   const [categories, setCategories] = useState([])

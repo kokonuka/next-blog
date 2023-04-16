@@ -4,7 +4,7 @@ import {
   Text,
   Image,
 } from '@chakra-ui/react'
-import { ViewPost } from '../types/posts'
+import { ViewPost } from '../graphql/types/posts'
 
 type Props = {
   post: ViewPost
@@ -28,6 +28,7 @@ export default function CardBox({ post }: Props) {
               w="100%"
               h="100%"
               src={imageUrl}
+              alt='article'
             />
             <Text 
               position="absolute" 

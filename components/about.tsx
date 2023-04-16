@@ -13,6 +13,7 @@ export default function About() {
         w="100%"
         h="30vh"
         src="images/image_01.jpg"
+        alt="about"
       />
       <Box mt="3" display="flex" alignItems="center">
         <Text color="blue.400" fontSize="lg">

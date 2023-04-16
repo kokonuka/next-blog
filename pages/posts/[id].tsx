@@ -5,21 +5,14 @@ import { load } from 'cheerio';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/base16/nova.css';
 import { formatDate } from "../../lib/formatDate";
-import { Post } from "../../types/posts";
-import { fetchGraphWithVariable } from "../../lib/fetchGraphql";
-import { getPostQuery, getPostsQuery, getNextPostsQuery } from "../../queries/posts";
+import { Post } from "../../graphql/types/posts";
+import { fetchGraphWithVariable } from "../../graphql/fetchGraphql";
+import { getPostQuery, getPostsQuery, getNextPostsQuery } from "../../graphql/queries/posts";
+import { Tag } from "../../graphql/types";
+import { ViewPost } from "../../graphql/types/posts";
 
 type Props = {
   post: ViewPost
-}
-
-type ViewPost = Post & {
-  formattedDate: string
-}
-
-type Tag = {
-  databaseId: number
-  name: string
 }
 
 const Post: NextPage<Props> = ({ post }) => {
@@ -59,7 +52,7 @@ const Post: NextPage<Props> = ({ post }) => {
           <Box width={{ base: "100%", lg: "60%" }} bg="white" p="5" borderRadius={{ base: "0", lg: "10" }} py="10">
             <Box pb="10" display="flex" flexWrap="wrap" gap="2">
               {post.tags.nodes.length > 0 && post.tags.nodes.map((tag: Tag) => (
-                <ChakraTag key={tag.databaseId}>
+                <ChakraTag key={tag.id}>
                   {tag.name}
                 </ChakraTag>
               ))}
