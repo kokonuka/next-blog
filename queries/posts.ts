@@ -27,6 +27,7 @@ export const getPostsQuery = `query getPosts (
     }
     pageInfo {
       endCursor
+      hasNextPage
     }
   }
 }`;
@@ -35,7 +36,7 @@ export const getNextPostsQuery = `query GetNextPosts (
   $endCursor: String!
 )
 {
-  posts(after: $endCursor) {
+  posts(first: 10, after: $endCursor) {
     nodes {
       databaseId
       title
@@ -61,6 +62,7 @@ export const getNextPostsQuery = `query GetNextPosts (
     }
     pageInfo {
       endCursor
+      hasNextPage
     }
   }
 }`;
