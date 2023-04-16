@@ -9,8 +9,12 @@ import { fetchGraphWithVariable } from '../../lib/fetchGraphql'
 import { getPostsQuery, getNextPostsQuery } from '../../queries/posts'
 
 type Props = {
-  posts: Array<Post>,
+  posts: ViewPost[],
   pageInfo: PageInfo
+}
+
+type ViewPost = Post & {
+  dateDiff: string
 }
 
 type PageInfo = {
@@ -40,8 +44,8 @@ const Index = ({ posts, pageInfo }: Props) => {
 
   const getNextPosts = async() => {
     const data = await fetchGraphWithVariable(getNextPostsQuery, { "endCursor": endCursor })
-    const posts = data.posts.nodes.map((post: Post) => {
-      post.date = getDateDiff(post.date)
+    const posts = data.posts.nodes.map((post: ViewPost) => {
+      post.dateDiff = getDateDiff(post.date);
       post.title = sliceText(post.title)
       return post
     })
