@@ -1,3 +1,4 @@
+import { Category } from "./categories"
 import { Tag } from "./tags"
 
 export type Post = {
@@ -12,10 +13,7 @@ export type Post = {
     }
   }
   categories: {
-    nodes: Array<{
-      databaseId: number
-      name: string
-    }>
+    nodes: Category[]
   }
   tags: {
     nodes: Tag[]

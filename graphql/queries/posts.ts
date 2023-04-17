@@ -14,6 +14,7 @@ export const getPostsQuery = `query getPosts (
       }
       categories {
         nodes {
+          id
           databaseId
           name
         }
@@ -49,6 +50,7 @@ export const getNextPostsQuery = `query GetNextPosts (
       }
       categories {
         nodes {
+          id
           databaseId
           name
         }
@@ -82,6 +84,7 @@ export const getPostQuery = `query getPost(
     }
     categories {
       nodes {
+        id
         databaseId
         name
       }
@@ -111,6 +114,7 @@ export const getPostsOfSearch = `query getPostsOfSearch (
       }
       categories {
         nodes {
+          id
           name
         }
       }
