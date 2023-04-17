@@ -13,8 +13,8 @@ export default function Twitter() {
           data-lang="ja" 
           data-height="600"
           data-theme="light" 
-          href="https://twitter.com/sunrise_web_dev?ref_src=twsrc%5Etfw"
-        >Tweets by sunrise_web_dev</a> 
+          href="https://twitter.com/web_dev_penguin?ref_src=twsrc%5Etfw"
+        >Tweets by web_dev_penguin</a> 
       </Box>
     </Box>
   )

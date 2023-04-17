@@ -20,19 +20,21 @@ export default function About() {
           <AiOutlineTwitter />
         </Text>
         <Link
-          href="https://twitter.com/sunrise_web_dev" 
+          href="https://twitter.com/web_dev_penguin" 
           target="_blank" 
           pl="1" 
           fontSize="sm"
-          >@sunrise_web_dev
+          >@web_dev_penguin
         </Link>
       </Box>
-      <Text mt="3" fontSize="xs">
-        駆け出しエンジニアです<br />
+      <Text mt="3" fontSize="xm">
+        Webエンジニアです<br />
         2022年よりWeb業界に勤めています<br />
         <br />
-        当ブログはNext.js、TypeScript、Redux、Chakra UI、GraphQL、Vercel、ヘッドレスCMSを用いて構築した、JAMstackな完全自作自己満ブログです。<br />
-        主に自分のための備忘録兼、学習のアウトプット用として使っています。
+        当ブログはNext.js、TypeScript、Chakra UI、GraphQL、Redux、Vercel、ヘッドレスCMSを用いて構築しており、<br />
+        JAMstack構成でSSG配信しています。<br />
+
+        主に学習のアウトプット兼メモとして使っています。
       </Text>
     </Box>
   )

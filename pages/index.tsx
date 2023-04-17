@@ -8,7 +8,6 @@ import MainBisual from '../components/mainBisual'
 import CardList from '../components/cardList'
 import Twitter from '../components/twitter'
 import About from '../components/about'
-import { sliceText } from '../lib/sliceText'
 import { getDateDiff } from '../lib/getDateDiff'
 import { ViewPost } from '../graphql/types/posts'
 import { getPostsQuery } from '../graphql/queries/posts'
@@ -69,7 +68,7 @@ const Home:NextPage<Props> = (props) => {
     <>
       <Head>
         <title>kimagurecode</title>
-        <meta name="description" content="駆け出しエンジニアの備忘録" />
+        <meta name="description" content="Webエンジニアの備忘録" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
