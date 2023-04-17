@@ -42,6 +42,18 @@ export const getCategory = `query getCategory(
           id
           databaseId
           title
+          date
+          featuredImage {
+            node {
+              mediaItemUrl
+            }
+          }
+          categories {
+            nodes {
+              id
+              name
+            }
+          }
         }
       }
     }

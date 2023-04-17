@@ -1,11 +1,14 @@
 import { useContext, useEffect } from 'react';
-import Link from 'next/link';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { CategoryContext } from '../_app';
 import { Category } from '../../graphql/types/categories';
 import { ViewPost } from '../../graphql/types/posts';
 import { fetchGraph, fetchGraphWithVariable } from '../../graphql/fetchGraphql';
 import { getCategory, getCategoriesQuery } from '../../graphql/queries/categories';
+import { sliceText } from '../../lib/sliceText';
+import { getDateDiff } from '../../lib/getDateDiff';
+import CardList from '../../components/cardList';
+import { Container, Text, Box } from "@chakra-ui/react"
 
 type Props = {
   category: Category
@@ -18,16 +21,15 @@ const CategoryPage: NextPage<Props> = ({ category, posts }) => {
   useEffect(() => setCarrentCategoryId(category.id), [category]);
 
   return (
-    <div>
-      <div>
-        カテゴリー名: {category.name}
-      </div>
-      {posts.map((post: ViewPost) => (
-        <div key={post.title}>
-          <Link href={`/posts/${post.databaseId}`}>{post.title}</Link>
-        </div>
-      ))}
-    </div>
+    <Container maxW="6xl">
+      <Box as="section"pt="10" pb="36">
+        <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">{category.name}</Text>
+        <Box mt={3} whiteSpace="pre-wrap">{category.description}</Box>
+        <Box mt="10">
+          <CardList posts={posts}/>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
@@ -38,10 +40,16 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const id = params!.id;
   const data = await fetchGraphWithVariable(getCategory, { id });
 
+  const posts = data.category.contentNodes.nodes.map((post: ViewPost) => {
+    post.clippedTitle = sliceText(post.title);
+    post.dateDiff = getDateDiff(post.date);
+    return post;
+  });
+
   return {
     props: {
       category: data.category,
-      posts: data.category.contentNodes.nodes,
+      posts: posts,
     },
   }
 };

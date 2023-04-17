@@ -8,31 +8,33 @@ import MainBisual from '../components/mainBisual'
 import CardList from '../components/cardList'
 import Twitter from '../components/twitter'
 import About from '../components/about'
+import { sliceText } from '../lib/sliceText'
 import { getDateDiff } from '../lib/getDateDiff'
 import { ViewPost } from '../graphql/types/posts'
 import { getPostsQuery } from '../graphql/queries/posts'
-import { fetchGraphWithVariable } from '../graphql/fetchGraphql'
+import { fetchGraph } from '../graphql/fetchGraphql'
 
 type Props = {
   posts: ViewPost[]
 }
 
 export const getStaticProps = async () => {
-  const data = await fetchGraphWithVariable(getPostsQuery, { "count": 5 })
+  const data = await fetchGraph(getPostsQuery);
+
+  const posts = data.posts.nodes.map((post: ViewPost) => {
+    post.dateDiff = getDateDiff(post.date);
+    return post;
+  });
 
   return {
     props: {
-      posts: data.posts.nodes
+      posts
     }
   }
 }
 
 const Home:NextPage<Props> = (props) => {
   const { posts } = props;
-
-  posts.forEach((post: ViewPost) => {
-    post.dateDiff = getDateDiff(post.date)
-  });
 
   const [isLoading, setIsLoading] = useState(true)
   let loadingWrap = useRef<HTMLDivElement>(null)

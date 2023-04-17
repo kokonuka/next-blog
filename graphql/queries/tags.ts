@@ -26,7 +26,7 @@ export const getNextTagsQuery = `query getNextTags(
   }
 }`
 
-export const getTagPosts = `query getTagPosts(
+export const getPostTag = `query getPostTag(
   $id: ID!
 ) {
   tag(id: $id, idType: ID) {
@@ -38,6 +38,18 @@ export const getTagPosts = `query getTagPosts(
           id
           databaseId
           title
+          date
+          featuredImage {
+            node {
+              mediaItemUrl
+            }
+          }
+          categories {
+            nodes {
+              id
+              name
+            }
+          }
         }
       }
     }
