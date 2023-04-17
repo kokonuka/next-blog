@@ -1,11 +1,11 @@
+import { useContext, useEffect } from 'react';
 import Link from 'next/link';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { CategoryContext } from '../_app';
 import { Category } from '../../graphql/types/categories';
 import { ViewPost } from '../../graphql/types/posts';
 import { fetchGraph, fetchGraphWithVariable } from '../../graphql/fetchGraphql';
-import { getTagPosts } from '../../graphql/queries/tags';
-import { getCategory, getCategoriesQuery, getNextCategoriesQuery } from '../../graphql/queries/categories';
-import { getTagsQuery, getNextTagsQuery } from "../../graphql/queries/tags";
+import { getCategory, getCategoriesQuery } from '../../graphql/queries/categories';
 
 type Props = {
   category: Category
@@ -13,6 +13,9 @@ type Props = {
 }
 
 const CategoryPage: NextPage<Props> = ({ category, posts }) => {
+  const { setCarrentCategoryId } = useContext(CategoryContext);
+
+  useEffect(() => setCarrentCategoryId(category.id), [category]);
 
   return (
     <div>
