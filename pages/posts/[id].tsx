@@ -10,6 +10,7 @@ import { fetchGraphWithVariable } from "../../graphql/fetchGraphql";
 import { getPostQuery, getPostsQuery, getNextPostsQuery } from "../../graphql/queries/posts";
 import { Tag } from "../../graphql/types";
 import { ViewPost } from "../../graphql/types/posts";
+import Link from "next/link";
 
 type Props = {
   post: ViewPost
@@ -17,6 +18,7 @@ type Props = {
 
 const Post: NextPage<Props> = ({ post }) => {
   post.formattedDate = formatDate(post.date);
+  const tags = post.tags.nodes;
   const tmpImageUrl = "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
   const imageUrl = post.featuredImage
     ? post.featuredImage.node.mediaItemUrl 
@@ -51,10 +53,12 @@ const Post: NextPage<Props> = ({ post }) => {
         <Box mt="10" display={{ base: "block", lg: "flex" }}>
           <Box width={{ base: "100%", lg: "60%" }} bg="white" p="5" borderRadius={{ base: "0", lg: "10" }} py="10">
             <Box pb="10" display="flex" flexWrap="wrap" gap="2">
-              {post.tags.nodes.length > 0 && post.tags.nodes.map((tag: Tag) => (
-                <ChakraTag key={tag.id}>
-                  {tag.name}
-                </ChakraTag>
+              {tags.length > 0 && post.tags.nodes.map((tag: Tag) => (
+                <Link href={`/tags/${tag.id}`}>
+                  <ChakraTag key={tag.id}>
+                    {tag.name}
+                  </ChakraTag>
+                </Link>
               ))}
             </Box>
             <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
@@ -71,6 +75,7 @@ const Post: NextPage<Props> = ({ post }) => {
 }
 
 export default Post;
+
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const id = params!.id;
