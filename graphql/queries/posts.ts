@@ -21,6 +21,7 @@ export const getPostsQuery = `query getPosts (
       }
       tags {
         nodes {
+          id
           databaseId
           name
         }
@@ -57,6 +58,7 @@ export const getNextPostsQuery = `query GetNextPosts (
       }
       tags {
         nodes {
+          id
           databaseId
           name
         }
@@ -91,6 +93,7 @@ export const getPostQuery = `query getPost(
     }
     tags {
       nodes {
+        id
         databaseId
         name
       }
