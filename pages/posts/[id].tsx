@@ -54,8 +54,8 @@ const Post: NextPage<Props> = ({ post }) => {
           <Box width={{ base: "100%", lg: "60%" }} bg="white" p="5" borderRadius={{ base: "0", lg: "10" }} py="10">
             <Box pb="10" display="flex" flexWrap="wrap" gap="2">
               {tags.length > 0 && post.tags.nodes.map((tag: Tag) => (
-                <Link href={`/tags/${tag.id}`}>
-                  <ChakraTag key={tag.id}>
+                <Link href={`/tags/${tag.id}`} key={tag.id} >
+                  <ChakraTag>
                     {tag.name}
                   </ChakraTag>
                 </Link>
