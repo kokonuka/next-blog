@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { GetStaticProps, GetStaticPaths, NextPage } from "next"
 import { Container, Image, Text, Box, Tag as ChakraTag } from "@chakra-ui/react"
 import { load } from 'cheerio';
@@ -10,7 +11,8 @@ import { fetchGraphWithVariable } from "../../graphql/fetchGraphql";
 import { getPostQuery, getPostsQuery, getNextPostsQuery } from "../../graphql/queries/posts";
 import { Tag } from "../../graphql/types";
 import { ViewPost } from "../../graphql/types/posts";
-import Link from "next/link";
+
+import styles from '../../styles/Post.module.css';
 
 type Props = {
   post: ViewPost
@@ -61,7 +63,7 @@ const Post: NextPage<Props> = ({ post }) => {
                 </Link>
               ))}
             </Box>
-            <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
+            <div className={`post-content  ${styles.body}`} dangerouslySetInnerHTML={{ __html: post.content }}></div>
           </Box>
           <Box display={{ base: "none", lg: "block" }} width={{ base: "100%", lg: "40%" }} pl="5">
             <Box bg="white" p="5" borderRadius="10">
