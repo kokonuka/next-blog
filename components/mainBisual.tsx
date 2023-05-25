@@ -53,13 +53,13 @@ export default function MainBisual() {
       justifyContent="center" 
       flexDirection="column" 
       overflow="hidden"
+      style={{ backgroundImage: "linear-gradient(90deg, rgba(103, 126, 250, 1), rgba(142, 84, 219, 1));" }}
       >
       <Box position="relative" zIndex="1">
         <Text fontSize="xl" color="white" textAlign="center">
           <span ref={el}></span>
         </Text>
       </Box>
-      <video className="video" src="/movies/14019_1280x720.mp4" autoPlay loop muted playsInline></video>
     </Box>
   )
 }
