@@ -20,21 +20,17 @@ export default function About() {
           <AiOutlineTwitter />
         </Text>
         <Link
-          href="https://twitter.com/web_dev_penguin" 
+          href={`https://twitter.com/${process.env.NEXT_PUBLIC_TWITTER_ACCOUNT_NAME}`}
           target="_blank" 
           pl="1" 
           fontSize="sm"
-          >@web_dev_penguin
+          >@{process.env.NEXT_PUBLIC_TWITTER_ACCOUNT_NAME}
         </Link>
       </Box>
       <Text mt="3" fontSize="xm">
-        Webエンジニアです<br />
-        2022年よりWeb業界に勤めています<br />
-        <br />
-        当ブログはNext.js、TypeScript、Chakra UI、GraphQL、Redux、Vercel、ヘッドレスCMSを用いて構築しており、<br />
-        JAMstack構成でSSG配信しています。<br />
-
-        主に学習のアウトプット兼メモとして使っています。
+        こんにちは、ご訪問ありがとうございます。<br />
+        都内でWebエンジニアをしています。<br />
+        当ブログは開発で得たTipsのアウトプット兼、個人用のメモとなっています。
       </Text>
     </Box>
   )

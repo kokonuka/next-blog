@@ -6,7 +6,6 @@ import { Triangle } from 'react-loader-spinner'
 import type { NextPage } from 'next'
 import MainBisual from '../components/mainBisual'
 import CardList from '../components/cardList'
-import Twitter from '../components/twitter'
 import About from '../components/about'
 import { getDateDiff } from '../lib/getDateDiff'
 import { ViewPost } from '../graphql/types/posts'
@@ -85,7 +84,6 @@ const Home:NextPage<Props> = (props) => {
           </Text>
         </Box>
         <About />
-        <Twitter />
       </Container>
       {isLoading && (
         <Box 
