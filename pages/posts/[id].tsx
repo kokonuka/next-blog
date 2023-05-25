@@ -35,20 +35,11 @@ const Post: NextPage<Props> = ({ post }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container maxW="6xl" py="10" px={{ base: "0", lg: "4" }}>
-        <Box px="10">
-          <Image
-            mx="auto"
-            objectFit='cover'
-            width={{ base: "100%", lg: "60%" }}
-            // height={{ lg: "200px" }}
-            borderRadius='2xl'
-            src={imageUrl}
-            alt='Caffe Latte'
-          />
-          <Text mt="10" fontSize={{base: "2xl", lg: "4xl" }} fontWeight="bold" textAlign="center" color="gray.700">
+        <Box>
+          <Text mt="10" fontSize={{base: "2xl", lg: "4xl" }} color="gray.700">
             {post.title}
           </Text>
-          <Text mt="5" fontWeight="bold" textAlign="center" color="gray.500">
+          <Text mt="5" color="gray.500">
             {post.formattedDate}
           </Text>
         </Box>
