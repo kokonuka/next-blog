@@ -24,7 +24,7 @@ export default function Categories() {
   return (
     <>
       {router.pathname !== "/search" && (
-        <Box as="section" bg="white" position="sticky" top="0" zIndex="2">
+        <Box as="section" bg="white" position="sticky" top="0" zIndex="2" shadow="md">
           <Container maxW="6xl" position="relative">
             <Box className='categoriesWrap' display="flex" gap="7" w="100%" pt="2" pr="14" overflowX="scroll">
               {categories.length > 0 && categories.map((category: Category) => (
