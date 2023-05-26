@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { Box, Text } from '@chakra-ui/react'
 import Typed from "typed.js";
 
+// Todo: ランダムにする
+
 export default function MainBisual() {
   const el = useRef(null!);
 
@@ -32,7 +34,7 @@ export default function MainBisual() {
         "Auth0",
         "Webエンジニアの備忘録です"
       ],
-      startDelay: 3000,
+      startDelay: 500,
       typeSpeed: 100,
       backSpeed: 50,
       backDelay: 1000
@@ -53,7 +55,7 @@ export default function MainBisual() {
       justifyContent="center" 
       flexDirection="column" 
       overflow="hidden"
-      style={{ backgroundImage: "linear-gradient(90deg, rgba(103, 126, 250, 1), rgba(142, 84, 219, 1));" }}
+      style={{ backgroundImage: "linear-gradient(90deg, rgba(103, 126, 250, 1), rgba(142, 84, 219, 1))" }}
       >
       <Box position="relative" zIndex="1">
         <Text fontSize="xl" color="white" textAlign="center">

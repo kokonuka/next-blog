@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react"
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { CategoryContext } from "../pages/_app"
+import { CategoryContext } from "../_app"
 import { Container, Box, Text } from '@chakra-ui/react'
-import { getCategoriesQuery } from "../graphql/queries/categories"
-import { fetchGraph } from "../graphql/fetchGraphql"
-import { Category } from "../graphql/types/categories"
+import { getCategoriesQuery } from "../../graphql/queries/categories"
+import { fetchGraph } from "../../graphql/fetchGraphql"
+import { Category } from "../../graphql/types/categories"
 
 export default function Categories() {
   const { carrentCategoryId } = useContext(CategoryContext);

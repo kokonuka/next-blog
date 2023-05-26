@@ -1,11 +1,10 @@
 import type { AppProps } from 'next/app';
 import Router from 'next/router';
 import { ChakraProvider } from '@chakra-ui/react';
-import Layout from '../components/layout';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import '../styles/globals.css';
-import { useState, createContext, Dispatch, SetStateAction, useEffect } from 'react';
+import { useState, createContext, Dispatch, useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -29,9 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <CategoryContext.Provider value={{ carrentCategoryId, setCarrentCategoryId }} >
       <ChakraProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Component {...pageProps} />
       </ChakraProvider>
     </CategoryContext.Provider>
   );

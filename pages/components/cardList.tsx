@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { Box } from '@chakra-ui/react'
 import CardBox from './cardBox'
 import CardFlat from './cardFlat'
-import { ViewPost } from '../graphql/types/posts'
+import { ViewPost } from '../../graphql/types/posts'
 
 interface Props {
   posts: ViewPost[]

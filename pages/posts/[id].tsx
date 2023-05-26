@@ -35,7 +35,7 @@ const Post: NextPage<Props> = ({ post }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container maxW="6xl" py="10" px={{ base: "0", lg: "4" }}>
-        <Box>
+        <Box p="5">
           <Text mt="10" fontSize={{base: "2xl", lg: "4xl" }} color="gray.700">
             {post.title}
           </Text>

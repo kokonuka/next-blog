@@ -116,15 +116,6 @@ a {
   opacity: 1;
 }
 
-.loading {
-  opacity: 0;
-}
-
-.loading.active {
-  opacity: 1;
-  transition: all 0.5s; 
-}
-
 .categoriesWrap {
   -ms-overflow-style: none;
   scrollbar-width: none;
