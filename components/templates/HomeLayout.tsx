@@ -1,5 +1,5 @@
-import { Header } from "../organisms/header"
-import { Footer } from "../organisms/footer"
+import { Header } from "../organisms/Header"
+import { Footer } from "../organisms/Footer"
 import { Mainvisual } from "../organisms/Mainvisual"
 import {
   Container,

@@ -5,7 +5,7 @@ import { fetchGraphWithVariable } from '../../graphql/fetchGraphql';
 import { getTagsQuery, getNextTagsQuery, getPostTag } from "../../graphql/queries/tags";
 import { sliceText } from '../../lib/sliceText';
 import { getDateDiff } from '../../lib/getDateDiff';
-import CardList from '../components/cardList';
+import CardList from '../../components/cardList';
 import { Container, Text, Box } from "@chakra-ui/react"
 
 type Props = {

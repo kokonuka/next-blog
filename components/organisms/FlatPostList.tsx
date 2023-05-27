@@ -4,7 +4,7 @@ import {
   Text
 } from '@chakra-ui/react'
 import CardList from '../cardList'
-import { ViewPost } from '../../../graphql/types/posts'
+import { ViewPost } from '../../graphql/types/posts'
 
 type Props = {
   posts: ViewPost[]

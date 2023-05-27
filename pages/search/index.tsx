@@ -7,7 +7,7 @@ import { getPostsOfSearch } from "../../graphql/queries/posts";
 import { fetchGraphWithVariable } from "../../graphql/fetchGraphql";
 import { ViewPost } from "../../graphql/types/posts";
 import { Tag } from "../../graphql/types/tags";
-import CardList from "../components/cardList";
+import CardList from "../../components/cardList";
 import { sliceText } from "../../lib/sliceText";
 import { getDateDiff } from "../../lib/getDateDiff";
 import { 

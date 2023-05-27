@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Container, Button, Text, Box } from "@chakra-ui/react"
 import { getDateDiff } from "../../lib/getDateDiff"
 import { sliceText } from '../../lib/sliceText'
-import CardList from "../components/cardList"
+import CardList from "../../components/cardList"
 import { ViewPost } from '../../graphql/types/posts'
 import { fetchGraphWithVariable } from '../../graphql/fetchGraphql'
 import { getPostsQuery, getNextPostsQuery } from '../../graphql/queries/posts'
