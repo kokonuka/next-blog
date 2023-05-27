@@ -5,8 +5,10 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import '../styles/globals.css';
 import { useState, createContext, Dispatch, useEffect } from 'react';
-
 import { useRouter } from 'next/router';
+
+import { ApolloProvider } from '@apollo/client';
+import client from '../lib/graphqlClient';
 
 export const CategoryContext = createContext({} as {
   carrentCategoryId: string
@@ -28,7 +30,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <CategoryContext.Provider value={{ carrentCategoryId, setCarrentCategoryId }} >
       <ChakraProvider>
-        <Component {...pageProps} />
+        <ApolloProvider client={client}>
+          <Component {...pageProps} />
+        </ApolloProvider>
       </ChakraProvider>
     </CategoryContext.Provider>
   );

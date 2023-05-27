@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env.local",
+    "codegen:watch": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env.local --watch"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.14",
     "@chakra-ui/icons": "^2.0.15",
     "@chakra-ui/react": "^2.4.6",
     "@emotion/react": "^11.10.5",
@@ -21,6 +24,7 @@
     "eslint": "8.30.0",
     "eslint-config-next": "13.1.1",
     "framer-motion": "^6.5.1",
+    "graphql": "^16.6.0",
     "highlight.js": "^11.7.0",
     "next": "13.1.1",
     "nprogress": "^0.2.0",
@@ -32,6 +36,10 @@
     "typescript": "4.9.4"
   },
   "devDependencies": {
-    "@types/nprogress": "^0.2.0"
+    "@graphql-codegen/cli": "4.0.0",
+    "@graphql-codegen/client-preset": "4.0.0",
+    "@graphql-codegen/introspection": "4.0.0",
+    "@types/nprogress": "^0.2.0",
+    "dotenv": "^16.0.3"
   }
 }

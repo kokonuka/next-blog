@@ -10,6 +10,24 @@ import About from './components/about'
 import { FlatPostList } from './components/organisms/FlatPostList'
 import { PageLoading } from './components/organisms/PageLoading'
 
+import { useQuery } from '@apollo/client'
+import { graphql } from '../gql'
+
+const allFilmsWithVariablesQueryDocument = graphql(/* GraphQL */ `
+  query getPosts {
+    categories {
+      nodes {
+        id
+        categoryId
+        name
+      }
+      pageInfo {
+        endCursor
+      }
+    }
+  }
+`)
+
 type Props = {}
 
 const fetchPosts = async () => {
@@ -23,6 +41,9 @@ const fetchPosts = async () => {
 const Home:NextPage<Props> = () => {
   const [posts, setPosts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+
+  const {data} = useQuery(allFilmsWithVariablesQueryDocument)
+  console.log(data?.categories?.nodes[0].id)
 
   useEffect(() => {
     (async () => {
