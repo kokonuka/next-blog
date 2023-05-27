@@ -13,6 +13,7 @@ import { Tag } from "../../graphql/types";
 import { ViewPost } from "../../graphql/types/posts";
 import { PostLayout } from "../../components/templates/PostLayout";
 import styles from '../../styles/Post.module.css';
+import 'zenn-content-css';
 
 type Props = {
   post: ViewPost
@@ -50,11 +51,11 @@ const Post: NextPage<Props> = ({ post }) => {
                   </Link>
                 ))}
               </Box>
-              <div className={`post-content  ${styles.body}`} dangerouslySetInnerHTML={{ __html: post.content }}></div>
+              <div className={`post-content znc ${styles.body}`} dangerouslySetInnerHTML={{ __html: post.content }}></div>
             </Box>
             <Box display={{ base: "none", lg: "block" }} width={{ base: "100%", lg: "40%" }} pl="5">
               <Box bg="white" p="5" borderRadius="10">
-                サイドバー
+                {/* サイドバー */}
               </Box>
             </Box>
           </Box>
