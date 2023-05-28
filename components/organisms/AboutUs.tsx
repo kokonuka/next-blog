@@ -1,12 +1,9 @@
 import { Box, Text, Image, Link } from "@chakra-ui/react"
 import { AiOutlineTwitter } from "react-icons/ai";
 
-export default function About() {
+export const AboutUs = () => {
   return (
-    <Box 
-      as='section'
-      py="16"
-      >
+    <Box as='section' >
       <Text pb="5" color="gray.700" fontSize="3xl" fontWeight="bold">About</Text>
       <Image
         objectFit='cover'

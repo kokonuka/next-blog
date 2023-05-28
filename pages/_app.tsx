@@ -6,7 +6,6 @@ import 'nprogress/nprogress.css';
 import '../styles/globals.css';
 import { useState, createContext, Dispatch, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
 import { ApolloProvider } from '@apollo/client';
 import client from '../lib/graphqlClient';
 

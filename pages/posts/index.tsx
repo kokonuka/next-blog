@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react' 
-import Head from 'next/head'
+import { Head } from '../../components/Head'
 import { Container, Button, Text, Box } from "@chakra-ui/react"
-import { getDateDiff } from "../../lib/getDateDiff"
-import { sliceText } from '../../lib/sliceText'
-import CardList from "../../components/cardList"
 import { ViewPost } from '../../graphql/types/posts'
 import { fetchGraphWithVariable } from '../../graphql/fetchGraphql'
 import { getPostsQuery, getNextPostsQuery } from '../../graphql/queries/posts'
+import { useQuery } from '@apollo/client'
+import { GetPostsDocument, Post } from '../../gql/generate/graphql'
+import { DefaultLayout } from '../../components/templates/DefaultLayout'
+import { Posts } from '../../components/organisms/Posts'
+import { NextPage } from 'next'
 
 type Props = {
   posts: ViewPost[],
@@ -17,83 +19,62 @@ type PageInfo = {
   endCursor: string
 }
 
-// Todo: 無限スクロール
 
-export const getStaticProps = async () => {
-  const data = await fetchGraphWithVariable(getPostsQuery, { "count": 10 })
-  const posts = data.posts.nodes.map((post: ViewPost) => {
-    post.clippedTitle = sliceText(post.title);
-    return post
-  })
+const PostsPage:NextPage<Props> = ({ posts, pageInfo }) => {
+  const { loading, error, data } = useQuery(GetPostsDocument)
 
-  return {
-    props:{
-      posts,
-      pageInfo: data.posts.pageInfo
-    }
-  }
-}
+  // const [postsState, setPostsState] = useState(posts)
+  // const [endCursor, setEndCursor] = useState(pageInfo.endCursor)
+  // const [isNextPage, setIsNextPage] = useState(posts.length === 10)
 
-const Index = ({ posts, pageInfo }: Props) => {
+  // useEffect(() => {
+  //   setPostsState(
+  //     posts.map((post: ViewPost) => {
+  //       post.dateDiff = getDateDiff(post.date);
+  //       return post;
+  //     })
+  //   )
+  // }, [posts])
 
-  const [postsState, setPostsState] = useState(posts)
-  const [endCursor, setEndCursor] = useState(pageInfo.endCursor)
-  const [isNextPage, setIsNextPage] = useState(posts.length === 10)
+  // const getNextPosts = async() => {
+  //   const data = await fetchGraphWithVariable(getNextPostsQuery, { "endCursor": endCursor })
+  //   const posts = data.posts.nodes.map((post: ViewPost) => {
+  //     post.dateDiff = getDateDiff(post.date);
+  //     post.clippedTitle = sliceText(post.title);
+  //     return post
+  //   })
+  //   setPostsState([...postsState, ...posts])
+  //   setEndCursor(data.posts.pageInfo.endCursor)
+  //   if(posts.length < 10) setIsNextPage(false)
+  // }
 
-  useEffect(() => {
-    setPostsState(
-      posts.map((post: ViewPost) => {
-        post.dateDiff = getDateDiff(post.date);
-        return post;
-      })
-    )
-  }, [posts])
+  // const handleClick = () => {
+  //   getNextPosts()
+  // }
 
-  const getNextPosts = async() => {
-    const data = await fetchGraphWithVariable(getNextPostsQuery, { "endCursor": endCursor })
-    const posts = data.posts.nodes.map((post: ViewPost) => {
-      post.dateDiff = getDateDiff(post.date);
-      post.clippedTitle = sliceText(post.title);
-      return post
-    })
-    setPostsState([...postsState, ...posts])
-    setEndCursor(data.posts.pageInfo.endCursor)
-    if(posts.length < 10) setIsNextPage(false)
-  }
-
-  const handleClick = () => {
-    getNextPosts()
-  }
+  if (loading) return <p>Loading...</p>;
+  if (error || !data) return <p>Error</p>;
 
   return (
     <>
-      <Head>
-        <title>Posts | kimagurecode</title>
-        <meta name="description" content="駆け出しエンジニアの備忘録" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Container maxW="6xl">
-        <Box as="section"pt="10" pb="36">
-          <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">Posts</Text>
-          <Box mt="10">
-            <CardList posts={postsState}/>
-            {isNextPage && (
-              <Box mt="14" textAlign="center">
-                <Button 
-                  onClick={handleClick}
-                  colorScheme='blue' 
-                  variant='link'
-                  >
-                  もっと見る
-                </Button>
-              </Box>
-            )}
+      <Head title='Posts | kimagurecode' description='Webエンジニアの備忘録' />
+      <DefaultLayout>
+        <Posts />
+        {/* <CardList posts={postsState}/> */}
+        {/* {isNextPage && (
+          <Box mt="14" textAlign="center">
+            <Button 
+              onClick={handleClick}
+              colorScheme='blue' 
+              variant='link'
+              >
+              もっと見る
+            </Button>
           </Box>
-        </Box>
-      </Container>
+        )} */}
+      </DefaultLayout>
     </>
   )
 }
 
-export default Index
+export default PostsPage;

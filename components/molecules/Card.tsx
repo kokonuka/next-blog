@@ -1,21 +1,16 @@
 import Link from 'next/link'
-import {
-  Box,
-  Text,
-  Image,
-} from '@chakra-ui/react'
-import { ViewPost } from '../graphql/types/posts'
+import { Box, Text, Image } from '@chakra-ui/react'
+import { Post } from '../../gql/generate/graphql'
+import React from 'react'
 
 type Props = {
-  post: ViewPost
+  post: Post
 }
 
-export default function CardBox({ post }: Props) {
-  const category = post.categories.nodes[0];
-  const tmpImageURL = "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-  const imageUrl = post.featuredImage
-    ? post.featuredImage.node.mediaItemUrl 
-    : tmpImageURL
+
+export const CardBox: React.FC<Props> = ({ post }) => {
+  const category = post?.categories?.nodes[0];
+  const defaultPostImage = "images/default_post_image.jpg"
 
   return (
     <>
@@ -30,25 +25,25 @@ export default function CardBox({ post }: Props) {
         <Link href={`/posts/${post.databaseId}`}>
           <Box position="relative" h="100px">
             <Image
-              position="absolute"
-              top="0"
               objectFit='cover'
               w="100%"
               h="100%"
-              src={imageUrl}
+              src={post.featuredImage?.node?.mediaItemUrl || defaultPostImage}
               alt='article'
             />
           </Box>
           <Box h="100px" pt="2" pb="3" px="3" display="flex" flexDirection="column">
             <Text  fontWeight="bold" flex="1">
-              {post.clippedTitle}
+              {/* {post.clippedTitle} */}{post.title}
             </Text>
-            <Text fontSize="xs" color="gray.400">{post.dateDiff}</Text>
+            <Text fontSize="xs" color="gray.400">
+              {/* {post.dateDiff} */}{post.date}
+            </Text>
           </Box>
         </Link>
-        <Link href={`/categories/${category.id}`}>
+        <Link href={`/categories/${category?.id}`}>
           <Text top="2" left="2" py="1" px="2" bg="blue.500" borderRadius="24" fontSize="xs" color="white" position="absolute" >
-            {category.name}
+            {category?.name}
           </Text>
         </Link>
       </Box>

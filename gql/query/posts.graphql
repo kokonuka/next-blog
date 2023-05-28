@@ -1,0 +1,34 @@
+fragment postFragment on Post {
+  databaseId
+  title
+  date
+  content
+  featuredImage {
+    node {
+      mediaItemUrl
+    }
+  }
+  categories {
+    nodes {
+      id
+      databaseId
+      name
+    }
+  }
+  tags {
+    nodes {
+      id
+      databaseId
+      name
+    }
+  }
+}
+
+
+query GetPosts {
+  posts {
+    nodes {
+      ...postFragment
+    }
+  }
+}

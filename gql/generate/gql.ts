@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query getPosts {\n    categories {\n      nodes {\n        id\n        categoryId\n        name\n      }\n      pageInfo {\n        endCursor\n      }\n    }\n  }\n": types.GetPostsDocument,
+    "fragment postFragment on Post {\n  databaseId\n  title\n  date\n  content\n  featuredImage {\n    node {\n      mediaItemUrl\n    }\n  }\n  categories {\n    nodes {\n      id\n      databaseId\n      name\n    }\n  }\n  tags {\n    nodes {\n      id\n      databaseId\n      name\n    }\n  }\n}\n\nquery GetPosts {\n  posts {\n    nodes {\n      ...postFragment\n    }\n  }\n}": types.PostFragmentFragmentDoc,
 };
 
 /**
@@ -33,7 +33,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query getPosts {\n    categories {\n      nodes {\n        id\n        categoryId\n        name\n      }\n      pageInfo {\n        endCursor\n      }\n    }\n  }\n"): (typeof documents)["\n  query getPosts {\n    categories {\n      nodes {\n        id\n        categoryId\n        name\n      }\n      pageInfo {\n        endCursor\n      }\n    }\n  }\n"];
+export function graphql(source: "fragment postFragment on Post {\n  databaseId\n  title\n  date\n  content\n  featuredImage {\n    node {\n      mediaItemUrl\n    }\n  }\n  categories {\n    nodes {\n      id\n      databaseId\n      name\n    }\n  }\n  tags {\n    nodes {\n      id\n      databaseId\n      name\n    }\n  }\n}\n\nquery GetPosts {\n  posts {\n    nodes {\n      ...postFragment\n    }\n  }\n}"): (typeof documents)["fragment postFragment on Post {\n  databaseId\n  title\n  date\n  content\n  featuredImage {\n    node {\n      mediaItemUrl\n    }\n  }\n  categories {\n    nodes {\n      id\n      databaseId\n      name\n    }\n  }\n  tags {\n    nodes {\n      id\n      databaseId\n      name\n    }\n  }\n}\n\nquery GetPosts {\n  posts {\n    nodes {\n      ...postFragment\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

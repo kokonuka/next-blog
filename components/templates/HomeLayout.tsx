@@ -15,17 +15,19 @@ export const HomeLayout: React.FC<Props> = ({ children }) => {
     <>
       <Header />
       <Mainvisual />
-      <Container
-        as="main"
-        maxW="6xl"
-        bg="gray.50"
-        pt="10"
-        display="flex"
-        flexDirection="column"
-        flex="1"
-      >
-        {children}
-      </Container>
+      <Box bg="gray.50" >
+        <Container
+          as="main"
+          maxW="6xl"
+          pt="10"
+          pb="36"
+          display="flex"
+          flexDirection="column"
+          flex="1"
+        >
+          {children}
+        </Container>
+      </Box>
       <Footer />
     </>
   )

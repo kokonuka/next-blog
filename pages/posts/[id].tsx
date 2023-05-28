@@ -19,6 +19,8 @@ type Props = {
   post: ViewPost
 }
 
+// Todo: サイドバー
+
 const Post: NextPage<Props> = ({ post }) => {
   post.formattedDate = formatDate(post.date);
   const tags = post.tags.nodes;
@@ -72,6 +74,8 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const id = params!.id;
   const data = await fetchGraphWithVariable(getPostQuery, { id })
   const post = data.post
+
+  console.log(post.content)
 
   const $ = load(post.content);
   $('pre code').each((_, elm) => {
