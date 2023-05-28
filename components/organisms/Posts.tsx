@@ -1,31 +1,47 @@
 import { Text, Box } from "@chakra-ui/react"
 import { ColPosts } from "../molecules/ColPosts"
-import { useQuery } from '@apollo/client'
-import { GetPostsDocument, Post } from '../../gql/generate/graphql'
+import { GetNextPostsDocument, Post } from '../../gql/generate/graphql'
+import InfiniteScroll from 'react-infinite-scroller';
+import { useState } from "react";
+import client from "../../lib/graphqlClient";
 
 type Props = {}
 
-// Todo: データを取得する処理
-// インフィニティスクロール
-
-// ページ表示の下部を取得
 
 export const Posts: React.FC<Props> = () => {
-  const { loading, error, data } = useQuery(GetPostsDocument)
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [endCursor, setEndCursor] = useState("");
 
-  if (loading) return <p>Loading...</p>;
-  if (error || !data) return <p>Error</p>;
+  const loadMore = async (page: number) => {
+    const { data } = await client.query({
+      query: GetNextPostsDocument,
+      variables: {
+        endCursor: endCursor
+      }
+    });
 
-  const viewportHeight = window.innerHeight;
-  console.log("ビューポートの高さ:", viewportHeight);
+    setPosts([ ...posts, ...data.posts?.nodes as Post[] ])
+    setEndCursor(data.posts?.pageInfo?.endCursor ?? "")
 
-  const posts = data?.posts?.nodes as Post[]
+    if(!data.posts?.pageInfo?.hasNextPage) setHasMore(false);
+  }
+
+  const loader = (
+    <div className="loader" key={0}>Loading ...</div>
+  )
 
   return (
     <Box as="section">
       <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">Posts</Text>
       <Box mt="10">
-        <ColPosts posts={posts} />
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={loadMore}
+          hasMore={hasMore}
+          loader={loader} >
+          <ColPosts posts={posts} />
+        </InfiniteScroll>
       </Box>
     </Box>
   )

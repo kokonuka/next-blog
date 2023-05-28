@@ -32,3 +32,17 @@ query GetPosts {
     }
   }
 }
+
+query getNextPosts (
+  $endCursor: String!
+) {
+  posts(first: 10, after: $endCursor) {
+    nodes {
+      ...postFragment
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}

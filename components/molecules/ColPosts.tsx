@@ -14,7 +14,7 @@ export const ColPosts: React.FC<Props> = ({ posts }) => {
       gridTemplateColumns={{ base: "1fr 1fr", md: "1fr 1fr 1fr"}} 
       gridGap="5"
     >
-      {posts.length !== 0 && posts.map((post) => (
+      {posts.map((post) => (
         <CardBox post={post} key={post.databaseId}/>
       ))}
     </Box>
