@@ -5,8 +5,9 @@ import { fetchGraphWithVariable } from '../../graphql/fetchGraphql';
 import { getTagsQuery, getNextTagsQuery, getPostTag } from "../../graphql/queries/tags";
 import { sliceText } from '../../lib/sliceText';
 import { getDateDiff } from '../../lib/getDateDiff';
-import CardList from '../../components/molecules/LawPosts';
+import { LawPosts } from '../../components/molecules/LawPosts';
 import { Container, Text, Box } from "@chakra-ui/react"
+import { DefaultLayout } from '../../components/templates/DefaultLayout';
 
 type Props = {
   tag: TypeTag
@@ -16,14 +17,12 @@ type Props = {
 const Tag: NextPage<Props> = ({ tag, posts }) => {
 
   return (
-    <Container maxW="6xl">
-      <Box as="section"pt="10" pb="36">
-        <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">{tag.name}</Text>
-        <Box mt="10">
-          <CardList posts={posts}/>
-        </Box>
+    <DefaultLayout>
+      <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">{tag.name}</Text>
+      <Box mt="10">
+        <LawPosts posts={posts}/>
       </Box>
-    </Container>
+    </DefaultLayout>
   );
 };
 
