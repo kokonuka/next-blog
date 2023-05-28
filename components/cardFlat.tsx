@@ -33,7 +33,7 @@ export const CardFlat: React.FC<Props> = ({ post }) => {
             </Heading>
           </Link>
             <Box mt="3" fontSize="xs" display="flex" gap="2">
-              <Link href={`categories/${category?.id}`}>{category?.name}</Link>
+              <Link href={`/categories/${category?.id}`}>{category?.name}</Link>
               <Text fontSize="xs">
                 {post.date}{/* {post.dateDiff} */}
               </Text>

@@ -42,7 +42,7 @@ export const FlatCard: React.FC<Props> = ({ post }) => {
           </Link>
             <Box mt="3" fontSize="xs" display="flex" gap="2">
               {/* <Text fontSize="xs">{post.categories.nodes[0].name}</Text> */}
-              <Link href={`categories/${category.id}`}>{category.name}</Link>
+              <Link href={`/categories/${category.id}`}>{category.name}</Link>
               <Text fontSize="xs">{post.dateDiff}</Text>
             </Box>
           </Box>
