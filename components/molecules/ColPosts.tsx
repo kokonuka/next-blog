@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import { CardBox } from './Card'
+import { Card } from './Card'
 import { Post } from '../../gql/generate/graphql'
 
 interface Props {
@@ -12,10 +12,9 @@ export const ColPosts: React.FC<Props> = ({ posts }) => {
     <Box 
       display="grid"
       gridTemplateColumns={{ base: "1fr 1fr", md: "1fr 1fr 1fr"}} 
-      gridGap="5"
-    >
+      gridGap="5" >
       {posts.map((post) => (
-        <CardBox post={post} key={post.databaseId}/>
+        <Card post={post} key={post.databaseId}/>
       ))}
     </Box>
   )

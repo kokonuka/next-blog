@@ -1,43 +1,65 @@
-.loader{
-  position:absolute;
+.page-loader{
+  position: absolute;
   top: 50%;
   left: 50%;
 }
-.loader > .spin{
-  border:solid 5px cyan;
+.page-loader > .spin{
+  border: solid 5px cyan;
   border-radius: 100%;
-  position:absolute;
+  position: absolute;
   box-shadow: 0px 0px 2px 2px cyan;
 }
-.spin.a{
+.page-loader .spin.a{
   width: 200px;
-  height:200px;
-  top: -95px; left: -95px;
+  height: 200px;
+  top: -95px;
+  left: -95px;
   animation: rotOuter 1.5s infinite linear;
 }
-.spin.b{
-  width:190px;
-  height:190px;
-  top:-90px;
-  left:-90px;
+.page-loader .spin.b{
+  width: 190px;
+  height: 190px;
+  top: -90px;
+  left: -90px;
   animation: rotInner 1.5s infinite linear;
 }
-.loader .txt{
-  position:absolute;
+.page-loader .txt{
+  position: absolute;
   width: 200px;
   line-height: 200px;
   color: white;
-  top:-95px; left: -95px;
+  top: -95px; left: -95px;
   text-align: center;
   font-size: 1.2em;
 }
+
 @keyframes rotInner{
   0%   { -webkit-transform: rotateY(-0deg)   rotateX(30deg); }
   50%  { -webkit-transform: rotateY(-180deg) rotateX(210deg); }
   100% { -webkit-transform: rotateY(-360deg) rotateX(390deg); }
 }
+
 @keyframes rotOuter{
   0%   { -webkit-transform: rotateY(0deg)   rotateX(30deg); }
   50%  { -webkit-transform: rotateY(180deg) rotateX(30deg); }
   100% { -webkit-transform: rotateY(360deg) rotateX(30deg); }
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: solid 4px;
+  border-color: #000000 #00000010 #00000010;
+  position: relative;
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

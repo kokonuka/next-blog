@@ -35,7 +35,7 @@ export const PageLoading:React.FC<Props> = () => {
           justifyContent="center"
           alignItems="center"
           zIndex="2" >
-          <div className="loader">
+          <div className="page-loader">
             <div className="txt">
               Loading
             </div>

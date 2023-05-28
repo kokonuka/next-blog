@@ -4,6 +4,7 @@ import { GetNextPostsDocument, Post } from '../../gql/generate/graphql'
 import InfiniteScroll from 'react-infinite-scroller';
 import { useState } from "react";
 import client from "../../lib/graphqlClient";
+import { Loader } from "../molecules/Loader";
 
 type Props = {}
 
@@ -27,10 +28,6 @@ export const Posts: React.FC<Props> = () => {
     if(!data.posts?.pageInfo?.hasNextPage) setHasMore(false);
   }
 
-  const loader = (
-    <div className="loader" key={0}>Loading ...</div>
-  )
-
   return (
     <Box as="section">
       <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">Posts</Text>
@@ -39,7 +36,7 @@ export const Posts: React.FC<Props> = () => {
           pageStart={0}
           loadMore={loadMore}
           hasMore={hasMore}
-          loader={loader} >
+          loader={<Loader key={0} />} >
           <ColPosts posts={posts} />
         </InfiniteScroll>
       </Box>

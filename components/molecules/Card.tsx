@@ -8,7 +8,7 @@ type Props = {
 }
 
 
-export const CardBox: React.FC<Props> = ({ post }) => {
+export const Card: React.FC<Props> = ({ post }) => {
   const category = post?.categories?.nodes[0];
   const defaultPostImage = "images/default_post_image.jpg"
 

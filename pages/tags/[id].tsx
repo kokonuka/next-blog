@@ -16,7 +16,6 @@ type Props = {
 }
 
 const Tag: NextPage<Props> = ({ tag, posts }) => {
-
   return (
     <DefaultLayout>
       <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">{tag.name}</Text>
