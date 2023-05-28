@@ -1,15 +1,21 @@
+import { useContext, useEffect } from 'react'
 import Link from 'next/link'
 import { Box, Text } from '@chakra-ui/react'
 import { LawPosts } from '../molecules/LawPosts'
 import { useQuery } from '@apollo/client'
 import { GetPostsDocument, Post } from '../../gql/generate/graphql'
+import { LoadingContext } from '../../context/LoadingContext'
 
 type Props = {}
 
-// Todo: ローディング
 
 export const NewPosts: React.FC<Props> = () => {
   const { loading, error, data } = useQuery(GetPostsDocument)
+  const { setIsLoading } = useContext(LoadingContext);
+
+  useEffect(() => {
+    if(data) setIsLoading(false);
+  }, [data])
 
   if (loading) return <p>Loading...</p>;
   if (error || !data) return <p>Error</p>;

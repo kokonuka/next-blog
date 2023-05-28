@@ -34,7 +34,6 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-infinite-scroller": "^1.2.6",
-    "react-loader-spinner": "^5.3.4",
     "typed.js": "^2.0.12",
     "typescript": "4.9.4",
     "zenn-content-css": "^0.1.143"

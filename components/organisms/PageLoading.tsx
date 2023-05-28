@@ -1,20 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Container, Box, Text } from '@chakra-ui/react'
-import { RotatingLines } from 'react-loader-spinner'
+import React, { useState, useRef, useContext, useEffect } from 'react'
+import { Box } from '@chakra-ui/react'
+import { LoadingContext } from '../../context/LoadingContext'
 
-type Props = {
-  isLoading: boolean
-}
+type Props = {}
 
 
-export const PageLoading:React.FC<Props> = ({ isLoading }) => {
+export const PageLoading:React.FC<Props> = () => {
   const [isView, setIsView] = useState(true)
+  const { isLoading } = useContext(LoadingContext);
   const loading = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if(!isLoading) {
-      loading.current?.classList.remove("active")
-      setTimeout(() => setIsView(false), 1000)
+      setTimeout(() => {
+        loading.current?.classList.remove("active")
+        setTimeout(() => setIsView(false), 1000)
+      }, 500)
     }
   }, [isLoading])
 
@@ -22,26 +23,27 @@ export const PageLoading:React.FC<Props> = ({ isLoading }) => {
     <>
       {isView && (
         <Box 
-          ref={loading} 
+          ref={loading}
           className="loadingWrap active" 
           position="absolute"
           top="0"
           left="0"
           w="100%"
           h="100vh"
-          bg="white"
+          bg="gray.900"
           display="flex"
           justifyContent="center"
           alignItems="center"
-          zIndex="2"
-        >
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="96"
-            visible={true}
-          />
+          zIndex="2" >
+          <div className="loader">
+            <div className="txt">
+              Loading
+            </div>
+            <div className="spin a">
+            </div>
+            <div className="spin b">
+            </div>
+          </div>
         </Box>
       )}
     </>
