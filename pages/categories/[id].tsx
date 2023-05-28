@@ -7,8 +7,9 @@ import { fetchGraph, fetchGraphWithVariable } from '../../graphql/fetchGraphql';
 import { getCategory, getCategoriesQuery } from '../../graphql/queries/categories';
 import { sliceText } from '../../lib/sliceText';
 import { getDateDiff } from '../../lib/getDateDiff';
-import CardList from '../../components/molecules/LawPosts';
+import { LawPosts } from '../../components/molecules/LawPosts';
 import { Container, Text, Box } from "@chakra-ui/react"
+import { DefaultLayout } from '../../components/templates/DefaultLayout';
 
 type Props = {
   category: Category
@@ -21,15 +22,13 @@ const CategoryPage: NextPage<Props> = ({ category, posts }) => {
   useEffect(() => setCarrentCategoryId(category.id), [category]);
 
   return (
-    <Container maxW="6xl">
-      <Box as="section"pt="10" pb="36">
-        <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">{category.name}</Text>
-        <Box mt={3} whiteSpace="pre-wrap">{category.description}</Box>
-        <Box mt="10">
-          <CardList posts={posts}/>
-        </Box>
+    <DefaultLayout>
+      <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">{category.name}</Text>
+      <Box mt={3} whiteSpace="pre-wrap">{category.description}</Box>
+      <Box mt="10">
+        <LawPosts posts={posts}/>
       </Box>
-    </Container>
+    </DefaultLayout>
   );
 };
 
