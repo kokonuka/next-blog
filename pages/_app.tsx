@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import '../styles/globals.css';
+import '../styles/post.css';
 import { useState, createContext, Dispatch, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { ApolloProvider } from '@apollo/client';

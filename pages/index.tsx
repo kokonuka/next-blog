@@ -15,10 +15,6 @@ const Home:NextPage<Props> = () => {
   useEffect(() => {
     setIsLoading(false)
   }, [])
-
-  // if (data?.posts?.nodes) {
-  //   setPosts(data.posts.nodes as Post[]);
-  // }
   
   return (
     <>

@@ -46,3 +46,11 @@ query getNextPosts (
     }
   }
 }
+
+query getPost(
+  $id: ID!
+) {
+  post(id: $id, idType: DATABASE_ID) {
+    ...postFragment
+  }
+}
