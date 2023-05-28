@@ -24,6 +24,9 @@ type Props = {
   tags: Tag[]
 }
 
+// Todo: タグの取得をCSRにする
+
+
 const fetchPostsOfQuery = async (q: string | string[]) => {
   const data = await fetchGraphWithVariable(getPostsOfSearch, { keyword: q })
   return data.posts.nodes;

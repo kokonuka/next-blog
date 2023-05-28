@@ -8,10 +8,11 @@ import { getDateDiff } from '../../lib/getDateDiff';
 import { LawPosts } from '../../components/molecules/LawPosts';
 import { Container, Text, Box } from "@chakra-ui/react"
 import { DefaultLayout } from '../../components/templates/DefaultLayout';
+import { Post } from '../../gql/generate/graphql';
 
 type Props = {
   tag: TypeTag
-  posts: ViewPost[]
+  posts: Post[]
 }
 
 const Tag: NextPage<Props> = ({ tag, posts }) => {

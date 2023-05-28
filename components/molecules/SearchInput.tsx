@@ -1,3 +1,5 @@
 export const SearchInput = () => {
-  return ()
+  return (
+    <></>
+  )
 }
