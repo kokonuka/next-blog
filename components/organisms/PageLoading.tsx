@@ -29,7 +29,7 @@ export const PageLoading:React.FC<Props> = () => {
           top="0"
           left="0"
           w="100%"
-          h="100vh"
+          h="100dvh"
           bg="gray.900"
           display="flex"
           justifyContent="center"
