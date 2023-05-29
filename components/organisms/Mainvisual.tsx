@@ -60,11 +60,11 @@ export const Mainvisual = () => {
       style={{ backgroundImage: "linear-gradient(90deg, rgba(103, 126, 250, 1), rgba(142, 84, 219, 1))" }}
     >
       <Text
-        ref={el}
         fontSize="xl"
         color="white"
-        textAlign="center"
-      />
+        textAlign="center" >
+        <span ref={el} ></span>
+      </Text>
     </Box>
   )
 }
