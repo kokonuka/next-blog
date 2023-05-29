@@ -19,7 +19,7 @@ const Home:NextPage<Props> = () => {
   
   return (
     <>
-      <Head title='kimagurecode' description='Webエンジニアの備忘録' />
+      <Head title='sun develop' description='Webエンジニアの備忘録' />
       <LoadingContextProvider>
         <HomeLayout>
           <NewPosts />

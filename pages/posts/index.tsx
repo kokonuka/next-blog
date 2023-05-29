@@ -9,7 +9,7 @@ const PostsPage:NextPage<Props> = () => {
 
   return (
     <>
-      <Head title='Posts | kimagurecode' description='Webエンジニアの備忘録' />
+      <Head title='Posts | sun develop' description='Webエンジニアの備忘録' />
       <DefaultLayout>
         <Posts />
       </DefaultLayout>

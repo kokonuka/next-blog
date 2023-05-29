@@ -61,7 +61,7 @@ const SearchPage: NextPage<Props> = () => {
 
   return (
     <>
-      <Head title='Search | kimagurecode' description='Webエンジニアの備忘録' />
+      <Head title='Search | sun develop' description='Webエンジニアの備忘録' />
       <SearchLayout>
         <SearchInput tags={tags} value={value} setValue={setValue} setActiveTags={setActiveTags} setIsPostsLoading={setIsPostsLoading} />
         <ResultTags activeTags={activeTags} setTags={setTags} setIsInitializedTags={setIsInitializedTags}  />

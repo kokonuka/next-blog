@@ -26,7 +26,7 @@ export type Props = {
 const PostPage: NextPage<Props> = ({ post, content, idsWithHeadings }) => {
   return (
     <>
-      <Head title={`${post.title} |  kimagurecode`} description='Webエンジニアの備忘録' />
+      <Head title={`${post.title} | sun develop`} description='Webエンジニアの備忘録' />
       <PostLayout post={post} content={content} idsWithHeadings={idsWithHeadings} />
     </>
   )
