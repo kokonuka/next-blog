@@ -8,7 +8,7 @@ type Props = {
 
 export const Tags: React.FC<Props> = ({ tags }) => {
   return (
-    <Box pb="10" display="flex" flexWrap="wrap" gap="2">
+    <Box display="flex" flexWrap="wrap" gap="2">
       {tags.map((tag) => (
         <Link href={`/tags/${tag.id}`} key={tag.id} >
           <ChakraTag>
