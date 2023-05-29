@@ -11,12 +11,6 @@ type Props = {}
 
 
 const Home:NextPage<Props> = () => {
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    setIsLoading(false)
-  }, [])
-  
   return (
     <>
       <Head title='sun develop' description='Webエンジニアの備忘録' />
