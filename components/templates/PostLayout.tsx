@@ -31,7 +31,7 @@ export const PostLayout: React.FC<Props> = ({ post, content, idsWithHeadings }) 
           flexDirection="column"
           flex="1" >
           <Box p="5">
-            <Text mt="10" fontSize={{base: "2xl", lg: "4xl" }} color="gray.700">
+            <Text fontSize={{base: "2xl", lg: "4xl" }} color="gray.700">
               {post.title}
             </Text>
             <Text mt="5" color="gray.500">
