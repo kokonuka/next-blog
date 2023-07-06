@@ -1,4 +1,4 @@
-export const getDateDiff = (date: string) => {
+export const getFormattedDateTimeDiff = (date: string) => {
   const postTimezone = '+09:00';
   const postTimestamp = Date.parse(date + postTimezone);
   const currentTimestamp = Date.now();
