@@ -1,46 +1,72 @@
-import Link from 'next/link'
-import { Box, Heading, Text, Image } from '@chakra-ui/react'
-import { Post } from '../gql/generate/graphql'
+import NextLink from "next/link";
+import { FragmentType, graphql, useFragment } from "../gql";
+import { Box, Heading, Text, Image, Link } from "@chakra-ui/react";
+import { getFormattedDateTimeDiff } from "../lib/getFormattedDateTimeDiff";
 
 type Props = {
-  post: Post
-}
+  post: FragmentType<typeof PostFragment>;
+};
 
+export const PostFragment = graphql(`
+  fragment PostItem on Post {
+    id
+    title
+    date
+    featuredImage {
+      node {
+        mediaItemUrl
+      }
+    }
+    categories {
+      nodes {
+        id
+        name
+      }
+    }
+    tags {
+      nodes {
+        id
+        name
+      }
+    }
+  }
+`);
 
-export const CardFlat: React.FC<Props> = ({ post }) => {
+export const CardFlat: React.FC<Props> = (props) => {
+  const post = useFragment(PostFragment, props.post);
   const category = post?.categories?.nodes[0];
-  const defaultPostImage = "../images/default_post_image.jpg"
+  const defaultPostImage = "../images/default_post_image.jpg";
 
   return (
     <>
       <Box as="article">
         <Box w="100%" display="flex">
-          <Link href={`/posts/${post.databaseId}`}>
+          <Link as={NextLink} href={`/posts/${post.id}`}>
             <Image
-              objectFit='cover'
+              objectFit="cover"
               bg="white"
-              width='75px'
-              height='75px'
-              borderRadius='2xl'
+              width="75px"
+              height="75px"
+              borderRadius="2xl"
               src={post.featuredImage?.node?.mediaItemUrl || defaultPostImage}
-              alt='article'
+              alt="article"
             />
           </Link>
           <Box p="0" pl="3" flex="1">
-          <Link href={`/posts/${post.databaseId}`}>
-            <Heading size='md' color="gray.700">
-              {post.title}{/* {post.clippedTitle} */}
-            </Heading>
-          </Link>
+            <Link as={NextLink} href={`/posts/${post.id}`} _hover={{}}>
+              <Heading size="md" color="gray.700">
+                {post.title}
+              </Heading>
+            </Link>
             <Box mt="3" fontSize="xs" display="flex" gap="2">
-              <Link href={`/categories/${category?.id}`}>{category?.name}</Link>
-              <Text fontSize="xs">
-                {post.date}{/* {post.dateDiff} */}
-              </Text>
+              <Link as={NextLink} href={`/categories/${category?.id}`}>
+                {category?.name}
+              </Link>
+              <Text fontSize="xs">{getFormattedDateTimeDiff(post.date!)}</Text>
             </Box>
           </Box>
         </Box>
       </Box>
     </>
-  )
-}
+  );
+};

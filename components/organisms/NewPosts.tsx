@@ -1,32 +1,46 @@
-import { useContext, useEffect } from 'react'
-import Link from 'next/link'
-import { Box, Text } from '@chakra-ui/react'
-import { LawPosts } from '../molecules/LawPosts'
-import { useQuery } from '@apollo/client'
-import { GetPostsDocument, Post } from '../../gql/generate/graphql'
-import { LoadingContext } from '../../context/LoadingContext'
+import { useContext, useEffect } from "react";
+import NextLink from "next/link";
+import { useQuery } from "@apollo/client";
+import { graphql } from "../../gql";
+import { Box, Text, Link } from "@chakra-ui/react";
+import { LoadingContext } from "../../context/LoadingContext";
+import { CardFlat } from "../cardFlat";
 
-type Props = {}
+type Props = {};
 
+export const allPostsQueryDocument = graphql(`
+  query allPostsQuery {
+    posts {
+      nodes {
+        ...PostItem
+      }
+    }
+  }
+`);
 
 export const NewPosts: React.FC<Props> = () => {
-  const { loading, error, data } = useQuery(GetPostsDocument)
+  const { loading, error, data } = useQuery(allPostsQueryDocument);
   const { setIsLoading } = useContext(LoadingContext);
 
   useEffect(() => {
-    if(data) setIsLoading(false);
-  }, [data])
-
-  if (loading) return <p>Loading...</p>;
-  if (error || !data) return <p>Error</p>;
+    if (!loading) setIsLoading(false);
+  }, [loading, setIsLoading]);
 
   return (
-    <Box as='section' py="16">
-      <Text pb="5" color="gray.700" fontSize="3xl" fontWeight="bold">New Posts</Text>
-      <LawPosts posts={data?.posts?.nodes as Post[]}/>
+    <Box as="section" py="16">
+      <Text pb="5" color="gray.700" fontSize="3xl" fontWeight="bold">
+        New Posts
+      </Text>
+      <Box display="flex" flexDirection="column" gap="10">
+        {data &&
+          data.posts?.nodes.map((post, i) => <CardFlat post={post} key={i} />)}
+        {error && <p>データの読み込みができませんでした。</p>}
+      </Box>
       <Text mt="10" color="blue.500" textAlign="center">
-        <Link href="/posts">全ての記事を見る</Link>
+        <Link as={NextLink} href="/posts">
+          全ての記事を見る
+        </Link>
       </Text>
     </Box>
-  )
-}
+  );
+};
