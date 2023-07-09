@@ -1,20 +1,20 @@
-import type { CodegenConfig } from '@graphql-codegen/cli';
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   overwrite: true,
   schema: process.env.GRAPHQL_ENDPOINT,
   // documents: ['gql/query/*.graphql'],
-  documents: ['components/**/*.{ts,tsx}', 'pages/**/*.{ts,tsx}'],
+  documents: ["src/**/*.{ts,tsx}"],
   // ignoreNoDocuments: true,
   generates: {
-    "gql/": {
+    "./src/gql/": {
       preset: "client",
-      plugins: []
+      plugins: [],
     },
     // "./graphql.schema.json": {
     //   plugins: ["introspection"]
     // }
-  }
+  },
 };
 
 export default config;

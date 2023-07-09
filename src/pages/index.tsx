@@ -10,6 +10,7 @@ import { LoadingContextProvider } from "../context/LoadingContext";
 type Props = {};
 
 const Home: NextPage<Props> = () => {
+  console.log("index hoge");
   return (
     <>
       <Head title="sun develop" description="Webエンジニアの備忘録" />
