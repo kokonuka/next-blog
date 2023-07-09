@@ -32,7 +32,7 @@ export const Header = () => {
             fontSize="2xl"
             color="gray.600"
           >
-            <Link href="/search">
+            <Link as={NextLink} href="/search">
               <AiOutlineSearch />
             </Link>
           </Box>
