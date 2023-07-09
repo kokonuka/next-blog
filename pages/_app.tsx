@@ -6,39 +6,23 @@ import "nprogress/nprogress.css";
 import "../styles/globals.css";
 import "../styles/loader.css";
 import "../styles/post.css";
-import { useState, createContext, Dispatch, useEffect } from "react";
-import { useRouter } from "next/router";
 import { ApolloProvider } from "@apollo/client";
 import client from "../lib/graphqlClient";
-
-export const CategoryContext = createContext(
-  {} as {
-    carrentCategoryId: string;
-    setCarrentCategoryId: Dispatch<React.SetStateAction<string>>;
-  }
-);
+import { store } from "../redux/store";
+import { Provider } from "react-redux";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [carrentCategoryId, setCarrentCategoryId] = useState("");
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!router.pathname.includes("/categories")) setCarrentCategoryId("");
-  }, [router.pathname]);
-
   return (
-    <CategoryContext.Provider
-      value={{ carrentCategoryId, setCarrentCategoryId }}
-    >
+    <Provider store={store}>
       <ChakraProvider>
         <ApolloProvider client={client}>
           <Component {...pageProps} />
         </ApolloProvider>
       </ChakraProvider>
-    </CategoryContext.Provider>
+    </Provider>
   );
 }
