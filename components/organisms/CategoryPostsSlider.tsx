@@ -36,7 +36,7 @@ export const CategoryPostsSlider: React.FC<Props> = ({ name }) => {
       },
     }
   );
-  console.log(data);
+
   const { setIsLoading } = useContext(LoadingContext);
 
   useEffect(() => {
