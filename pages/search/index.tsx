@@ -1,24 +1,27 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import { NextPage } from "next";
 import { Head } from "../../components/Head";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { getPostsOfSearch } from "../../graphql/queries/posts";
 import { fetchGraphWithVariable } from "../../graphql/fetchGraphql";
-import { Post } from "../../gql/generate/graphql";
-import { Tag } from "../../gql/generate/graphql";
+import { Post } from "../../graphql/generate/graphql";
+import { Tag } from "../../graphql/generate/graphql";
 import { SearchLayout } from "../../components/templates/SearchLayout";
 import { ResultTags } from "../../components/organisms/ResultTags";
 import { SearchInput } from "../../components/molecules/SearchInput";
 import { ResultPosts } from "../../components/organisms/ResultPosts";
 
-type Props = {}
-
+type Props = {};
 
 export const tagFilter = (tags: Tag[], q: string) => {
-  return tags.filter(tag => {
-    return tag?.name?.toLowerCase().includes(typeof q == "string" ? q.toLowerCase() : "") ? true : false;
-  })
-}
+  return tags.filter((tag) => {
+    return tag?.name
+      ?.toLowerCase()
+      .includes(typeof q == "string" ? q.toLowerCase() : "")
+      ? true
+      : false;
+  });
+};
 
 const fetchPostsOfQuery = async (q: string | string[]) => {
   const data = await fetchGraphWithVariable(getPostsOfSearch, { keyword: q });
@@ -36,39 +39,48 @@ const SearchPage: NextPage<Props> = () => {
   const [isPostsLoading, setIsPostsLoading] = useState(true);
 
   useEffect(() => {
-    if(!isInitializedTags) return;
-    
-    if(!q) {
+    if (!isInitializedTags) return;
+
+    if (!q) {
       setPosts([]);
       setIsPostsLoading(false);
       setActiveTags(tags);
       return;
-    };
-    
+    }
+
     setValue(q as string);
     setActiveTags(tagFilter(tags, q as string));
-    ( async() => {
+    (async () => {
       const post = await fetchPostsOfQuery(q);
       setPosts(post);
       setIsPostsLoading(false);
-    })(); 
-
+    })();
   }, [q, isInitializedTags, isPostsLoading]);
 
   useEffect(() => {
     setIsPostsLoading(true);
-  }, [q])
+  }, [q]);
 
   return (
     <>
-      <Head title='Search | sun develop' description='Webエンジニアの備忘録' />
+      <Head title="Search | sun develop" description="Webエンジニアの備忘録" />
       <SearchLayout>
-        <SearchInput tags={tags} value={value} setValue={setValue} setActiveTags={setActiveTags} setIsPostsLoading={setIsPostsLoading} />
-        <ResultTags activeTags={activeTags} setTags={setTags} setIsInitializedTags={setIsInitializedTags}  />
-        <ResultPosts posts={posts} isPostsLoading={isPostsLoading} /> 
+        <SearchInput
+          tags={tags}
+          value={value}
+          setValue={setValue}
+          setActiveTags={setActiveTags}
+          setIsPostsLoading={setIsPostsLoading}
+        />
+        <ResultTags
+          activeTags={activeTags}
+          setTags={setTags}
+          setIsInitializedTags={setIsInitializedTags}
+        />
+        {/* <ResultPosts posts={posts} isPostsLoading={isPostsLoading} /> */}
       </SearchLayout>
     </>
-  )
+  );
 };
 
 export default SearchPage;
