@@ -2,21 +2,18 @@ import { useState } from "react";
 import client from "../../../lib/graphqlClient";
 import { FragmentType, graphql } from "../../../gql";
 import { Box } from "@chakra-ui/react";
-import { Card, PostVerticalFragment } from "../../molecules/Card";
+import { Card, PostFragment } from "../../molecules/Card";
 import InfiniteScroll from "react-infinite-scroller";
 import { Loader } from "../../molecules/Loader";
+import { useAppSelector } from "../../../redux/store";
 
-type Props = {
-  id: string;
-};
-
-// Todo: idをreduxで管理
+type Props = {};
 
 export const allPostsByCategoryIdWithVariablesQueryDocument = graphql(`
   query allPostsWithCategoryQuery($categoryIn: [ID], $endCursor: String!) {
     posts(where: { categoryIn: $categoryIn }, first: 10, after: $endCursor) {
       nodes {
-        ...PostVerticalItem
+        ...PostItem
       }
       pageInfo {
         endCursor
@@ -26,10 +23,11 @@ export const allPostsByCategoryIdWithVariablesQueryDocument = graphql(`
   }
 `);
 
-export const CategoryPostList: React.FC<Props> = ({ id }) => {
-  const [posts, setPosts] = useState<
-    FragmentType<typeof PostVerticalFragment>[]
-  >([]);
+export const CategoryPostList: React.FC<Props> = () => {
+  const id = useAppSelector((state) => state.categoryId.id);
+  console.log(id);
+
+  const [posts, setPosts] = useState<FragmentType<typeof PostFragment>[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [endCursor, setEndCursor] = useState("");
 

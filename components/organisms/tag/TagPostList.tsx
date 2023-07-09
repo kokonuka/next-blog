@@ -2,7 +2,7 @@ import { useState } from "react";
 import client from "../../../lib/graphqlClient";
 import { FragmentType, graphql } from "../../../gql";
 import { Box } from "@chakra-ui/react";
-import { Card, PostVerticalFragment } from "../../molecules/Card";
+import { Card, PostFragment } from "../../molecules/Card";
 import InfiniteScroll from "react-infinite-scroller";
 import { Loader } from "../../molecules/Loader";
 
@@ -14,7 +14,7 @@ export const allPostsByCategoryIdWithVariablesQueryDocument = graphql(`
   query allPostsByTagIdWithVariablesQuery($tagIn: [ID], $endCursor: String!) {
     posts(where: { tagIn: $tagIn }, first: 10, after: $endCursor) {
       nodes {
-        ...PostVerticalItem
+        ...PostItem
       }
       pageInfo {
         endCursor
@@ -25,9 +25,7 @@ export const allPostsByCategoryIdWithVariablesQueryDocument = graphql(`
 `);
 
 export const TagPostList: React.FC<Props> = ({ id }) => {
-  const [posts, setPosts] = useState<
-    FragmentType<typeof PostVerticalFragment>[]
-  >([]);
+  const [posts, setPosts] = useState<FragmentType<typeof PostFragment>[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [endCursor, setEndCursor] = useState("");
 
