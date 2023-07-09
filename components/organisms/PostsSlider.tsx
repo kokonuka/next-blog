@@ -11,7 +11,7 @@ type Props = {
   posts: FragmentType<typeof PostFragment>[];
 };
 
-export const TechPostsSlider: React.FC<Props> = ({ posts }) => {
+export const PostsSlider: React.FC<Props> = ({ posts }) => {
   return (
     <Box px={{ base: "0", lg: "16" }}>
       <Splide
