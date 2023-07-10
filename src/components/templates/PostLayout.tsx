@@ -3,9 +3,10 @@ import { Footer } from "../organisms/Footer";
 import { Box, Container, Text } from "@chakra-ui/react";
 import { Post, Tag } from "../../graphql/generate/graphql";
 import { IdsWithHeadings } from "../../pages/posts/[id]";
-import styles from "../../styles/Post.module.css";
+// import styles from "../../styles/Post.module.css";
 import { SideMenu } from "../organisms/SideMenu";
 import { Tags } from "../organisms/Tags";
+import { formatDate } from "@/lib/formatDate";
 
 type Props = {
   post: Post;
@@ -35,17 +36,21 @@ export const PostLayout: React.FC<Props> = ({
           flex="1"
         >
           <Box p="5">
-            <Text fontSize={{ base: "2xl", lg: "4xl" }} color="gray.700">
+            <Text
+              fontSize={{ base: "2xl", lg: "4xl" }}
+              fontWeight="bold"
+              color="gray.700"
+              textAlign="center"
+            >
               {post.title}
             </Text>
-            <Text mt="5" color="gray.500">
-              {post.date}
-              {/* {post.formattedDate} */}
+            <Text mt="5" color="gray.500" textAlign="center">
+              {formatDate(post.date!)}
             </Text>
           </Box>
           <Box mt="10" display={{ base: "block", lg: "flex" }}>
             <Box
-              width={{ base: "100%", lg: "60%" }}
+              width={{ base: "100%", lg: "70%" }}
               bg="white"
               p="5"
               borderRadius={{ base: "0", lg: "10" }}
@@ -53,13 +58,13 @@ export const PostLayout: React.FC<Props> = ({
             >
               <Tags tags={tags} />
               <div
-                className={`post znc ${styles.body}`}
+                className={`post znc`}
                 dangerouslySetInnerHTML={{ __html: content }}
               ></div>
             </Box>
             <Box
               display={{ base: "none", lg: "block" }}
-              width={{ base: "100%", lg: "40%" }}
+              width={{ base: "100%", lg: "30%" }}
               pl="5"
             >
               <SideMenu idsWithHeadings={idsWithHeadings} />

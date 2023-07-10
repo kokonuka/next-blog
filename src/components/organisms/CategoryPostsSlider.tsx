@@ -1,9 +1,7 @@
-import { useContext, useEffect } from "react";
 import NextLink from "next/link";
 import { useQuery } from "@apollo/client";
 import { FragmentType, graphql } from "../../gql";
 import { Box, Text, Link } from "@chakra-ui/react";
-import { LoadingContext } from "../../context/LoadingContext";
 import { PostFragment } from "../molecules/Card";
 import { PostsSlider } from "./PostsSlider";
 
@@ -36,12 +34,6 @@ export const CategoryPostsSlider: React.FC<Props> = ({ name }) => {
       },
     }
   );
-
-  const { setIsLoading } = useContext(LoadingContext);
-
-  useEffect(() => {
-    if (!loading) setIsLoading(false);
-  }, [loading, setIsLoading]);
 
   return (
     <Box as="section" mt="20">

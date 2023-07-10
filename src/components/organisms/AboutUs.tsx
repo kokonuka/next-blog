@@ -3,15 +3,7 @@ import { AiOutlineTwitter } from "react-icons/ai";
 
 export const AboutUs = () => {
   return (
-    <Box
-      as="section"
-      mt="20"
-      py="10"
-      px="5"
-      bg="white"
-      borderRadius="3xl"
-      shadow="lg"
-    >
+    <Box as="section" mt="20" p={{ base: "5", lg: "10" }} bg="white">
       <Text color="gray.700" fontSize="3xl" fontWeight="bold">
         About
       </Text>
@@ -22,7 +14,6 @@ export const AboutUs = () => {
         h="30vh"
         src="images/image_01.jpg"
         alt="about"
-        borderRadius="lg"
       />
       <Box mt="3" display="flex" alignItems="center">
         <Text color="blue.400" fontSize="lg">

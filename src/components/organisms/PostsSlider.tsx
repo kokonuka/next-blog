@@ -13,7 +13,7 @@ type Props = {
 
 export const PostsSlider: React.FC<Props> = ({ posts }) => {
   return (
-    <Box px={{ base: "0", lg: "16" }}>
+    <Box px={{ base: "0" }}>
       <Splide
         hasTrack={false}
         aria-label=""
@@ -32,19 +32,22 @@ export const PostsSlider: React.FC<Props> = ({ posts }) => {
               perPage: 2,
               perMove: 2,
               arrows: false,
-              padding: { left: "0", right: "4rem" },
+              padding: { left: "0", right: "3rem" },
+              gap: 10,
             },
             768: {
               perPage: 1,
               perMove: 1,
               arrows: false,
-              padding: { left: "0", right: "4rem" },
+              padding: { left: "0", right: "3rem" },
+              gap: 10,
             },
             480: {
               perPage: 1,
               perMove: 1,
               arrows: false,
-              padding: { left: "0", right: "4rem" },
+              padding: { left: "0", right: "3rem" },
+              gap: 10,
             },
           },
         }}
@@ -59,18 +62,21 @@ export const PostsSlider: React.FC<Props> = ({ posts }) => {
         <div className="splide__arrows">
           <button
             className="splide__arrow splide__arrow--prev"
-            style={{ right: "102%", left: "auto", width: "3em", height: "3em" }}
+            style={{ width: "3em", height: "3em" }}
           >
             <FaAngleRight />
           </button>
           <button
             className="splide__arrow splide__arrow--next"
-            style={{ right: "auto", left: "102%", width: "3em", height: "3em" }}
+            style={{ width: "3em", height: "3em" }}
           >
             <FaAngleRight />
           </button>
         </div>
-        <ul className="splide__pagination" style={{ position: "static" }}></ul>
+        <ul
+          className="splide__pagination"
+          style={{ position: "static", marginTop: "10px" }}
+        ></ul>
       </Splide>
     </Box>
   );

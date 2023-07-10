@@ -40,31 +40,47 @@ export const Card: React.FC<Props> = (props) => {
   const defaultPostImage = "/images/default_post_image.jpg";
 
   return (
-    <Box as="article">
-      <Link as={NextLink} href={`/posts/${post.databaseId}`} _hover={{}}>
-        <Box position="relative" h="200px" borderRadius="3xl" overflow="hidden">
-          <Image
-            objectFit="cover"
-            w="100%"
-            h="100%"
-            src={post.featuredImage?.node?.mediaItemUrl || defaultPostImage}
-            alt="article"
-          />
-        </Box>
-        <Box px="3">
-          <Text mt="4" fontSize="xs" fontWeight="bold" color="gray.400">
+    <Box as="article" h="100%" bg="white" display="flex" flexDirection="column">
+      <Box position="relative" h="200px" overflow="hidden">
+        <Link
+          as={NextLink}
+          href={`/posts/${post.databaseId}`}
+          h="100%"
+          w="100%"
+          position="absolute"
+          _hover={{ bg: "white" }}
+          opacity="0.2"
+        ></Link>
+        <Image
+          objectFit="cover"
+          w="100%"
+          h="100%"
+          src={post.featuredImage?.node?.mediaItemUrl || defaultPostImage}
+          alt="article"
+        />
+      </Box>
+      <Box px="3" py="5" flex="1" display="flex" flexDirection="column">
+        <Box flex="1" minH="20">
+          <Text fontSize="xs" fontWeight="bold" color="gray.400">
             {getFormattedDateTimeDiff(post.date!)}
           </Text>
-          <Text mt="2" fontSize="xl" fontWeight="bold">
+          <Link
+            as={NextLink}
+            href={`/posts/${post.databaseId}`}
+            mt="2"
+            fontSize="xl"
+            fontWeight="bold"
+            _hover={{ color: "blackAlpha.600" }}
+          >
             {post.title}
-          </Text>
-          <Box mt="4" display="flex" gap="3">
-            {post.tags?.nodes.map((tag, i) => (
-              <TagButton tag={tag} key={i} />
-            ))}
-          </Box>
+          </Link>
         </Box>
-      </Link>
+        <Box mt="4" display="flex" gap="3">
+          {post.tags?.nodes.map((tag, i) => (
+            <TagButton tag={tag} key={i} />
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 };
