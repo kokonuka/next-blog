@@ -51,7 +51,7 @@ export const Card: React.FC<Props> = (props) => {
   return (
     <Box as="article" h="100%" bg="white" display="flex" flexDirection="column">
       <Box position="relative" h="200px" overflow="hidden">
-        <Skeleton isLoaded={!loading}>
+        <Skeleton isLoaded={!loading} h="100%">
           <Link
             as={NextLink}
             href={`/posts/${post?.databaseId}`}

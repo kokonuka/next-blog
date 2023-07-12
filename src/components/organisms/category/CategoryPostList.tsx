@@ -56,7 +56,11 @@ export const CategoryPostList: React.FC<Props> = () => {
       >
         <Box
           display="grid"
-          gridTemplateColumns={{ base: "1fr 1fr", md: "1fr 1fr 1fr" }}
+          gridTemplateColumns={{
+            base: "1fr",
+            md: "1fr 1fr",
+            lg: "1fr 1fr 1fr",
+          }}
           gridGap="5"
         >
           {posts.map((post, i) => (
