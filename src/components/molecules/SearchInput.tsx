@@ -2,22 +2,16 @@ import { SetStateAction, Dispatch } from "react";
 import { useRouter } from "next/router";
 import { Box, InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { Tag } from "../../graphql/generate/graphql";
-import { tagFilter } from "../../pages/search";
 
 type Props = {
-  tags: Tag[];
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
-  setActiveTags: Dispatch<SetStateAction<Tag[]>>;
   setIsPostsLoading: Dispatch<SetStateAction<boolean>>;
 };
 
 export const SearchInput: React.FC<Props> = ({
-  tags,
   value,
   setValue,
-  setActiveTags,
   setIsPostsLoading,
 }) => {
   const router = useRouter();
@@ -27,7 +21,6 @@ export const SearchInput: React.FC<Props> = ({
   const handleChange = (e: any) => {
     const value = e.target.value;
     setValue(value);
-    setActiveTags(tagFilter(tags, value));
   };
 
   const handleSubmit = (e: any) => {
