@@ -34,20 +34,20 @@ export const SearchInput: React.FC<Props> = ({
   };
 
   return (
-    <Box
-      w={{ base: "90%", sm: "80%", md: "70%", lg: "60%", xl: "50%" }}
-      mx="auto"
-    >
+    <Box w="90%" mx="auto">
       <InputGroup>
-        <InputLeftElement pointerEvents="none">
-          <AiOutlineSearch />
+        <InputLeftElement pointerEvents="none" h="12">
+          <Box pl="3" fontSize="2xl" color="gray.500">
+            <AiOutlineSearch />
+          </Box>
         </InputLeftElement>
         <Input
           onChange={handleChange}
           onKeyPress={handleSubmit}
           value={value}
-          placeholder="Enter Keyword"
-          borderRadius="20"
+          placeholder="キーワードを入力"
+          borderRadius="3xl"
+          size="lg"
         />
       </InputGroup>
     </Box>

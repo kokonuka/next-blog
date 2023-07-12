@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Box, Tag as ChakraTag, Text } from "@chakra-ui/react";
-import Link from "next/link";
+import { Box, Text } from "@chakra-ui/react";
 import { Loader } from "../molecules/Loader";
 import { Tag } from "../../graphql/generate/graphql";
 import { fetchGraphWithVariable } from "../../graphql/fetchGraphql";
 import { getNextTagsQuery, getTagsQuery } from "../../graphql/queries/tags";
+import { TagButton } from "../atoms/TagButton";
 
 type Props = {};
 
@@ -39,18 +39,16 @@ export const AllTags: React.FC<Props> = () => {
 
   return (
     <Box mt="10">
-      <Text fontWeight="bold">Tags</Text>
+      <Text fontWeight="bold" fontSize="2xl">
+        Tags
+      </Text>
       <Box mt="5" display="flex" flexWrap="wrap" gap="3">
         {isLoading ? (
           <Loader />
         ) : (
           <>
-            {tags.map((tag) => (
-              <Link href={`/tags/${tag.id}`} key={tag.id}>
-                <ChakraTag px={4} py={3}>
-                  {tag.name}
-                </ChakraTag>
-              </Link>
+            {tags.map((tag, i) => (
+              <TagButton tag={tag} key={i} />
             ))}
           </>
         )}

@@ -1,44 +1,27 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { Button } from "@chakra-ui/react";
-import { FragmentType, graphql, useFragment } from "../../gql";
-import { TagItemFragment } from "../../gql/graphql";
+import { Button, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Tag } from "../../graphql/generate/graphql";
 
 type Props = {
-  tag: FragmentType<typeof TagFragment>;
+  tag: Tag;
 };
 
-export const TagFragment = graphql(`
-  fragment TagItem on Tag {
-    id
-    name
-  }
-`);
-
-export const TagButton: React.FC<Props> = (props) => {
-  const tag = useFragment(TagFragment, props.tag);
-  const router = useRouter();
-
-  const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    tag: TagItemFragment
-  ) => {
-    event.preventDefault();
-    router.push(`/tags/${tag?.id}`);
-  };
-
+export const TagButton: React.FC<Props> = ({ tag }) => {
   return (
-    <Button
+    <Link
+      as={NextLink}
+      href={`/tags/${tag.id}`}
+      py="2"
+      px="5"
+      fontWeight="medium"
       fontSize="sm"
-      color="blue.400"
-      w="auto"
-      h="auto"
-      p="0"
+      border="1px"
+      borderColor="gray.300"
+      borderRadius="3xl"
       bg="inherit"
-      _hover={{ textDecoration: "underline" }}
-      onClick={(event) => handleClick(event, tag)}
+      _hover={{ backgroundColor: "gray.100" }}
     >
-      #{tag?.name}
-    </Button>
+      {tag.name}
+    </Link>
   );
 };
