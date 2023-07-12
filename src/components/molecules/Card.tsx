@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { FragmentType, graphql, useFragment } from "../../gql";
 import { getFormattedDateTimeDiff } from "../../lib/getFormattedDateTimeDiff";
-import { TagButton } from "../atoms/TagButton";
+import { TagLink } from "../atoms/TagLink";
 
 export const PostFragment = graphql(`
   fragment PostItem on Post {
@@ -89,8 +89,9 @@ export const Card: React.FC<Props> = (props) => {
           </SkeletonText>
         </Box>
         <Box mt="4" display="flex" gap="3">
-          {post &&
-            post.tags?.nodes.map((tag, i) => <TagButton tag={tag} key={i} />)}
+          {post?.tags?.nodes.map((tag, i) => (
+            <TagLink tag={tag} key={i} />
+          ))}
         </Box>
       </Box>
     </Box>
