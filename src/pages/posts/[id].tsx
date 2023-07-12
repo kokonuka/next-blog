@@ -8,7 +8,6 @@ import { getPostsQuery, getNextPostsQuery } from "../../graphql/queries/posts";
 import { GetPostDocument } from "../../graphql/generate/graphql";
 import { PostLayout } from "../../components/templates/PostLayout";
 import "zenn-content-css";
-// import { Post } from "../../graphql/types/posts";
 import { Post, Tag } from "../../graphql/generate/graphql";
 import client from "../../lib/graphqlClient";
 
