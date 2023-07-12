@@ -64,7 +64,7 @@ export const Posts: React.FC<Props> = () => {
             gridGap="5"
           >
             {posts.map((post, i) => (
-              <Card post={post} key={i} />
+              <Card post={post} key={i} loading={false} />
             ))}
           </Box>
         </InfiniteScroll>

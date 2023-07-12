@@ -1,17 +1,18 @@
 import React from "react";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-// import { AllPostsQueryQuery } from "../../graphql/generate/graphql";
 import { Card, PostFragment } from "../molecules/Card";
 import { FragmentType } from "../../gql";
 import { Box } from "@chakra-ui/react";
 import { FaAngleRight } from "react-icons/fa";
 
 type Props = {
-  posts: FragmentType<typeof PostFragment>[];
+  posts?: FragmentType<typeof PostFragment>[];
+  loading: boolean;
 };
 
-export const PostsSlider: React.FC<Props> = ({ posts }) => {
+export const PostsSlider: React.FC<Props> = ({ posts, loading }) => {
+  console.log(posts);
   return (
     <Box px={{ base: "0" }}>
       <Splide
@@ -53,11 +54,21 @@ export const PostsSlider: React.FC<Props> = ({ posts }) => {
         }}
       >
         <SplideTrack>
-          {posts.map((post, i) => (
-            <SplideSlide key={i}>
-              <Card post={post} />
-            </SplideSlide>
-          ))}
+          {loading ? (
+            <>
+              {Array.from({ length: 3 }).map((_, index) => (
+                <SplideSlide key={index}>
+                  <Card loading={loading} />
+                </SplideSlide>
+              ))}
+            </>
+          ) : (
+            posts?.map((post, i) => (
+              <SplideSlide key={i}>
+                <Card post={post} loading={loading} />
+              </SplideSlide>
+            ))
+          )}
         </SplideTrack>
         <div className="splide__arrows">
           <button
