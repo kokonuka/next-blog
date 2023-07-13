@@ -1,16 +1,30 @@
 import { useEffect, useState } from "react";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import {
+  selectDisplayedTags,
+  setDisplayedTags,
+} from "@/redux/Slice/displayedTagsSlice";
+import { setAllTags } from "@/redux/Slice/allTagsSlice";
+import { Tag } from "../../../graphql/generate/graphql";
+import { fetchGraphWithVariable } from "../../../graphql/fetchGraphql";
+import { getNextTagsQuery, getTagsQuery } from "../../../graphql/queries/tags";
 import { Box, Text } from "@chakra-ui/react";
-import { Loader } from "../molecules/Loader";
-import { Tag } from "../../graphql/generate/graphql";
-import { fetchGraphWithVariable } from "../../graphql/fetchGraphql";
-import { getNextTagsQuery, getTagsQuery } from "../../graphql/queries/tags";
-import { TagButton } from "../atoms/TagButton";
+import { Loader } from "../../molecules/Loader";
+import { TagButton } from "../../atoms/TagButton";
 
 type Props = {};
 
-export const AllTags: React.FC<Props> = () => {
-  const [tags, setTags] = useState<Tag[]>([]);
+export const Tags: React.FC<Props> = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useAppDispatch();
+  const displayedTags = useAppSelector(selectDisplayedTags);
+
+  useEffect(() => {
+    (async () => {
+      dispatch(setAllTags(await fetchAllTags()));
+      dispatch(setDisplayedTags(await fetchAllTags()));
+    })();
+  }, [dispatch]);
 
   const fetchAllTags = async () => {
     let tags: Tag[] = [];
@@ -31,12 +45,6 @@ export const AllTags: React.FC<Props> = () => {
     return tags;
   };
 
-  useEffect(() => {
-    (async () => {
-      setTags(await fetchAllTags());
-    })();
-  }, [setTags]);
-
   return (
     <Box mt="10">
       <Text fontWeight="bold" fontSize="2xl">
@@ -47,7 +55,7 @@ export const AllTags: React.FC<Props> = () => {
           <Loader />
         ) : (
           <>
-            {tags.map((tag, i) => (
+            {displayedTags.map((tag, i) => (
               <TagButton tag={tag} key={i} />
             ))}
           </>
