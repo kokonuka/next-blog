@@ -3,8 +3,8 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { PostsLayout } from "../../components/templates/PostsLayout";
 import { CategoryPosts } from "../../components/organisms/category/CategoryPosts";
-import { useAppSelector, useAppDispatch } from "../../redux/store";
-import { set } from "../../redux/categoryIdSlice";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { set } from "../../redux/Slice/categoryIdSlice";
 
 const CategoryPage: NextPage = () => {
   const router = useRouter();

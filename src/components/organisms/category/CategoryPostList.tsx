@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/react";
 import { Card, PostFragment } from "../../molecules/Card";
 import InfiniteScroll from "react-infinite-scroller";
 import { Loader } from "../../molecules/Loader";
-import { useAppSelector } from "../../../redux/store";
+import { useAppSelector } from "../../../redux/hooks";
 
 type Props = {};
 

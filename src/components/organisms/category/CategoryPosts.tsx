@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 import { HeadingWithDescription } from "../../molecules/HeadingWithDescription";
 import { CategoryPostList } from "./CategoryPostList";
 import { useQuery } from "@apollo/client";
-import { useAppSelector } from "../../../redux/store";
+import { useAppSelector } from "../../../redux/hooks";
 
 type Props = {};
 
