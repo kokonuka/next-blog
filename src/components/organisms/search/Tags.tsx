@@ -1,49 +1,89 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { FragmentType, graphql } from "@/gql";
+import client from "@/lib/graphqlClient";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import {
   selectDisplayedTags,
   setDisplayedTags,
 } from "@/redux/Slice/displayedTagsSlice";
-import { setAllTags } from "@/redux/Slice/allTagsSlice";
-import { Tag } from "../../../graphql/generate/graphql";
-import { fetchGraphWithVariable } from "../../../graphql/fetchGraphql";
-import { getNextTagsQuery, getTagsQuery } from "../../../graphql/queries/tags";
+import { selectAllTags, setAllTags } from "@/redux/Slice/allTagsSlice";
 import { Box, Text } from "@chakra-ui/react";
+import { TagButton, TagButtonFragment } from "../../atoms/TagButton";
 import { Loader } from "../../molecules/Loader";
-import { TagButton } from "../../atoms/TagButton";
+
+export const allTagsQueryDocument = graphql(`
+  query allTagsQuery($endCursor: String!) {
+    tags(first: 10, after: $endCursor) {
+      nodes {
+        ...TagButton
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+`);
 
 type Props = {};
 
 export const Tags: React.FC<Props> = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+  const allTags = useAppSelector(selectAllTags);
   const dispatch = useAppDispatch();
   const displayedTags = useAppSelector(selectDisplayedTags);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isQuery, setIsQuery] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const fetch = async () => {
       const allTags = await fetchAllTags();
       dispatch(setAllTags(allTags));
       dispatch(setDisplayedTags(allTags));
+      setIsLoading(false);
     };
     fetch();
   }, [dispatch]);
 
+  // クエリの初期化
+  useEffect(() => {
+    const q = router.query.q;
+    if (typeof q !== "string") {
+      setIsQuery(false);
+      return;
+    }
+    setIsQuery(true);
+    setQuery(q);
+  }, [router]);
+
+  useEffect(() => {
+    if (!isQuery) {
+      dispatch(setDisplayedTags(allTags));
+      return;
+    }
+    const filteredTags = allTags.filter((tag: any) =>
+      tag.name?.toLowerCase().includes(query.toLowerCase())
+    );
+    dispatch(setDisplayedTags(filteredTags));
+  }, [allTags, dispatch, isQuery, query]);
+
   const fetchAllTags = async () => {
-    let tags: Tag[] = [];
+    let tags: FragmentType<typeof TagButtonFragment>[] = [];
     let hasNextPage = true;
     let endCursor = "";
     while (hasNextPage) {
-      const data =
-        tags.length == 0
-          ? await fetchGraphWithVariable(getTagsQuery, { count: 10 })
-          : await fetchGraphWithVariable(getNextTagsQuery, {
-              endCursor: endCursor,
-            });
-      tags.push(...data.tags.nodes);
-      endCursor = data.tags.pageInfo.endCursor;
-      if (!data.tags.pageInfo.hasNextPage) hasNextPage = false;
+      const { data } = await client.query({
+        query: allTagsQueryDocument,
+        variables: {
+          endCursor: endCursor,
+        },
+      });
+      tags.push(...data.tags?.nodes!);
+      endCursor = data.tags?.pageInfo?.endCursor!;
+      if (!data.tags?.pageInfo?.hasNextPage) hasNextPage = false;
     }
-    setIsLoading(false);
     return tags;
   };
 

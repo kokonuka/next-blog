@@ -2,9 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { Tag } from "../../graphql/generate/graphql";
+import { FragmentType } from "@/gql";
+import { TagButtonFragment } from "@/components/atoms/TagButton";
 
 export interface AllTagsState {
-  value: Tag[];
+  value: FragmentType<typeof TagButtonFragment>[];
 }
 
 const initialState: AllTagsState = {
@@ -15,7 +17,10 @@ export const allTagsSlice = createSlice({
   name: "allTags",
   initialState,
   reducers: {
-    setAllTags: (state, action: PayloadAction<Tag[]>) => {
+    setAllTags: (
+      state,
+      action: PayloadAction<FragmentType<typeof TagButtonFragment>[]>
+    ) => {
       state.value = [...action.payload];
     },
   },

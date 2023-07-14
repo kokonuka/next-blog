@@ -1,12 +1,21 @@
-import { Button, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { Tag } from "../../graphql/generate/graphql";
+import { FragmentType, graphql, useFragment } from "@/gql";
+import { Link } from "@chakra-ui/react";
+
+export const TagButtonFragment = graphql(`
+  fragment TagButton on Tag {
+    id
+    name
+  }
+`);
 
 type Props = {
-  tag: Tag;
+  tag: FragmentType<typeof TagButtonFragment>;
 };
 
-export const TagButton: React.FC<Props> = ({ tag }) => {
+export const TagButton: React.FC<Props> = (props) => {
+  const tag = useFragment(TagButtonFragment, props.tag);
+
   return (
     <Link
       as={NextLink}

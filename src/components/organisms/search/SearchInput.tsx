@@ -1,5 +1,9 @@
-import { SetStateAction, Dispatch, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { AiOutlineSearch } from "react-icons/ai";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { setDisplayedTags } from "@/redux/Slice/displayedTagsSlice";
+import { selectAllTags } from "@/redux/Slice/allTagsSlice";
 import {
   Box,
   InputGroup,
@@ -8,16 +12,10 @@ import {
   InputRightElement,
   Kbd,
 } from "@chakra-ui/react";
-import { AiOutlineSearch } from "react-icons/ai";
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { setDisplayedTags } from "@/redux/Slice/displayedTagsSlice";
-import { selectAllTags } from "@/redux/Slice/allTagsSlice";
 
-type Props = {
-  setIsPostsLoading: Dispatch<SetStateAction<boolean>>;
-};
+type Props = {};
 
-export const SearchInput: React.FC<Props> = ({ setIsPostsLoading }) => {
+export const SearchInput: React.FC<Props> = () => {
   const router = useRouter();
   const allTags = useAppSelector(selectAllTags);
   const dispatch = useAppDispatch();
@@ -50,10 +48,11 @@ export const SearchInput: React.FC<Props> = ({ setIsPostsLoading }) => {
   const handleChange = (e: any) => {
     const value = e.target.value;
     setValue(value);
-    const filteredTags = allTags.filter((tag) =>
+    if (typeof router.query.q === "string") return;
+    const filteredTags = allTags.filter((tag: any) => {
       // valueが空要素の場合trueとなる
-      tag.name?.toLowerCase().includes(value.toLowerCase())
-    );
+      tag.name?.toLowerCase().includes(value.toLowerCase());
+    });
     dispatch(setDisplayedTags(filteredTags));
   };
 
