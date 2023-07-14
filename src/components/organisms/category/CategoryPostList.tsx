@@ -25,11 +25,11 @@ export const allPostsByCategoryIdWithVariablesQueryDocument = graphql(`
 
 export const CategoryPostList: React.FC<Props> = () => {
   const id = useAppSelector((state) => state.categoryId.id);
-  console.log(id);
-
   const [posts, setPosts] = useState<FragmentType<typeof PostFragment>[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [endCursor, setEndCursor] = useState("");
+
+  console.log(id);
 
   const loadMore = async (page: number) => {
     const { data } = await client.query({
