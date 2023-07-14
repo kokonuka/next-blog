@@ -12,7 +12,6 @@ type Props = {
 };
 
 export const PostsSlider: React.FC<Props> = ({ posts, loading }) => {
-  console.log(posts);
   return (
     <Box px={{ base: "0" }}>
       <Splide
