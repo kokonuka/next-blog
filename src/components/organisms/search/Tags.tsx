@@ -20,10 +20,12 @@ export const Tags: React.FC<Props> = () => {
   const displayedTags = useAppSelector(selectDisplayedTags);
 
   useEffect(() => {
-    (async () => {
-      dispatch(setAllTags(await fetchAllTags()));
-      dispatch(setDisplayedTags(await fetchAllTags()));
-    })();
+    const fetch = async () => {
+      const allTags = await fetchAllTags();
+      dispatch(setAllTags(allTags));
+      dispatch(setDisplayedTags(allTags));
+    };
+    fetch();
   }, [dispatch]);
 
   const fetchAllTags = async () => {
