@@ -88,7 +88,7 @@ export const Card: React.FC<Props> = (props) => {
             </Link>
           </SkeletonText>
         </Box>
-        <Box mt="4" display="flex" gap="3">
+        <Box mt="4" display="flex" gap="3" flexWrap="wrap">
           {post?.tags?.nodes.map((tag, i) => (
             <TagLink tag={tag} key={i} />
           ))}
