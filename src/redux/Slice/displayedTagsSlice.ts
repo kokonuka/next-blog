@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { Tag } from "../../graphql/generate/graphql";
 import { FragmentType } from "@/gql";
 import { TagButtonFragment } from "@/components/atoms/TagButton";
 
