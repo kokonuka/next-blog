@@ -13,9 +13,9 @@ type Props = {
 
 export const PostLayout: React.FC<Props> = ({ post, content, headings }) => {
   return (
-    <>
+    <Box display="flex" flexDirection="column" minH="100vh">
       <Header />
-      <Box bg="gray.50">
+      <Box bg="blackAlpha.50" flex="1">
         <Container
           as="main"
           maxW="6xl"
@@ -30,6 +30,6 @@ export const PostLayout: React.FC<Props> = ({ post, content, headings }) => {
         </Container>
       </Box>
       <Footer />
-    </>
+    </Box>
   );
 };

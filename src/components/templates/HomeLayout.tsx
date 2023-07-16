@@ -9,10 +9,10 @@ type Props = {
 
 export const HomeLayout: React.FC<Props> = ({ children }) => {
   return (
-    <>
+    <Box display="flex" flexDirection="column" minH="100vh">
       <Header />
       <Mainvisual />
-      <Box bg="blackAlpha.100">
+      <Box bg="blackAlpha.50" flex="1">
         <Container
           as="main"
           maxW="6xl"
@@ -25,6 +25,6 @@ export const HomeLayout: React.FC<Props> = ({ children }) => {
         </Container>
       </Box>
       <Footer />
-    </>
+    </Box>
   );
 };

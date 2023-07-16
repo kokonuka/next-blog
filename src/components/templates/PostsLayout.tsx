@@ -10,8 +10,8 @@ export const PostsLayout: React.FC<Props> = ({ children }) => {
   return (
     <Box display="flex" flexDirection="column" minH="100vh">
       <Header />
-      <Box as="main" bg="gray.50" flex="1">
-        <Container maxW="6xl" pt="10" pb="36">
+      <Box bg="blackAlpha.50" flex="1">
+        <Container as="main" maxW="6xl" pt="10" pb="36">
           {children}
         </Container>
       </Box>
