@@ -1,26 +1,17 @@
+import { PostPageFragment } from "@/gql/graphql";
+import { Box, Container } from "@chakra-ui/react";
+import { Headings } from "../../pages/posts/[id]";
 import { Header } from "../organisms/Header";
 import { Footer } from "../organisms/Footer";
-import { Box, Container, Text } from "@chakra-ui/react";
-import { Post, Tag } from "../../graphql/generate/graphql";
-import { IdsWithHeadings } from "../../pages/posts/[id]";
-// import styles from "../../styles/Post.module.css";
-import { SideMenu } from "../organisms/SideMenu";
-import { Tags } from "../organisms/Tags";
-import { formatDate } from "@/lib/formatDate";
+import { Post } from "../organisms/post/Post";
 
 type Props = {
-  post: Post;
+  post: PostPageFragment;
   content: string;
-  idsWithHeadings: IdsWithHeadings[];
+  headings: Headings[];
 };
 
-export const PostLayout: React.FC<Props> = ({
-  post,
-  content,
-  idsWithHeadings,
-}) => {
-  const tags = post?.tags?.nodes as Tag[];
-
+export const PostLayout: React.FC<Props> = ({ post, content, headings }) => {
   return (
     <>
       <Header />
@@ -35,41 +26,7 @@ export const PostLayout: React.FC<Props> = ({
           flexDirection="column"
           flex="1"
         >
-          <Box p="5">
-            <Text
-              fontSize={{ base: "2xl", lg: "4xl" }}
-              fontWeight="bold"
-              color="gray.700"
-              textAlign="center"
-            >
-              {post.title}
-            </Text>
-            <Text mt="5" color="gray.500" textAlign="center">
-              {formatDate(post.date!)}
-            </Text>
-          </Box>
-          <Box mt="10" display={{ base: "block", lg: "flex" }}>
-            <Box
-              width={{ base: "100%", lg: "70%" }}
-              bg="white"
-              p="5"
-              borderRadius={{ base: "0", lg: "10" }}
-              py="10"
-            >
-              <Tags tags={tags} />
-              <div
-                className={`post znc`}
-                dangerouslySetInnerHTML={{ __html: content }}
-              ></div>
-            </Box>
-            <Box
-              display={{ base: "none", lg: "block" }}
-              width={{ base: "100%", lg: "30%" }}
-              pl="5"
-            >
-              <SideMenu idsWithHeadings={idsWithHeadings} />
-            </Box>
-          </Box>
+          <Post post={post} content={content} headings={headings} />
         </Container>
       </Box>
       <Footer />
