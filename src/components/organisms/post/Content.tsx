@@ -25,7 +25,6 @@ export const Content: React.FC<Props> = ({ post, content }) => {
         dangerouslySetInnerHTML={{ __html: content }}
         className="znc"
         py="10"
-        _first={{ backgroundColor: "red" }}
       ></Box>
     </Box>
   );
