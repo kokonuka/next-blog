@@ -8,7 +8,7 @@ type Props = {
 
 export const Header: React.FC<Props> = ({ title, date }) => {
   return (
-    <Box p="5">
+    <Box mt="10" px="3">
       <Text
         fontSize={{ base: "2xl", lg: "4xl" }}
         fontWeight="bold"
