@@ -51,7 +51,7 @@ export const SearchInput: React.FC<Props> = () => {
     if (typeof router.query.q === "string") return;
     const filteredTags = allTags.filter((tag: any) => {
       // valueが空要素の場合trueとなる
-      tag.name?.toLowerCase().includes(value.toLowerCase());
+      return tag.name?.toLowerCase().includes(value.toLowerCase());
     });
     dispatch(setDisplayedTags(filteredTags));
   };
