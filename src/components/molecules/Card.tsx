@@ -1,13 +1,7 @@
 import React from "react";
 import NextLink from "next/link";
-import {
-  Box,
-  Text,
-  Image,
-  Link,
-  Skeleton,
-  SkeletonText,
-} from "@chakra-ui/react";
+import Image from "next/image";
+import { Box, Text, Link, Skeleton, SkeletonText } from "@chakra-ui/react";
 import { FragmentType, graphql, useFragment } from "../../gql";
 import { getFormattedDateTimeDiff } from "../../lib/getFormattedDateTimeDiff";
 import { TagLink } from "../atoms/TagLink";
@@ -46,7 +40,7 @@ type Props = {
 export const Card: React.FC<Props> = (props) => {
   const post = useFragment(PostFragment, props.post);
   const loading = props.loading;
-  const defaultPostImage = "/images/default_post_image.jpg";
+  const defaultPostImage = "https://source.unsplash.com/random";
 
   return (
     <Box as="article" h="100%" bg="white" display="flex" flexDirection="column">
@@ -62,11 +56,15 @@ export const Card: React.FC<Props> = (props) => {
             opacity="0.2"
           ></Link>
           <Image
-            objectFit="cover"
-            w="100%"
-            h="100%"
             src={post?.featuredImage?.node?.mediaItemUrl || defaultPostImage}
             alt="article"
+            width={1980}
+            height={1150}
+            style={{
+              width: "100%",
+              height: "200px",
+              objectFit: "contain",
+            }}
           />
         </Skeleton>
       </Box>
