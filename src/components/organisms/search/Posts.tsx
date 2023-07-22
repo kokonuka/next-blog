@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Container, Text } from "@chakra-ui/react";
 import { Card, PostFragment } from "../../molecules/Card";
 import { Loader } from "../../molecules/Loader";
 import { useRouter } from "next/router";
@@ -58,32 +58,34 @@ export const Posts: React.FC<Props> = () => {
   return (
     <>
       {id && (
-        <Box mt="10">
-          <Text fontWeight="bold" fontSize="2xl">
-            Posts
-          </Text>
-          <Box mt="5">
-            <InfiniteScroll
-              pageStart={0}
-              loadMore={loadMore}
-              hasMore={hasMore}
-              loader={<Loader key={0} />}
-            >
-              <Box
-                display="grid"
-                gridTemplateColumns={{
-                  base: "1fr",
-                  md: "1fr 1fr",
-                  lg: "1fr 1fr 1fr",
-                }}
-                gridGap="5"
+        <Box mt="10" py="10" bg="blackAlpha.50" flex="1">
+          <Container maxW="6xl">
+            <Text fontWeight="bold" fontSize="2xl">
+              Posts
+            </Text>
+            <Box mt="5">
+              <InfiniteScroll
+                pageStart={0}
+                loadMore={loadMore}
+                hasMore={hasMore}
+                loader={<Loader key={0} />}
               >
-                {posts.map((post, i) => (
-                  <Card post={post} key={i} loading={false} />
-                ))}
-              </Box>
-            </InfiniteScroll>
-          </Box>
+                <Box
+                  display="grid"
+                  gridTemplateColumns={{
+                    base: "1fr",
+                    md: "1fr 1fr",
+                    lg: "1fr 1fr 1fr",
+                  }}
+                  gridGap="5"
+                >
+                  {posts.map((post, i) => (
+                    <Card post={post} key={i} loading={false} />
+                  ))}
+                </Box>
+              </InfiniteScroll>
+            </Box>
+          </Container>
         </Box>
       )}
     </>
