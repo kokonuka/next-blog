@@ -8,6 +8,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import "../styles/globals.css";
+import "../styles/user.css";
 import "../styles/loader.css";
 import "../styles/post.css";
 
