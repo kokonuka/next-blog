@@ -41,6 +41,7 @@ export const Card: React.FC<Props> = (props) => {
   const post = useFragment(PostFragment, props.post);
   const loading = props.loading;
   const defaultPostImage = "https://source.unsplash.com/random";
+  const mediaItemUrl = post?.featuredImage?.node?.mediaItemUrl;
 
   return (
     <Box as="article" h="100%" bg="white" display="flex" flexDirection="column">
@@ -56,14 +57,14 @@ export const Card: React.FC<Props> = (props) => {
             opacity="0.2"
           ></Link>
           <Image
-            src={post?.featuredImage?.node?.mediaItemUrl || defaultPostImage}
+            src={mediaItemUrl || defaultPostImage}
             alt="article"
             width={1980}
             height={1150}
             style={{
               width: "100%",
               height: "200px",
-              objectFit: "contain",
+              objectFit: mediaItemUrl ? "contain" : "cover",
             }}
           />
         </Skeleton>

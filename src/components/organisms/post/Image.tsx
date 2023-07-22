@@ -7,19 +7,20 @@ type Props = {
 };
 
 export const Image: React.FC<Props> = ({ post }) => {
+  const mediaItemUrl = post?.featuredImage?.node?.mediaItemUrl;
   const defaultPostImage = "https://source.unsplash.com/random";
 
   return (
     <Box>
       <NextImage
-        src={post?.featuredImage?.node?.mediaItemUrl || defaultPostImage}
+        src={mediaItemUrl || defaultPostImage}
         alt="article"
         width={1980}
         height={1150}
         style={{
           width: "100%",
-          height: "100px",
-          objectFit: "contain",
+          height: mediaItemUrl ? "100px" : "400px",
+          objectFit: mediaItemUrl ? "contain" : "cover",
         }}
       />
     </Box>
