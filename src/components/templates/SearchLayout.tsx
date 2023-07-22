@@ -10,7 +10,7 @@ export const SearchLayout: React.FC<Props> = ({ children }) => {
   return (
     <Box display="flex" flexDirection="column" minH="100vh">
       <Header />
-      <Box bg="blackAlpha.50" flex="1">
+      <Box bg="white" flex="1">
         <Container
           as="main"
           maxW="6xl"
