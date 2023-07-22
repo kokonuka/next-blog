@@ -41,7 +41,11 @@ export const CategoryPostsSlider: React.FC<Props> = ({ name }) => {
     <Box as="section" mt="20">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Skeleton isLoaded={!loading} mr="5">
-          <Text color="gray.700" fontSize="5xl" fontWeight="bold">
+          <Text
+            color="gray.700"
+            fontSize={{ base: "2xl", md: "4xl" }}
+            fontWeight="bold"
+          >
             {data ? data.categories?.nodes[0].name : "hogehoge"}
           </Text>
         </Skeleton>

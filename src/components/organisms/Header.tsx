@@ -7,7 +7,12 @@ export const Header = () => {
   return (
     <Box bg="white" py="2" as="header">
       <Container maxW="6xl" display="flex" justifyContent="space-between">
-        <Box display="flex" alignItems="center" fontSize="2xl" color="gray.800">
+        <Box
+          display="flex"
+          alignItems="center"
+          fontSize={{ base: "lg", md: "2xl" }}
+          color="gray.800"
+        >
           <Link
             as={NextLink}
             href="/"
