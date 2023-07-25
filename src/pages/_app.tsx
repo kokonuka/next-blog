@@ -5,6 +5,7 @@ import { store } from "../redux/store";
 import { ApolloProvider } from "@apollo/client";
 import client from "../lib/graphqlClient";
 import { ChakraProvider } from "@chakra-ui/react";
+import { theme } from "@/components/thema";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import "../styles/globals.css";
@@ -20,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ApolloProvider client={client}>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <Component {...pageProps} />
         </ChakraProvider>
       </ApolloProvider>
