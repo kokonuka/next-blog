@@ -1,11 +1,12 @@
-import { Box, Container, Text } from "@chakra-ui/react";
-import { Card, PostFragment } from "../../molecules/Card";
-import { Loader } from "../../molecules/Loader";
-import { useRouter } from "next/router";
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from "react";
-import InfiniteScroll from "react-infinite-scroller";
+import { useRouter } from "next/router";
 import { FragmentType, graphql } from "@/gql";
 import client from "@/lib/graphqlClient";
+import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react";
+import { Card, PostFragment } from "../../molecules/Card";
+import { Loader } from "../../molecules/Loader";
+import InfiniteScroll from "react-infinite-scroller";
 
 type Props = {};
 
@@ -58,7 +59,11 @@ export const Posts: React.FC<Props> = () => {
   return (
     <>
       {id && (
-        <Box pb="16" bg="blackAlpha.50" flex="1">
+        <Box
+          pb="16"
+          bg={useColorModeValue("blackAlpha.50", "gray.900")}
+          flex="1"
+        >
           <Container maxW="6xl" pt="10">
             <Text fontWeight="bold" fontSize="2xl">
               Posts

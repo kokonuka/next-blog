@@ -3,6 +3,7 @@ import {
   IconButtonProps,
   Tooltip,
   useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
@@ -18,6 +19,7 @@ export const ColorSwitchButton: React.FC<IconButtonProps> = (props) => {
         {...props}
         icon={colorMode === "light" ? <FaMoon /> : <FaSun />}
         bg="inherit"
+        color={useColorModeValue("gray.500", "gray.400")}
         fontSize="xl"
         onClick={toggleColorMode}
       />

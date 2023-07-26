@@ -15,13 +15,13 @@ export const Header = () => {
   return (
     <Box
       as="header"
-      bg={useColorModeValue("rgba(255, 255, 255, 0.1)", "rgba(0, 0, 0, 0.1)")}
+      bg={useColorModeValue("white", "rgba(0, 0, 0, 0.1)")}
       py="2"
       position="sticky"
       top="0"
       zIndex="1000"
       borderBottom="1px"
-      borderColor="whiteAlpha.400"
+      borderColor={useColorModeValue("gray.200", "gray.700")}
       backdropFilter="blur(20px)"
     >
       <Container maxW="6xl" display="flex" justifyContent="space-between">
@@ -42,14 +42,16 @@ export const Header = () => {
             </Heading>
           </Link>
         </Box>
-        <Box display="flex" alignItems="center" color="gray.600" gap="3">
+        <Box display="flex" alignItems="center">
           <ColorSwitchButton aria-label={""} />
           <Button
             as={NextLink}
             href="/search"
+            p="0"
             backgroundColor="inherit"
             fontSize="2xl"
-            p="0"
+            color={useColorModeValue("gray.500", "gray.400")}
+            _hover={{ color: useColorModeValue("gray.600", "gray.500") }}
           >
             <AiOutlineSearch />
           </Button>

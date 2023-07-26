@@ -13,7 +13,7 @@ export const HeadingWithDescription: React.FC<Props> = ({
   return (
     <>
       <Heading text={text} />
-      <Box mt={3} whiteSpace="pre-wrap">
+      <Box mt={3} whiteSpace="pre-wrap" textAlign="center">
         {description}
       </Box>
     </>

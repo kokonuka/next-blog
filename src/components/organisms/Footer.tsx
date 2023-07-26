@@ -6,12 +6,16 @@ import {
   Link,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { AiOutlineTwitter } from "react-icons/ai";
-import { FaRegFileAlt, FaGithub } from "react-icons/fa";
+import { FaRegFileAlt } from "react-icons/fa";
 
 export const Footer = () => {
   return (
-    <Box as="footer" bg="blackAlpha.200">
+    <Box
+      as="footer"
+      bg={useColorModeValue("white", "gray.900")}
+      borderTop="1px"
+      borderColor={useColorModeValue("gray.200", "gray.700")}
+    >
       <Container maxW="6xl">
         <Box py="7" display="flex" justifyContent="space-between">
           <Box>
@@ -25,22 +29,6 @@ export const Footer = () => {
             >
               <FaRegFileAlt />
               {process.env.SITE_TITLE || process.env.NEXT_PUBLIC_SITE_TITLE}
-            </Link>
-          </Box>
-          <Box display="flex" gap="4">
-            <Link
-              href="https://twitter.com/sunrise_web_dev"
-              target="_blank"
-              fontSize="2xl"
-            >
-              <FaGithub />
-            </Link>
-            <Link
-              href="https://twitter.com/sunrise_web_dev"
-              target="_blank"
-              fontSize="2xl"
-            >
-              <AiOutlineTwitter />
             </Link>
           </Box>
         </Box>

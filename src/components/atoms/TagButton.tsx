@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import { FragmentType, graphql, useFragment } from "@/gql";
-import { Link } from "@chakra-ui/react";
+import { Link, useColorModeValue } from "@chakra-ui/react";
 
 export const TagButtonFragment = graphql(`
   fragment TagButton on Tag {
@@ -28,7 +28,7 @@ export const TagButton: React.FC<Props> = (props) => {
       borderColor="gray.300"
       borderRadius="3xl"
       bg="inherit"
-      _hover={{ backgroundColor: "gray.100" }}
+      _hover={{ backgroundColor: useColorModeValue("gray.100", "gray.700") }}
     >
       {tag.name}
     </Link>

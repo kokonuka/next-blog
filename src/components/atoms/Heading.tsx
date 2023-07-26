@@ -6,8 +6,8 @@ type Props = {
 
 export const Heading: React.FC<Props> = ({ text }) => {
   return (
-    <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">
-      {text}
+    <Text fontSize="3xl" fontWeight="bold" textAlign="center">
+      「 {text} 」
     </Text>
   );
 };

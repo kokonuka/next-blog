@@ -4,7 +4,7 @@ import { PostPageFragment as PostPageFragmentType } from "@/gql/graphql";
 import { graphql } from "@/gql";
 import { Image } from "./Image";
 import { Headings } from "../../../pages/posts/[id]";
-import { SideMenu } from "../SideMenu";
+import { SideMenu } from "./SideMenu";
 import { Header } from "./Header";
 import { Content } from "./Content";
 

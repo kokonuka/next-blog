@@ -54,10 +54,13 @@ export const Card: React.FC<Props> = (props) => {
     <Box
       as="article"
       h="100%"
-      bg={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue("white", "gray.800")}
       display="flex"
       flexDirection="column"
       cursor="pointer"
+      border="1px"
+      borderColor={useColorModeValue("gray.200", "gray.700")}
+      borderRadius="lg"
     >
       <Box position="relative" h="200px" overflow="hidden">
         <Skeleton isLoaded={!loading} h="100%">
