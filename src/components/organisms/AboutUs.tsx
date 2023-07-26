@@ -31,7 +31,7 @@ export const AboutUs = () => {
           @{process.env.NEXT_PUBLIC_TWITTER_ACCOUNT_NAME}
         </Link>
         <Link
-          href={`https://github.com/sun-nine`}
+          href={`https://github.com/${process.env.NEXT_PUBLIC_GITHUB_ACCOUNT_NAME}`}
           target="_blank"
           fontSize="2xl"
         >
