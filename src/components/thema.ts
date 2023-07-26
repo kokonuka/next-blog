@@ -1,19 +1,9 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
-
-const styles = {
-  global: {
-    body: {
-      color: "gray.900",
-    },
-  },
-};
+import { mode } from "@chakra-ui/theme-tools";
+import type { StyleFunctionProps } from "@chakra-ui/styled-system";
 
 const colors = {
-  brand: {
-    900: "#1a365d",
-    800: "#153e75",
-    700: "#2a69ac",
-  },
+  white: "#fff",
 };
 
 const config: ThemeConfig = {
@@ -21,8 +11,18 @@ const config: ThemeConfig = {
   useSystemColorMode: false,
 };
 
+const styles = {
+  global: (props: StyleFunctionProps) => ({
+    body: {
+      fontFamily: "body",
+      color: mode("gray.800", "whiteAlpha.900")(props),
+      bg: mode("blackAlpha.50", "gray.800")(props),
+    },
+  }),
+};
+
 export const theme = extendTheme({
-  // styles,
-  // colors,
+  colors,
+  styles,
   config,
 });
