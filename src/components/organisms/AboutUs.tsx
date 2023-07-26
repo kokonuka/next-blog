@@ -4,13 +4,6 @@ import { AiOutlineTwitter } from "react-icons/ai";
 export const AboutUs = () => {
   return (
     <Box as="section" mt="20">
-      <Heading
-        color="gray.700"
-        fontSize={{ base: "2xl", md: "4xl" }}
-        fontWeight="bold"
-      >
-        About
-      </Heading>
       <Box mt="5" bg="white" p="5" display={{ base: "block", lg: "flex" }}>
         <Box>
           <Image
