@@ -19,7 +19,7 @@ export const Header = () => {
       py="2"
       position="sticky"
       top="0"
-      zIndex="99999"
+      zIndex="1000"
       borderBottom="1px"
       borderColor="whiteAlpha.400"
       backdropFilter="blur(20px)"
