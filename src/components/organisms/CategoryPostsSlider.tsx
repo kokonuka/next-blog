@@ -2,7 +2,7 @@ import NextLink from "next/link";
 import { useQuery } from "@apollo/client";
 import { FragmentType, graphql } from "../../gql";
 import { PostFragment } from "../molecules/Card";
-import { Box, Text, Link, Skeleton } from "@chakra-ui/react";
+import { Box, Text, Link, Skeleton, useColorModeValue } from "@chakra-ui/react";
 import { PostsSlider } from "./PostsSlider";
 
 type Props = {
@@ -41,11 +41,7 @@ export const CategoryPostsSlider: React.FC<Props> = ({ name }) => {
     <Box as="section" mt="20">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Skeleton isLoaded={!loading} mr="5">
-          <Text
-            color="gray.700"
-            fontSize={{ base: "2xl", md: "4xl" }}
-            fontWeight="bold"
-          >
+          <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
             {data ? data.categories?.nodes[0].name : "hogehoge"}
           </Text>
         </Skeleton>

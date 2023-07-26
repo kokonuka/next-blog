@@ -88,7 +88,7 @@ export const Tags: React.FC<Props> = () => {
   };
 
   return (
-    <Box mt="10">
+    <Box mt="10" pb="10">
       <Text fontWeight="bold" fontSize="2xl">
         Tags
       </Text>

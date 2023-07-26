@@ -12,7 +12,7 @@ export const HomeLayout: React.FC<Props> = ({ children }) => {
     <Box display="flex" flexDirection="column" minH="100vh">
       <Header />
       <Mainvisual />
-      <Box bg="blackAlpha.50" flex="1">
+      <Box flex="1">
         <Container
           as="main"
           maxW="6xl"

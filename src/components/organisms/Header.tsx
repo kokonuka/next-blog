@@ -3,9 +3,9 @@ import {
   Container,
   Box,
   Link,
-  useColorMode,
   Heading,
   Button,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaRegFileAlt } from "react-icons/fa";
@@ -13,7 +13,17 @@ import { ColorSwitchButton } from "../molecules/ColorSwitchButton";
 
 export const Header = () => {
   return (
-    <Box bg="white" py="2" as="header">
+    <Box
+      as="header"
+      bg={useColorModeValue("rgba(255, 255, 255, 0.1)", "rgba(0, 0, 0, 0.1)")}
+      py="2"
+      position="sticky"
+      top="0"
+      zIndex="99999"
+      borderBottom="1px"
+      borderColor="whiteAlpha.400"
+      backdropFilter="blur(20px)"
+    >
       <Container maxW="6xl" display="flex" justifyContent="space-between">
         <Box display="flex" alignItems="center">
           <Link
@@ -27,11 +37,7 @@ export const Header = () => {
             <Box fontSize={{ base: "lg", md: "2xl" }}>
               <FaRegFileAlt />
             </Box>
-            <Heading
-              as="h1"
-              color="black.900"
-              fontSize={{ base: "lg", md: "2xl" }}
-            >
+            <Heading as="h1" fontSize={{ base: "lg", md: "2xl" }}>
               {process.env.SITE_TITLE || process.env.NEXT_PUBLIC_SITE_TITLE}
             </Heading>
           </Link>

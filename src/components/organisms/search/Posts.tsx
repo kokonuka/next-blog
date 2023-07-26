@@ -58,8 +58,8 @@ export const Posts: React.FC<Props> = () => {
   return (
     <>
       {id && (
-        <Box mt="10" py="10" bg="blackAlpha.50" flex="1">
-          <Container maxW="6xl">
+        <Box pb="16" bg="blackAlpha.50" flex="1">
+          <Container maxW="6xl" pt="10">
             <Text fontWeight="bold" fontSize="2xl">
               Posts
             </Text>

@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react";
 import { PostPageFragment as PostPageFragmentType } from "@/gql/graphql";
-import { Tags } from "./Tags";
 import { FragmentType } from "@/gql";
+import { Box, useColorModeValue } from "@chakra-ui/react";
+import { Tags } from "./Tags";
 import { TagButtonFragment } from "@/components/atoms/TagButton";
 
 type Props = {
@@ -13,7 +13,7 @@ export const Content: React.FC<Props> = ({ post, content }) => {
   return (
     <Box
       width={{ base: "100%", lg: "70%" }}
-      bg="white"
+      bg={useColorModeValue("white", "gray.900")}
       p="5"
       borderRadius={{ base: "0", lg: "10" }}
       py="10"

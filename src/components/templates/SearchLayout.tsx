@@ -1,6 +1,6 @@
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import { Header } from "../organisms/Header";
 import { Footer } from "../organisms/Footer";
-import { Box } from "@chakra-ui/react";
 
 type Props = {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export const SearchLayout: React.FC<Props> = ({ children }) => {
       <Box
         as="main"
         pt="10"
-        bg="white"
+        bg={useColorModeValue("white", "gray.900")}
         flex="1"
         display="flex"
         flexDirection="column"

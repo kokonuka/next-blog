@@ -1,7 +1,14 @@
 import React from "react";
 import NextLink from "next/link";
 import Image from "next/image";
-import { Box, Text, Link, Skeleton, SkeletonText } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Link,
+  Skeleton,
+  SkeletonText,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { FragmentType, graphql, useFragment } from "../../gql";
 import { getFormattedDateTimeDiff } from "../../lib/getFormattedDateTimeDiff";
 import { TagLink } from "../atoms/TagLink";
@@ -44,7 +51,14 @@ export const Card: React.FC<Props> = (props) => {
   const mediaItemUrl = post?.featuredImage?.node?.mediaItemUrl;
 
   return (
-    <Box as="article" h="100%" bg="white" display="flex" flexDirection="column">
+    <Box
+      as="article"
+      h="100%"
+      bg={useColorModeValue("white", "gray.900")}
+      display="flex"
+      flexDirection="column"
+      cursor="pointer"
+    >
       <Box position="relative" h="200px" overflow="hidden">
         <Skeleton isLoaded={!loading} h="100%">
           <Link
@@ -78,10 +92,11 @@ export const Card: React.FC<Props> = (props) => {
             <Link
               as={NextLink}
               href={`/posts/${post?.databaseId}`}
-              mt="2"
+              mt="1"
               fontSize="xl"
               fontWeight="bold"
-              _hover={{ color: "blackAlpha.600" }}
+              display="inline-block"
+              _hover={{ opacity: "0.4" }}
             >
               {post?.title}
             </Link>

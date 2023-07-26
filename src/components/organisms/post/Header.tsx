@@ -12,7 +12,6 @@ export const Header: React.FC<Props> = ({ title, date }) => {
       <Text
         fontSize={{ base: "2xl", lg: "4xl" }}
         fontWeight="bold"
-        color="gray.700"
         textAlign="center"
       >
         {title}
