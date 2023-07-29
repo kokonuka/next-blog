@@ -1,6 +1,9 @@
+import { useEffect } from "react";
+import "zenn-content-css";
 import { PostPageFragment as PostPageFragmentType } from "@/gql/graphql";
 import { FragmentType } from "@/gql";
 import { Box, useColorModeValue } from "@chakra-ui/react";
+import Prism from "prismjs";
 import { Tags } from "./Tags";
 import { TagButtonFragment } from "@/components/atoms/TagButton";
 
@@ -10,6 +13,13 @@ type Props = {
 };
 
 export const Content: React.FC<Props> = ({ post, content }) => {
+  useEffect(() => {
+    const highlight = async () => {
+      await Prism.highlightAll();
+    };
+    highlight();
+  }, [post]);
+
   return (
     <Box
       width={{ base: "100%", lg: "70%" }}

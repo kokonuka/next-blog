@@ -1,13 +1,10 @@
 import { GetStaticProps, GetStaticPaths, NextPage } from "next";
-import "highlight.js/styles/base16/nova.css";
-import "zenn-content-css";
 import client from "../../lib/graphqlClient";
 import { FragmentType, graphql, useFragment } from "@/gql";
 import { PostPageFragment as PostPageFragmentType } from "@/gql/graphql";
-import { PostPageFragment } from "@/components/organisms/post/Post";
 import { CheerioAPI, load } from "cheerio";
-import hljs from "highlight.js";
 import { Head } from "../../components/Head";
+import { PostPageFragment } from "@/components/organisms/post/Post";
 import { PostLayout } from "@/components/templates/PostLayout";
 
 export const allPostsQueryDocument = graphql(`
@@ -70,12 +67,16 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   });
 
   const post = data.post as PostPageFragmentType;
-  const { $, headings } = excuteFormatHtml(post.content);
+
+  const content = post.content;
+  const $ = load(typeof content === "string" ? content : "");
+  const headings = getHeadings($);
+  const $highlighted = highlightCode($);
 
   return {
     props: {
       post: data.post as FragmentType<typeof PostPageFragment>,
-      content: $.html(),
+      content: $highlighted.html(),
       headings: headings,
     },
   };
@@ -119,16 +120,7 @@ const fetchAllPosts = async () => {
   return posts;
 };
 
-const excuteFormatHtml = (content: string | null | undefined) => {
-  const $ = load(typeof content === "string" ? content : "");
-
-  const codes = $("pre code");
-  codes.each((_, elm) => {
-    const result = hljs.highlightAuto($(elm).text());
-    $(elm).html(result.value);
-    $(elm).addClass("hljs");
-  });
-
+const getHeadings = ($: CheerioAPI) => {
   let headings: Headings[] = [];
   const cheerioHeadings = $("h1, h2, h3, h4, h5, h6");
   cheerioHeadings.each((index, elm) => {
@@ -140,5 +132,41 @@ const excuteFormatHtml = (content: string | null | undefined) => {
       heading,
     });
   });
-  return { $, headings };
+
+  return headings;
+};
+
+const highlightCode = ($: CheerioAPI) => {
+  const cheerioCodes = $('pre code[class*="language-"]');
+
+  cheerioCodes.each((_, code) => {
+    const cheerioCode = $(code);
+    const className = cheerioCode.attr("class") as string;
+
+    const regex = /^language-(\w+):(\S+)$/;
+    // const regex = /language-(\w+)(?::(\S+))?/;
+    const match = className.match(regex);
+
+    if (!match) return;
+
+    const language = match[1];
+    const fileName = match[2];
+    // const fileName = match[2] || "";
+
+    const codeBlock = `
+      <div class="code-block-container">
+        <div class="code-block-filename-container">
+          <span class="code-block-filename">${fileName}</span>
+        </div>
+        <pre>
+          <code class="language-${language}">${cheerioCode.text()}</code>
+        </pre>
+      </div>
+    `;
+
+    const pre = cheerioCode.parent()[0];
+    $(pre).replaceWith(codeBlock);
+  });
+
+  return $;
 };
