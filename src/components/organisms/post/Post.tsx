@@ -3,7 +3,6 @@ import { Box } from "@chakra-ui/react";
 import { PostPageFragment as PostPageFragmentType } from "@/gql/graphql";
 import { graphql } from "@/gql";
 import { Image } from "./Image";
-import { Headings } from "../../../pages/posts/[id]";
 import { SideMenu } from "./SideMenu";
 import { Header } from "./Header";
 import { Content } from "./Content";
@@ -37,10 +36,9 @@ export const PostPageFragment = graphql(`
 type Props = {
   post: PostPageFragmentType;
   content: string;
-  headings: Headings[];
 };
 
-export const Post: React.FC<Props> = ({ post, content, headings }) => {
+export const Post: React.FC<Props> = ({ post, content }) => {
   return (
     <>
       <Image post={post} />
@@ -50,7 +48,7 @@ export const Post: React.FC<Props> = ({ post, content, headings }) => {
       />
       <Box mt="14" display={{ base: "block", lg: "flex" }}>
         <Content post={post} content={content} />
-        <SideMenu headings={headings} />
+        <SideMenu content={content} />
       </Box>
     </>
   );

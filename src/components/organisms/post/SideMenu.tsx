@@ -1,12 +1,42 @@
-import { Box, useColorModeValue } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { Box, Heading, useColorModeValue } from "@chakra-ui/react";
+import { load } from "cheerio";
 import { Link as Scroll } from "react-scroll";
-import { Headings } from "../../../pages/posts/[id]";
 
 type Props = {
-  headings: Headings[];
+  content: string;
 };
 
-export const SideMenu: React.FC<Props> = ({ headings }) => {
+export type Heading = {
+  id: string;
+  text: string;
+  tagLevel: string;
+};
+
+export const SideMenu = ({ content }: Props) => {
+  const [headings, setHeadings] = useState<Heading[]>([]);
+
+  useEffect(() => {
+    const $ = load(typeof content === "string" ? content : "");
+    let headings: Heading[] = [];
+    const cheerioHeadings = $("h1, h2, h3, h4, h5, h6");
+
+    cheerioHeadings.each((_, elm) => {
+      const id = $(elm).attr("id") as string;
+      const text = $(elm).text();
+      const tagName = elm.tagName;
+      const tagLevel = tagName.replace(/^h/, "");
+
+      headings.push({
+        id,
+        text,
+        tagLevel,
+      });
+    });
+
+    setHeadings(headings);
+  }, [content]);
+
   return (
     <Box
       pl="5"
@@ -20,15 +50,24 @@ export const SideMenu: React.FC<Props> = ({ headings }) => {
         borderColor={useColorModeValue("gray.200", "gray.700")}
         borderRadius="lg"
       >
-        <p>目次</p>
-        {headings.map((id) => (
-          <Box key={id.id}>
-            <Scroll to={`${id.id}`} smooth={true}>
-              {id.heading}
-            </Scroll>
-            <br />
-          </Box>
-        ))}
+        <Heading as="h2" fontSize="xl">
+          目次
+        </Heading>
+        <Box mt="5">
+          {headings.map((heading, i) => (
+            <Box mt="1" key={i} pl={`${heading.tagLevel}`}>
+              <Box
+                display="inline"
+                cursor="pointer"
+                _hover={{ opacity: "0.7" }}
+              >
+                <Scroll to={`${heading.id}`} smooth={true}>
+                  {heading.text}
+                </Scroll>
+              </Box>
+            </Box>
+          ))}
+        </Box>
       </Box>
     </Box>
   );

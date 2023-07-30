@@ -29,18 +29,12 @@ export const postQueryDocument = graphql(`
   }
 `);
 
-export type Headings = {
-  id: string;
-  heading: string;
-};
-
 export type Props = {
   post: FragmentType<typeof PostPageFragment>;
   content: string;
-  headings: Headings[];
 };
 
-const PostPage: NextPage<Props> = ({ post: propsPost, content, headings }) => {
+const PostPage: NextPage<Props> = ({ post: propsPost, content }) => {
   const post = useFragment(PostPageFragment, propsPost);
 
   return (
@@ -49,7 +43,7 @@ const PostPage: NextPage<Props> = ({ post: propsPost, content, headings }) => {
         title={`${post.title} | sun develop`}
         description="Webエンジニアの備忘録"
       />
-      <PostLayout post={post} content={content} headings={headings} />
+      <PostLayout post={post} content={content} />
     </>
   );
 };
@@ -70,14 +64,13 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
   const content = post.content;
   const $ = load(typeof content === "string" ? content : "");
-  const headings = getHeadings($);
   const $highlighted = highlightCode($);
+  setHeadingId($);
 
   return {
     props: {
       post: data.post as FragmentType<typeof PostPageFragment>,
       content: $highlighted.html(),
-      headings: headings,
     },
   };
 };
@@ -120,22 +113,6 @@ const fetchAllPosts = async () => {
   return posts;
 };
 
-const getHeadings = ($: CheerioAPI) => {
-  let headings: Headings[] = [];
-  const cheerioHeadings = $("h1, h2, h3, h4, h5, h6");
-  cheerioHeadings.each((index, elm) => {
-    const id = `${elm.tagName}-${index}`;
-    $(elm).attr("id", id);
-    const heading = $(elm).text();
-    headings.push({
-      id,
-      heading,
-    });
-  });
-
-  return headings;
-};
-
 const highlightCode = ($: CheerioAPI) => {
   const cheerioCodes = $('pre code[class*="language-"]');
 
@@ -169,4 +146,12 @@ const highlightCode = ($: CheerioAPI) => {
   });
 
   return $;
+};
+
+const setHeadingId = ($: CheerioAPI) => {
+  const cheerioHeadings = $("h1, h2, h3, h4, h5, h6");
+  cheerioHeadings.each((index, elm) => {
+    const id = `${elm.tagName}-${index}`;
+    $(elm).attr("id", id);
+  });
 };

@@ -1,6 +1,5 @@
 import { PostPageFragment } from "@/gql/graphql";
 import { Box, Container } from "@chakra-ui/react";
-import { Headings } from "../../pages/posts/[id]";
 import { Header } from "../organisms/Header";
 import { Footer } from "../organisms/Footer";
 import { Post } from "../organisms/post/Post";
@@ -8,10 +7,9 @@ import { Post } from "../organisms/post/Post";
 type Props = {
   post: PostPageFragment;
   content: string;
-  headings: Headings[];
 };
 
-export const PostLayout: React.FC<Props> = ({ post, content, headings }) => {
+export const PostLayout: React.FC<Props> = ({ post, content }) => {
   return (
     <Box display="flex" flexDirection="column" minH="100vh">
       <Header />
@@ -26,7 +24,7 @@ export const PostLayout: React.FC<Props> = ({ post, content, headings }) => {
           flexDirection="column"
           flex="1"
         >
-          <Post post={post} content={content} headings={headings} />
+          <Post post={post} content={content} />
         </Container>
       </Box>
       <Footer />
