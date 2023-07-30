@@ -92,7 +92,7 @@ export const Tags: React.FC<Props> = () => {
       <Text fontWeight="bold" fontSize="2xl">
         Tags
       </Text>
-      <Box mt="5" display="flex" flexWrap="wrap" gap="2">
+      <Box mt="5" display="flex" flexWrap="wrap" gap={{ base: "1", md: "2" }}>
         {isLoading ? (
           <Loader />
         ) : (

@@ -11,7 +11,7 @@ export const Image: React.FC<Props> = ({ post }) => {
   const defaultPostImage = "https://source.unsplash.com/random";
 
   return (
-    <Box>
+    <Box px="3">
       <NextImage
         src={mediaItemUrl || defaultPostImage}
         alt="article"

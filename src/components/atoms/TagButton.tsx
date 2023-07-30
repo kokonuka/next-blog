@@ -20,8 +20,8 @@ export const TagButton: React.FC<Props> = (props) => {
     <Link
       as={NextLink}
       href={`/tags/${tag.id}`}
-      py="2"
-      px="5"
+      py={{ base: "1", md: "2" }}
+      px={{ base: "3", md: "5" }}
       fontWeight="medium"
       fontSize="sm"
       border="1px"
