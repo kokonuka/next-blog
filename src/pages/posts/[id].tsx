@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import client from "../../lib/graphqlClient";
-import { FragmentType, graphql, useFragment } from "@/gql";
-import { PostPageFragment as PostPageFragmentType } from "@/gql/graphql";
+import { FragmentType, graphql, useFragment } from "@/gql/generated";
+import { PostPageFragment as PostPageFragmentType } from "@/gql/generated/graphql";
 import { CheerioAPI, load } from "cheerio";
 import { Head } from "../../components/Head";
 import { PostPageFragment } from "@/components/organisms/post/Post";

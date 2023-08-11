@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { FragmentType, graphql } from "@/gql";
+import { FragmentType, graphql } from "@/gql/generated";
 import client from "@/lib/graphqlClient";
 import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react";
 import { Card, PostFragment } from "../../molecules/Card";

@@ -2,11 +2,12 @@ import React from "react";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { Card, PostFragment } from "../molecules/Card";
-import { FragmentType } from "../../gql";
+import { FragmentType } from "@/gql/generated";
 import { Box } from "@chakra-ui/react";
 import { FaAngleRight } from "react-icons/fa";
 
 type Props = {
+  // posts?: PostItemFragment[];
   posts?: FragmentType<typeof PostFragment>[];
   loading: boolean;
 };

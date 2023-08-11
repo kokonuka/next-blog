@@ -1,4 +1,4 @@
-import { graphql } from "../../../gql";
+import { graphql } from "@/gql/generated";
 import { useQuery } from "@apollo/client";
 import { Box } from "@chakra-ui/react";
 import { Heading } from "../../atoms/Heading";

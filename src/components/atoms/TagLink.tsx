@@ -1,7 +1,7 @@
 import React from "react";
 import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
-import { FragmentType, graphql, useFragment } from "../../gql";
+import { FragmentType, graphql, useFragment } from "@/gql/generated";
 
 type Props = {
   tag: FragmentType<typeof TagFragment>;

@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { TagButton, TagButtonFragment } from "@/components/atoms/TagButton";
-import { FragmentType } from "@/gql";
+import { FragmentType } from "@/gql/generated";
 
 type Props = {
   tags: FragmentType<typeof TagButtonFragment>[];

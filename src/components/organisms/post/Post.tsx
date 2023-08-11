@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { Box } from "@chakra-ui/react";
-import { PostPageFragment as PostPageFragmentType } from "@/gql/graphql";
-import { graphql } from "@/gql";
+import { PostPageFragment as PostPageFragmentType } from "@/gql/generated/graphql";
+import { graphql } from "@/gql/generated";
 import { Image } from "./Image";
 import { SideMenu } from "./SideMenu";
 import { Header } from "./Header";

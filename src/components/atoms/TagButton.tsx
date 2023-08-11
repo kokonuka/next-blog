@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { FragmentType, graphql, useFragment } from "@/gql";
+import { FragmentType, graphql, useFragment } from "@/gql/generated";
 import { Link, useColorModeValue } from "@chakra-ui/react";
 
 export const TagButtonFragment = graphql(`

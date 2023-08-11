@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { FragmentType, graphql } from "@/gql";
+import { FragmentType, graphql } from "@/gql/generated";
 import client from "@/lib/graphqlClient";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import {

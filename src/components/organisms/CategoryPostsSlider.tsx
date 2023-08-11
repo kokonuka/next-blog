@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import { useQuery } from "@apollo/client";
-import { FragmentType, graphql } from "../../gql";
+import { FragmentType, graphql } from "@/gql/generated";
 import { PostFragment } from "../molecules/Card";
 import { Box, Text, Link, Skeleton, useColorModeValue } from "@chakra-ui/react";
 import { PostsSlider } from "./PostsSlider";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import client from "../../../lib/graphqlClient";
-import { FragmentType, graphql } from "../../../gql";
+import { FragmentType, graphql } from "@/gql/generated";
 import { Box } from "@chakra-ui/react";
 import { Card, PostFragment } from "../../molecules/Card";
 import InfiniteScroll from "react-infinite-scroller";

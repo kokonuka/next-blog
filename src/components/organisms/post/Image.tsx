@@ -1,6 +1,6 @@
 import NextImage from "next/image";
 import { Box } from "@chakra-ui/react";
-import { PostPageFragment as PostPageFragmentType } from "@/gql/graphql";
+import { PostPageFragment as PostPageFragmentType } from "@/gql/generated/graphql";
 
 type Props = {
   post: PostPageFragmentType;

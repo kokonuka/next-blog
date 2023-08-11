@@ -1,4 +1,4 @@
-import { PostPageFragment } from "@/gql/graphql";
+import { PostPageFragment } from "@/gql//generated/graphql";
 import { Box, Container } from "@chakra-ui/react";
 import { Header } from "../organisms/Header";
 import { Footer } from "../organisms/Footer";

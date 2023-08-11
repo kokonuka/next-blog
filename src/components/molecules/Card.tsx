@@ -9,7 +9,7 @@ import {
   SkeletonText,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FragmentType, graphql, useFragment } from "../../gql";
+import { FragmentType, graphql, useFragment } from "@/gql/generated";
 import { getFormattedDateTimeDiff } from "../../lib/getFormattedDateTimeDiff";
 import { TagLink } from "../atoms/TagLink";
 

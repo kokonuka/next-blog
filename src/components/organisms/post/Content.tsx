@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "zenn-content-css";
-import { PostPageFragment as PostPageFragmentType } from "@/gql/graphql";
-import { FragmentType } from "@/gql";
+import { PostPageFragment as PostPageFragmentType } from "@/gql/generated/graphql";
+import { FragmentType } from "@/gql/generated";
 import { Box, useColorModeValue } from "@chakra-ui/react";
 import Prism from "prismjs";
 import { Tags } from "./Tags";
