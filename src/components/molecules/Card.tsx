@@ -12,6 +12,7 @@ import {
 import { FragmentType, graphql, useFragment } from "@/gql/generated";
 import { getFormattedDateTimeDiff } from "../../lib/getFormattedDateTimeDiff";
 import { TagLink } from "../atoms/TagLink";
+import { isJpgUrl } from "@/lib/isJpgUrl";
 
 export const PostFragment = graphql(`
   fragment PostItem on Post {
@@ -61,31 +62,38 @@ export const Card: React.FC<Props> = (props) => {
       border={useColorModeValue("", "1px")}
       borderColor={useColorModeValue("gray.200", "gray.700")}
       borderRadius={useColorModeValue("", "lg")}
+      overflow="hidden"
     >
-      <Box position="relative" h="200px" overflow="hidden">
-        <Skeleton isLoaded={!loading} h="100%">
+      <Skeleton isLoaded={!loading} h="100%">
+        <Box
+          position="relative"
+          pt={{ base: "50%", md: "60%", lg: "65%", xl: "70%" }}
+          overflow="hidden"
+        >
           <Link
             as={NextLink}
             href={`/posts/${post?.databaseId}`}
+            position="absolute"
+            top="0"
             h="100%"
             w="100%"
-            position="absolute"
             _hover={{ bg: "white" }}
             opacity="0.2"
+            zIndex="1"
           ></Link>
           <Image
             src={mediaItemUrl || defaultPostImage}
             alt="article"
-            width={1980}
-            height={1150}
+            fill
             style={{
-              width: "100%",
-              height: "200px",
-              objectFit: mediaItemUrl ? "contain" : "cover",
+              objectFit:
+                isJpgUrl(mediaItemUrl ?? "") || !mediaItemUrl
+                  ? "cover"
+                  : "contain",
             }}
           />
-        </Skeleton>
-      </Box>
+        </Box>
+      </Skeleton>
       <Box px="3" py="5" flex="1" display="flex" flexDirection="column">
         <Box flex="1" minH="20">
           <SkeletonText isLoaded={!loading}>
