@@ -20,10 +20,12 @@ const Home: NextPage<Props> = () => {
           pr={{ base: "0", lg: "40px", xl: "80px" }}
         >
           <TopPost />
-          <CategoryPostsSlider name="Tech" />
-          <CategoryPostsSlider name="CheatSheet" />
+          <Box px={{ base: "4", lg: "0" }}>
+            <CategoryPostsSlider name="Tech" />
+            <CategoryPostsSlider name="CheatSheet" />
+          </Box>
         </Box>
-        <Box w="320px">
+        <Box mt={{ base: "14", lg: "0" }} w={{ base: "100%", lg: "320px" }}>
           <Profile />
         </Box>
       </HomeLayout>

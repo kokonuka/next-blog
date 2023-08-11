@@ -26,9 +26,9 @@ export const Content: React.FC<Props> = ({ post, content }) => {
       bg={useColorModeValue("white", "gray.800")}
       p="5"
       py="10"
-      border="1px"
+      border={useColorModeValue("", "1px")}
       borderColor={useColorModeValue("gray.200", "gray.700")}
-      borderRadius={{ base: "0", lg: "lg" }}
+      borderRadius={useColorModeValue("", "lg")}
     >
       <Tags
         tags={post.tags?.nodes as FragmentType<typeof TagButtonFragment>[]}

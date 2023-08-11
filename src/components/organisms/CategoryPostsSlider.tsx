@@ -38,7 +38,7 @@ export const CategoryPostsSlider: React.FC<Props> = ({ name }) => {
   if (error) return <Box>データの読み込みに失敗しました。</Box>;
 
   return (
-    <Box as="section" mt="20">
+    <Box as="section" mt="14">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Skeleton isLoaded={!loading} mr="5">
           <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">

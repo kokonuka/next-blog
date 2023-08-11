@@ -46,9 +46,9 @@ export const SideMenu = ({ content }: Props) => {
       <Box
         bg={useColorModeValue("white", "gray.800")}
         p="5"
-        border="1px"
+        border={useColorModeValue("", "1px")}
         borderColor={useColorModeValue("gray.200", "gray.700")}
-        borderRadius="lg"
+        borderRadius={useColorModeValue("", "lg")}
       >
         <Heading as="h2" fontSize="xl">
           目次

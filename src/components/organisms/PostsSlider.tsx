@@ -28,7 +28,11 @@ export const PostsSlider: React.FC<Props> = ({ posts, loading }) => {
           padding: { left: "0", right: "0" },
           gap: 20,
           breakpoints: {
-            1280: {},
+            1280: {
+              perPage: 2,
+              perMove: 2,
+              gap: 10,
+            },
             992: {
               perPage: 2,
               perMove: 2,

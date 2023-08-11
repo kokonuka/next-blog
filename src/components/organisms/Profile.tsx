@@ -28,12 +28,21 @@ export const Profile = () => {
         justifyContent="center"
         flex="1"
       >
-        <Text textAlign="center">sun</Text>
-        <Box mt="3" display="flex" justifyContent="center" gap="2">
+        <Box
+          mt="3"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          gap="2"
+        >
+          <Text fontWeight="bold" fontSize="lg" textAlign="center">
+            sun
+          </Text>
           <Link
             href={`https://twitter.com/${process.env.NEXT_PUBLIC_TWITTER_ACCOUNT_NAME}`}
             target="_blank"
             fontSize="2xl"
+            color="blue.400"
           >
             <AiOutlineTwitter />
           </Link>
@@ -47,7 +56,7 @@ export const Profile = () => {
         </Box>
       </Box>
       <Box>
-        <Text mt="7" fontSize="xm" textAlign="center">
+        <Text mt="7" fontSize="sm" textAlign="center">
           ご訪問ありがとうございます。
           <br />
           都内でWebエンジニアをしています。
