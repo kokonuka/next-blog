@@ -11,7 +11,13 @@ export const HomeLayout: React.FC<Props> = ({ children }) => {
   return (
     <Box display="flex" flexDirection="column" minH="100vh">
       <Header />
-      <Container maxW="7xl" pt="14" pb="20" display="flex" flex="1">
+      <Container
+        maxW="7xl"
+        pt="14"
+        pb="20"
+        display={{ base: "block", lg: "flex" }}
+        flex="1"
+      >
         {children}
       </Container>
       <Footer />
