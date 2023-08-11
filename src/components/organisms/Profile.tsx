@@ -28,9 +28,7 @@ export const Profile = () => {
         justifyContent="center"
         flex="1"
       >
-        <Text textAlign="center">
-          {process.env.NEXT_PUBLIC_TWITTER_ACCOUNT_NAME}
-        </Text>
+        <Text textAlign="center">sun</Text>
         <Box mt="3" display="flex" justifyContent="center" gap="2">
           <Link
             href={`https://twitter.com/${process.env.NEXT_PUBLIC_TWITTER_ACCOUNT_NAME}`}
