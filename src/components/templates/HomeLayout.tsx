@@ -11,19 +11,9 @@ export const HomeLayout: React.FC<Props> = ({ children }) => {
   return (
     <Box display="flex" flexDirection="column" minH="100vh">
       <Header />
-      <Mainvisual />
-      <Box flex="1">
-        <Container
-          as="main"
-          maxW="6xl"
-          pb="20"
-          display="flex"
-          flexDirection="column"
-          flex="1"
-        >
-          {children}
-        </Container>
-      </Box>
+      <Container maxW="7xl" pt="14" pb="20" display="flex" flex="1">
+        {children}
+      </Container>
       <Footer />
     </Box>
   );

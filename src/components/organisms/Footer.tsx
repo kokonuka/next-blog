@@ -16,7 +16,7 @@ export const Footer = () => {
       borderTop="1px"
       borderColor={useColorModeValue("gray.200", "gray.700")}
     >
-      <Container maxW="6xl">
+      <Container maxW="7xl">
         <Box py="7" display="flex" justifyContent="space-between">
           <Box>
             <Link

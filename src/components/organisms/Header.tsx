@@ -24,7 +24,7 @@ export const Header = () => {
       borderColor={useColorModeValue("gray.200", "gray.700")}
       backdropFilter="blur(20px)"
     >
-      <Container maxW="6xl" display="flex" justifyContent="space-between">
+      <Container maxW="7xl" display="flex" justifyContent="space-between">
         <Box display="flex" alignItems="center">
           <Link
             as={NextLink}
