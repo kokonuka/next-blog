@@ -30,13 +30,22 @@ const HeadCard = (props: Props) => {
   return (
     <Box
       bg={useColorModeValue("white", "gray.800")}
-      border={useColorModeValue("", "1px")}
-      borderColor={useColorModeValue("gray.200", "gray.700")}
-      borderRadius={useColorModeValue("", "lg")}
+      border={useColorModeValue("0", "1px")}
+      borderRight={{ base: "none", lg: useColorModeValue("0", "1px") }}
+      borderLeft={{ base: "none", lg: useColorModeValue("0", "1px") }}
+      borderRadius={{ base: "", lg: useColorModeValue("0", "base") }}
+      borderColor={{
+        base: useColorModeValue("gray.200", "gray.700"),
+        lg: useColorModeValue("gray.200", "gray.700"),
+      }}
       overflow="hidden"
     >
       <Skeleton isLoaded={!loading} h="100%">
-        <Box w="100%" paddingTop="50%" position="relative">
+        <Box
+          w="100%"
+          paddingTop={{ base: "60%", md: "50%" }}
+          position="relative"
+        >
           <Link
             as={NextLink}
             href={`/posts/${post?.databaseId}`}
@@ -58,29 +67,40 @@ const HeadCard = (props: Props) => {
           />
         </Box>
       </Skeleton>
-      <Box py="12" px="3">
+      <Box py={{ base: "5", md: "12" }} px="5">
         <Box>
           <Link as={NextLink} href={`/posts/${post?.databaseId}`}>
-            <Text fontSize="3xl" fontWeight="bold" lineHeight="1.8">
+            <Text
+              fontSize={{ base: "xl", md: "3xl" }}
+              fontWeight="bold"
+              lineHeight="1.8"
+            >
               {post?.title}
             </Text>
           </Link>
         </Box>
         <Box mt="2" display="flex" gap="5">
           <Box display="flex" alignItems="center" gap="2">
-            <Text color="blue.500" fontSize="2xl">
+            <Text color="blue.500" fontSize={{ base: "lg", md: "2xl" }}>
               <AiOutlineCalendar />
             </Text>
-            <Text>{formatDate(post?.date ?? "")}</Text>
+            <Text fontSize={{ base: "sm", md: "medium" }}>
+              {formatDate(post?.date ?? "")}
+            </Text>
           </Box>
           <Box display="flex" alignItems="center" gap="2">
-            <Text color="blue.500" fontSize="2xl">
+            <Text color="blue.500" fontSize={{ base: "lg", md: "2xl" }}>
               <AiOutlineTag />
             </Text>
             <Tags tags={post?.tags?.nodes} />
           </Box>
         </Box>
-        <Box mt="8" dangerouslySetInnerHTML={{ __html: excerpt }} />
+        <Box
+          mt={{ base: "5", lg: "8" }}
+          fontSize={{ base: "sm", md: "medium" }}
+          lineHeight="1.8"
+          dangerouslySetInnerHTML={{ __html: excerpt }}
+        />
       </Box>
     </Box>
   );

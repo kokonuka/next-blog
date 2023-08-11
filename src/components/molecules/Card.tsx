@@ -61,7 +61,7 @@ export const Card: React.FC<Props> = (props) => {
       cursor="pointer"
       border={useColorModeValue("", "1px")}
       borderColor={useColorModeValue("gray.200", "gray.700")}
-      borderRadius={useColorModeValue("", "lg")}
+      borderRadius={useColorModeValue("", "base")}
       overflow="hidden"
     >
       <Skeleton isLoaded={!loading} h="100%">

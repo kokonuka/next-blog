@@ -12,7 +12,11 @@ const NewLinkTag = (props: Props) => {
   const tag = useFragment(TagFragment, props.tag);
 
   return (
-    <Link as={NextLink} href={`/tags/${tag?.id}`}>
+    <Link
+      as={NextLink}
+      href={`/tags/${tag?.id}`}
+      fontSize={{ base: "sm", md: "medium" }}
+    >
       {tag.name},
     </Link>
   );

@@ -10,8 +10,13 @@ export const Profile = () => {
       px="5"
       bg={useColorModeValue("white", "gray.800")}
       border={useColorModeValue("0", "1px")}
-      borderRadius={useColorModeValue("0", "lg")}
-      borderColor={useColorModeValue("gray.200", "gray.700")}
+      borderRight={{ base: "none", lg: useColorModeValue("0", "1px") }}
+      borderLeft={{ base: "none", lg: useColorModeValue("0", "1px") }}
+      borderRadius={{ base: "", lg: useColorModeValue("0", "base") }}
+      borderColor={{
+        base: useColorModeValue("gray.200", "gray.700"),
+        lg: useColorModeValue("gray.200", "gray.700"),
+      }}
     >
       <Box display="flex" justifyContent="center">
         <Avatar
@@ -56,7 +61,7 @@ export const Profile = () => {
         </Box>
       </Box>
       <Box>
-        <Text mt="7" fontSize="sm" textAlign="center">
+        <Text mt="7" fontSize="sm" textAlign="center" lineHeight="1.8">
           ご訪問ありがとうございます。
           <br />
           都内でWebエンジニアをしています。
