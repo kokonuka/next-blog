@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import { FragmentType, graphql } from "@/gql/generated";
 import client from "@/lib/graphqlClient";
 import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react";
-import { Card, PostFragment } from "../../molecules/Card";
+import { Card } from "../../molecules/Card";
+import { PostFragment } from "@/gql/fragments/post";
 import { Loader } from "../../molecules/Loader";
 import InfiniteScroll from "react-infinite-scroller";
 
@@ -14,7 +15,7 @@ export const postsWhereSearchQueryDocument = graphql(`
   query postsWhereSearchQuery($keyword: String!, $endCursor: String!) {
     posts(where: { search: $keyword }, first: 10, after: $endCursor) {
       nodes {
-        ...PostItem
+        ...Post
       }
       pageInfo {
         endCursor

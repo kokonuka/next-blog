@@ -2,7 +2,8 @@ import { useState } from "react";
 import client from "../../../lib/graphqlClient";
 import { FragmentType, graphql } from "@/gql/generated";
 import { Box } from "@chakra-ui/react";
-import { Card, PostFragment } from "../../molecules/Card";
+import { Card } from "../../molecules/Card";
+import { PostFragment } from "@/gql/fragments/post";
 import InfiniteScroll from "react-infinite-scroller";
 import { Loader } from "../../molecules/Loader";
 import { useAppSelector } from "../../../redux/hooks";
@@ -13,7 +14,7 @@ export const allPostsByCategoryIdWithVariablesQueryDocument = graphql(`
   query allPostsWithCategoryQuery($categoryIn: [ID], $endCursor: String!) {
     posts(where: { categoryIn: $categoryIn }, first: 10, after: $endCursor) {
       nodes {
-        ...PostItem
+        ...Post
       }
       pageInfo {
         endCursor

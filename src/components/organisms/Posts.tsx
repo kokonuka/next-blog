@@ -2,7 +2,8 @@ import { useState } from "react";
 import client from "../../lib/graphqlClient";
 import { FragmentType, graphql } from "@/gql/generated";
 import { Text, Box } from "@chakra-ui/react";
-import { Card, PostFragment } from "../molecules/Card";
+import { Card } from "../molecules/Card";
+import { PostFragment } from "@/gql/fragments/post";
 import InfiniteScroll from "react-infinite-scroller";
 import { Loader } from "../molecules/Loader";
 
@@ -12,7 +13,7 @@ export const allPostsWithVariablesQueryDocument = graphql(`
   query allPostsWithVariablesQuery($endCursor: String!) {
     posts(first: 10, after: $endCursor) {
       nodes {
-        ...PostItem
+        ...Post
       }
       pageInfo {
         endCursor

@@ -1,7 +1,7 @@
 import NextLink from "next/link";
 import { useQuery } from "@apollo/client";
 import { FragmentType, graphql } from "@/gql/generated";
-import { PostFragment } from "../molecules/Card";
+import { PostFragment } from "@/gql/fragments/post";
 import { Box, Text, Link, Skeleton, useColorModeValue } from "@chakra-ui/react";
 import { PostsSlider } from "./PostsSlider";
 
@@ -17,7 +17,7 @@ export const categoryWhereCategoryNameQueryDocument = graphql(`
         name
         posts {
           nodes {
-            ...PostItem
+            ...Post
           }
         }
       }
@@ -26,7 +26,7 @@ export const categoryWhereCategoryNameQueryDocument = graphql(`
 `);
 
 export const CategoryPostsSlider: React.FC<Props> = ({ name }) => {
-  const { loading, error, data } = useQuery(
+  const { data, loading, error } = useQuery(
     categoryWhereCategoryNameQueryDocument,
     {
       variables: {
