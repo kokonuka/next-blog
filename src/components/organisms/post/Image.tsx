@@ -1,7 +1,7 @@
 import NextImage from "next/image";
 import { Box } from "@chakra-ui/react";
 import { PostPageFragment as PostPageFragmentType } from "@/gql/generated/graphql";
-import { isJpgUrl } from "@/lib/isJpgUrl";
+import { isSvgUrl } from "@/lib/isSvgUrl";
 
 type Props = {
   post: PostPageFragmentType;
@@ -10,23 +10,11 @@ type Props = {
 export const Image: React.FC<Props> = ({ post }) => {
   const mediaItemUrl = post?.featuredImage?.node?.mediaItemUrl;
   const defaultPostImage = "https://source.unsplash.com/random";
-  const isJpgUrlResult = !mediaItemUrl || isJpgUrl(mediaItemUrl ?? "");
+  const isSvg = mediaItemUrl && isSvgUrl(mediaItemUrl);
 
   return (
-    <Box px="3" pt={isJpgUrlResult ? "50%" : ""} position="relative">
-      {isJpgUrlResult ? (
-        <NextImage
-          src={mediaItemUrl || defaultPostImage}
-          alt="article"
-          fill
-          style={{
-            objectFit:
-              isJpgUrl(mediaItemUrl ?? "") || !mediaItemUrl
-                ? "cover"
-                : "contain",
-          }}
-        />
-      ) : (
+    <Box px="3" pt={isSvg ? "14" : "50%"} position="relative">
+      {isSvg ? (
         <NextImage
           src={mediaItemUrl || defaultPostImage}
           alt="article"
@@ -36,6 +24,16 @@ export const Image: React.FC<Props> = ({ post }) => {
             width: "100%",
             height: mediaItemUrl ? "100px" : "400px",
             objectFit: mediaItemUrl ? "contain" : "cover",
+          }}
+        />
+      ) : (
+        <NextImage
+          src={mediaItemUrl || defaultPostImage}
+          alt="article"
+          fill
+          style={{
+            objectFit:
+              mediaItemUrl && isSvgUrl(mediaItemUrl) ? "contain" : "cover",
           }}
         />
       )}
