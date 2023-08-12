@@ -4,7 +4,7 @@ import { FragmentType, useFragment } from "@/gql/generated";
 import { Box, Skeleton, Text } from "@chakra-ui/react";
 import PostCardDate from "@/components/molecules/PostCardDate";
 import PostCardTags from "@/components/molecules/PostCardTags";
-import LinkImage from "@/components/molecules/LinkImage";
+import PriorityLinkImage from "@/components/molecules/PriorityLinkImage";
 
 type Props = {
   post: FragmentType<typeof PostFragment>;
@@ -43,7 +43,7 @@ const FlatCard = (props: Props) => {
           position="relative"
         >
           {post && (
-            <LinkImage
+            <PriorityLinkImage
               databaseId={post.databaseId}
               imageUrl={
                 post.featuredImage?.node.mediaItemUrl ?? getUnsplashImage()

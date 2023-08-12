@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import NextLink from "next/link";
 import {
   Box,
@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import { FragmentType, useFragment } from "@/gql/generated";
 import { PostFragment } from "@/gql/fragments/post";
-import LinkImage from "../../molecules/LinkImage";
 import { formatDate } from "@/lib/formatDate";
 import PriorityLinkImage from "@/components/molecules/PriorityLinkImage";
 
@@ -52,12 +51,6 @@ export const SliderCard: React.FC<Props> = (props) => {
       <Skeleton isLoaded={!loading}>
         <Box pt="60%" position="relative">
           {post && (
-            // <LinkImage
-            //   databaseId={post.databaseId}
-            //   imageUrl={
-            //     post.featuredImage?.node.mediaItemUrl ?? getUnsplashImage()
-            //   }
-            // />
             <PriorityLinkImage
               databaseId={post.databaseId}
               imageUrl={
