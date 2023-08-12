@@ -3,7 +3,6 @@ import { Head } from "../components/Head";
 import type { NextPage } from "next";
 import { HomeLayout } from "../components/templates/HomeLayout";
 import { Profile } from "../components/organisms/Profile";
-import { CategoryPostsSlider } from "../components/organisms/CategoryPostsSlider";
 import { Box } from "@chakra-ui/react";
 import TopPost from "@/components/organisms/home/TopPost";
 import TechPostList from "@/components/organisms/home/TechPostList";
