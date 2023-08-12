@@ -23,7 +23,7 @@ export const PickupPostsSlider = () => {
         });
         setUnsplashImages(unsplashImages);
       });
-  }, []);
+  }, [data]);
 
   if (error) return <Box>データの読み込みに失敗しました。</Box>;
 
