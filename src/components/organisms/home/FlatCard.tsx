@@ -18,22 +18,16 @@ const FlatCard = (props: Props) => {
   const loading = props.loading;
   const i = props.i;
   const unsplashImages = props.unsplashImages;
-  const [unsplashImage, setdUnsplashImage] = useState(
-    "https://source.unsplash.com/random"
-  );
   const defaultImage = "https://source.unsplash.com/random";
 
-  useEffect(() => {
+  const getUnsplashImage = () => {
     if (unsplashImages.length === 0) {
-      setdUnsplashImage(defaultImage);
-      return;
+      return defaultImage;
     }
-    setdUnsplashImage(
-      unsplashImages.length > i
-        ? unsplashImages[i]
-        : unsplashImages[unsplashImages.length - 1]
-    );
-  }, [i, unsplashImages]);
+    return unsplashImages.length > i
+      ? unsplashImages[i]
+      : unsplashImages[unsplashImages.length - 1];
+  };
 
   return (
     <Box
@@ -42,7 +36,7 @@ const FlatCard = (props: Props) => {
       display={{ base: "", md: "flex" }}
       py="10"
     >
-      {unsplashImage}
+      {/* {unsplashImage} */}
       {/* <img src={unsplashImage} alt="" /> */}
       <Skeleton isLoaded={!loading}>
         <Box
@@ -54,7 +48,7 @@ const FlatCard = (props: Props) => {
             <LinkImage
               databaseId={post.databaseId}
               imageUrl={
-                post.featuredImage?.node.mediaItemUrl ?? unsplashImages[i]
+                post.featuredImage?.node.mediaItemUrl ?? getUnsplashImage()
               }
             />
           )}
