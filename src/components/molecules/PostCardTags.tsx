@@ -24,7 +24,7 @@ const PostCardTags = (props: Props) => {
         {tags?.map((tag, i) => (
           <>
             <NewLinkTag tag={tag} key={i} />
-            <Text pr="2" mt="-2px">
+            <Text pr="2" mt="-4px">
               {tags.length - 1 !== i && ","}
             </Text>
           </>
