@@ -11,7 +11,7 @@ const TechPostList = () => {
   if (error) return <Text>読み込めませんでした</Text>;
 
   return (
-    <Box as="section" mt="14">
+    <Box as="section" mt="14" px={{ base: "4", lg: "0" }}>
       <Box as="ul">
         {data?.posts?.nodes.map((post, i) => (
           <Box key={i}>

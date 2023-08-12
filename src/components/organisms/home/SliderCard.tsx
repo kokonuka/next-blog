@@ -35,13 +35,14 @@ export const SliderCard: React.FC<Props> = (props) => {
     >
       <Skeleton isLoaded={!loading}>
         <Box
-          pt={{ base: "50%", md: "60%", lg: "50%", xl: "60%" }}
+          // pt={{ base: "50%", md: "60%", lg: "50%", xl: "60%" }}
+          pt="60%"
           position="relative"
         >
           {post && <LinkImage post={post} />}
         </Box>
       </Skeleton>
-      <Box px="3" pt="2" pb="5">
+      <Box px="3" pt="5" pb="9">
         <SkeletonText isLoaded={!loading}>
           <Box mt="1">
             <Link
