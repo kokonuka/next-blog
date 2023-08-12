@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PostFragment } from "@/gql/fragments/post";
 import { FragmentType, useFragment } from "@/gql/generated";
 import { Box, Skeleton, Text } from "@chakra-ui/react";
@@ -36,8 +36,6 @@ const FlatCard = (props: Props) => {
       display={{ base: "", md: "flex" }}
       py="10"
     >
-      {/* {unsplashImage} */}
-      {/* <img src={unsplashImage} alt="" /> */}
       <Skeleton isLoaded={!loading}>
         <Box
           w={{ base: "100%", md: "200px" }}
