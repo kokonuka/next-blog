@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import NextLink from "next/link";
+import Image from "next/image";
 import { Link } from "@chakra-ui/react";
 import { isSvgUrl } from "@/lib/isSvgUrl";
 
@@ -9,7 +9,7 @@ type Props = {
   imageUrl: string;
 };
 
-const LinkImage = ({ databaseId, imageUrl }: Props) => {
+const PriorityLinkImage = ({ databaseId, imageUrl }: Props) => {
   return (
     <>
       <Link
@@ -27,7 +27,8 @@ const LinkImage = ({ databaseId, imageUrl }: Props) => {
         src={imageUrl}
         alt="post"
         fill
-        sizes="(max-width:992px) 100vw,(max-width:1200px) 50vw, 33vw"
+        priority
+        sizes="(max-width:992px) 100vw,(max-width:1200px) 75vw, 50vw"
         style={{
           objectFit: isSvgUrl(imageUrl) ? "contain" : "cover",
         }}
@@ -36,4 +37,4 @@ const LinkImage = ({ databaseId, imageUrl }: Props) => {
   );
 };
 
-export default LinkImage;
+export default PriorityLinkImage;

@@ -9,18 +9,20 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FragmentType, useFragment } from "@/gql/generated";
+import { getFormattedDateTimeDiff } from "../../lib/getFormattedDateTimeDiff";
+import { TagLink } from "../atoms/TagLink";
 import { PostFragment } from "@/gql/fragments/post";
-import LinkImage from "../../molecules/LinkImage";
+import LinkImage from "./LinkImage";
 import { formatDate } from "@/lib/formatDate";
 
 type Props = {
   post?: FragmentType<typeof PostFragment>;
   loading: boolean;
-  i?: number;
+  i: number;
   unsplashImages: string[];
 };
 
-export const SliderCard: React.FC<Props> = (props) => {
+export const BoxCard: React.FC<Props> = (props) => {
   const post = useFragment(PostFragment, props.post);
   const loading = props.loading;
   const i = props.i;
@@ -29,8 +31,7 @@ export const SliderCard: React.FC<Props> = (props) => {
   const defaultImage = "https://source.unsplash.com/random";
 
   useEffect(() => {
-    if (!i) return;
-    if (unsplashImages?.length === 0) {
+    if (unsplashImages.length === 0) {
       setdUnsplashImage(defaultImage);
       return;
     }
@@ -46,6 +47,8 @@ export const SliderCard: React.FC<Props> = (props) => {
       as="article"
       h="100%"
       bg={useColorModeValue("white", "gray.800")}
+      display="flex"
+      flexDirection="column"
       cursor="pointer"
       border={useColorModeValue("", "1px")}
       borderColor={useColorModeValue("gray.200", "gray.700")}
@@ -53,11 +56,7 @@ export const SliderCard: React.FC<Props> = (props) => {
       overflow="hidden"
     >
       <Skeleton isLoaded={!loading}>
-        <Box
-          // pt={{ base: "50%", md: "60%", lg: "50%", xl: "60%" }}
-          pt="60%"
-          position="relative"
-        >
+        <Box pt="50%" position="relative">
           {post && (
             <LinkImage
               databaseId={post.databaseId}

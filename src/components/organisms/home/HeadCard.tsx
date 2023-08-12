@@ -6,8 +6,9 @@ import { AiOutlineCalendar, AiOutlineTag } from "react-icons/ai";
 import { formatDate } from "@/lib/formatDate";
 import { FragmentType, useFragment } from "@/gql/generated";
 import { PostFragment } from "@/gql/fragments/post";
-import LinkImage from "@/components/molecules/LinkImage";
+import axios from "axios";
 import PostCardTags from "@/components/molecules/PostCardTags";
+import PriorityLinkImage from "@/components/molecules/PriorityLinkImage";
 
 type Props = {
   post?: FragmentType<typeof PostFragment>;
@@ -18,6 +19,24 @@ const HeadCard = (props: Props) => {
   const post = useFragment(PostFragment, props.post);
   const loading = props.loading;
   const [excerpt, setExcerpt] = useState("");
+  const [unsplashImage, setUnsplashImage] = useState("");
+
+  useEffect(() => {
+    if (loading) return;
+    const featuredImage = post?.featuredImage?.node.mediaItemUrl;
+    if (!featuredImage) {
+      axios
+        .get(
+          `https://api.unsplash.com/search/photos?query=tech&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESSKEY}`
+        )
+        .then((res) => {
+          if (res.data.results.length > 0) {
+            const imgUrl = res.data.results[0].urls.regular;
+            setUnsplashImage(imgUrl);
+          }
+        });
+    }
+  }, [loading, post]);
 
   useEffect(() => {
     const $ = load(post?.excerpt ?? "");
@@ -40,7 +59,12 @@ const HeadCard = (props: Props) => {
     >
       <Skeleton isLoaded={!loading}>
         <Box pt={{ base: "60%", md: "50%" }} position="relative">
-          {post && <LinkImage post={post} />}
+          {post && (
+            <PriorityLinkImage
+              databaseId={post.databaseId}
+              imageUrl={post.featuredImage?.node.mediaItemUrl ?? unsplashImage}
+            />
+          )}
         </Box>
       </Skeleton>
       <Box py={{ base: "5", md: "12" }} px="5">

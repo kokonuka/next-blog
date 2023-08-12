@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FragmentType, graphql } from "@/gql/generated";
 import client from "@/lib/graphqlClient";
-import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react";
-import { Card } from "../../molecules/Card";
 import { PostFragment } from "@/gql/fragments/post";
-import { Loader } from "../../molecules/Loader";
+import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroller";
-
-type Props = {};
+import axios from "axios";
+import { Loader } from "../../molecules/Loader";
+import { BoxCard } from "@/components/molecules/BoxCard";
 
 export const postsWhereSearchQueryDocument = graphql(`
   query postsWhereSearchQuery($keyword: String!, $endCursor: String!) {
@@ -25,12 +24,27 @@ export const postsWhereSearchQueryDocument = graphql(`
   }
 `);
 
-export const Posts: React.FC<Props> = () => {
+export const Posts = () => {
   const router = useRouter();
   const [id, setId] = useState("");
   const [posts, setPosts] = useState<FragmentType<typeof PostFragment>[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [endCursor, setEndCursor] = useState("");
+  const [unsplashImages, setUnsplashImages] = useState([""]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.unsplash.com/search/photos?query=tech&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESSKEY}`
+      )
+      .then((res) => {
+        let unsplashImages: string[] = [];
+        res.data.results.map((obj: any) => {
+          unsplashImages.push(obj.urls.regular);
+        });
+        setUnsplashImages(unsplashImages);
+      });
+  }, []);
 
   useEffect(() => {
     setPosts([]);
@@ -86,7 +100,13 @@ export const Posts: React.FC<Props> = () => {
                   gridGap="5"
                 >
                   {posts.map((post, i) => (
-                    <Card post={post} key={i} loading={false} />
+                    <BoxCard
+                      post={post}
+                      loading={false}
+                      i={i}
+                      unsplashImages={unsplashImages}
+                      key={i}
+                    />
                   ))}
                 </Box>
               </InfiniteScroll>

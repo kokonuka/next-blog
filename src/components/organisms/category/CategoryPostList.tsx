@@ -1,12 +1,13 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import client from "../../../lib/graphqlClient";
 import { FragmentType, graphql } from "@/gql/generated";
-import { Box } from "@chakra-ui/react";
-import { Card } from "../../molecules/Card";
 import { PostFragment } from "@/gql/fragments/post";
-import InfiniteScroll from "react-infinite-scroller";
-import { Loader } from "../../molecules/Loader";
 import { useAppSelector } from "../../../redux/hooks";
+import { Box } from "@chakra-ui/react";
+import InfiniteScroll from "react-infinite-scroller";
+import axios from "axios";
+import { Loader } from "../../molecules/Loader";
+import { BoxCard } from "@/components/molecules/BoxCard";
 
 type Props = {};
 
@@ -29,8 +30,21 @@ export const CategoryPostList: React.FC<Props> = () => {
   const [posts, setPosts] = useState<FragmentType<typeof PostFragment>[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [endCursor, setEndCursor] = useState("");
+  const [unsplashImages, setUnsplashImages] = useState([""]);
 
-  console.log(id);
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.unsplash.com/search/photos?query=command&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESSKEY}`
+      )
+      .then((res) => {
+        let unsplashImages: string[] = [];
+        res.data.results.map((obj: any) => {
+          unsplashImages.push(obj.urls.regular);
+        });
+        setUnsplashImages(unsplashImages);
+      });
+  }, []);
 
   const loadMore = async (page: number) => {
     const { data } = await client.query({
@@ -65,7 +79,13 @@ export const CategoryPostList: React.FC<Props> = () => {
           gridGap="5"
         >
           {posts.map((post, i) => (
-            <Card post={post} key={i} loading={false} />
+            <BoxCard
+              post={post}
+              loading={false}
+              i={i}
+              unsplashImages={unsplashImages}
+              key={i}
+            />
           ))}
         </Box>
       </InfiniteScroll>

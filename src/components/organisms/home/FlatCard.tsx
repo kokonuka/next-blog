@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PostFragment } from "@/gql/fragments/post";
 import { FragmentType, useFragment } from "@/gql/generated";
 import { Box, Skeleton, Text } from "@chakra-ui/react";
@@ -9,11 +9,29 @@ import LinkImage from "@/components/molecules/LinkImage";
 type Props = {
   post: FragmentType<typeof PostFragment>;
   loading: boolean;
+  i: number;
+  unsplashImages: string[];
 };
 
 const FlatCard = (props: Props) => {
   const post = useFragment(PostFragment, props.post);
   const loading = props.loading;
+  const i = props.i;
+  const unsplashImages = props.unsplashImages;
+  const [unsplashImage, setdUnsplashImage] = useState("");
+  const defaultImage = "https://source.unsplash.com/random";
+
+  useEffect(() => {
+    if (unsplashImages.length === 0) {
+      setdUnsplashImage(defaultImage);
+      return;
+    }
+    setdUnsplashImage(
+      unsplashImages.length > i
+        ? unsplashImages[i]
+        : unsplashImages[unsplashImages.length - 1]
+    );
+  }, [i, unsplashImages]);
 
   return (
     <Box
@@ -28,7 +46,12 @@ const FlatCard = (props: Props) => {
           paddingTop="50%"
           position="relative"
         >
-          {post && <LinkImage post={post} />}
+          {post && (
+            <LinkImage
+              databaseId={post.databaseId}
+              imageUrl={post.featuredImage?.node.mediaItemUrl ?? unsplashImage}
+            />
+          )}
         </Box>
       </Skeleton>
       <Box mt={{ base: "5", md: "0" }} pl={{ base: "0", md: "10" }}>

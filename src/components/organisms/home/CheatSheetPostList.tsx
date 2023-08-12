@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NextLink from "next/link";
 import { useQuery } from "@apollo/client";
 import { getCheatSheetPostsQueryDocuments } from "@/gql/query/posts/getCheatSheetPosts";
 import { Box, Button, Text } from "@chakra-ui/react";
+import axios from "axios";
 import FlatCard from "./FlatCard";
 
 const CheatSheetPostList = () => {
   const { data, loading, error } = useQuery(getCheatSheetPostsQueryDocuments);
+  const [unsplashImages, setUnsplashImages] = useState([""]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.unsplash.com/search/photos?query=command&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESSKEY}`
+      )
+      .then((res) => {
+        let unsplashImages: string[] = [];
+        res.data.results.map((obj: any) => {
+          unsplashImages.push(obj.urls.regular);
+        });
+        setUnsplashImages(unsplashImages);
+      });
+  }, []);
 
   if (error) return <Text>読み込めませんでした</Text>;
 
@@ -27,7 +43,13 @@ const CheatSheetPostList = () => {
       </Text>
       <Box as="ul">
         {data?.posts?.nodes.map((post, i) => (
-          <FlatCard post={post} loading={loading} key={i} />
+          <FlatCard
+            post={post}
+            loading={loading}
+            i={i}
+            unsplashImages={unsplashImages}
+            key={i}
+          />
         ))}
       </Box>
       <Box mt="10" textAlign="center">

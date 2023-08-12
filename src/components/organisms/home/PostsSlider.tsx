@@ -10,9 +10,14 @@ import { SliderCard } from "./SliderCard";
 type Props = {
   posts?: FragmentType<typeof PostFragment>[];
   loading: boolean;
+  unsplashImages: string[];
 };
 
-export const PostsSlider: React.FC<Props> = ({ posts, loading }) => {
+export const PostsSlider: React.FC<Props> = ({
+  posts,
+  loading,
+  unsplashImages,
+}) => {
   return (
     <Box px={{ base: "0" }}>
       <Splide
@@ -62,14 +67,22 @@ export const PostsSlider: React.FC<Props> = ({ posts, loading }) => {
             <>
               {Array.from({ length: 3 }).map((_, index) => (
                 <SplideSlide key={index}>
-                  <SliderCard loading={loading} />
+                  <SliderCard
+                    loading={loading}
+                    unsplashImages={unsplashImages}
+                  />
                 </SplideSlide>
               ))}
             </>
           ) : (
             posts?.map((post, i) => (
               <SplideSlide key={i}>
-                <SliderCard post={post} loading={loading} />
+                <SliderCard
+                  post={post}
+                  loading={loading}
+                  i={i}
+                  unsplashImages={unsplashImages}
+                />
               </SplideSlide>
             ))
           )}
