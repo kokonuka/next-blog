@@ -72,7 +72,7 @@ export const PostList: React.FC<Props> = () => {
           <Box
             display="grid"
             gridTemplateColumns={{ base: "1fr 1fr", md: "1fr 1fr 1fr" }}
-            gridGap="5"
+            gridGap="4"
           >
             {posts.map((post, i) => (
               <BoxCard
