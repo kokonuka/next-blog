@@ -8,6 +8,7 @@ import { Box } from "@chakra-ui/react";
 import TopPost from "@/components/organisms/home/TopPost";
 import TechPostList from "@/components/organisms/home/TechPostList";
 import { PickupPostsSlider } from "@/components/organisms/home/PickupPostsSlider";
+import CheatSheetPostList from "@/components/organisms/home/CheatSheetPostList";
 
 type Props = {};
 
@@ -22,11 +23,9 @@ const Home: NextPage<Props> = () => {
           pr={{ base: "0", lg: "40px", xl: "80px" }}
         >
           <TopPost />
-          <Box px={{ base: "4", lg: "0" }}>
-            <PickupPostsSlider />
-            <TechPostList />
-            <CategoryPostsSlider name="CheatSheet" />
-          </Box>
+          <PickupPostsSlider />
+          <TechPostList />
+          <CheatSheetPostList />
         </Box>
         <Box mt={{ base: "14", lg: "0" }} w={{ base: "100%", lg: "320px" }}>
           <Profile />
