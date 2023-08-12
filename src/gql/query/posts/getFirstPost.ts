@@ -1,4 +1,4 @@
-import { graphql } from "../../generated";
+import { graphql } from "@/gql/generated";
 
 export const getFirstPostQueryDocuments = graphql(`
   query getFirstPost {

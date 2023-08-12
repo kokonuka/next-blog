@@ -27,6 +27,8 @@ const documents = {
     "\n  query tagWithVariablesQuery($id: ID!) {\n    tag(id: $id, idType: ID) {\n      id\n      name\n      description\n    }\n  }\n": types.TagWithVariablesQueryDocument,
     "\n  fragment Post on Post {\n    id\n    databaseId\n    title\n    date\n    excerpt\n    content\n    featuredImage {\n      node {\n        mediaItemUrl\n      }\n    }\n    categories {\n      nodes {\n        id\n        name\n      }\n    }\n    tags {\n      nodes {\n        ...TagItem\n      }\n    }\n  }\n": types.PostFragmentDoc,
     "\n  query getFirstPost {\n    posts(first: 1) {\n      nodes {\n        ...Post\n      }\n    }\n  }\n": types.GetFirstPostDocument,
+    "\n  query getPickupPosts {\n    posts(where: { categoryName: \"pickup\" }) {\n      nodes {\n        ...Post\n      }\n    }\n  }\n": types.GetPickupPostsDocument,
+    "\n  query getTechPosts {\n    posts(where: { categoryName: \"tech\" }) {\n      nodes {\n        ...Post\n      }\n    }\n  }\n": types.GetTechPostsDocument,
     "\n  query allPostsQuery($endCursor: String!) {\n    posts(first: 10, after: $endCursor) {\n      nodes {\n        databaseId\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n": types.AllPostsQueryDocument,
     "\n  query postQuery($id: ID!) {\n    post(id: $id, idType: DATABASE_ID) {\n      ...PostPage\n    }\n  }\n": types.PostQueryDocument,
 };
@@ -101,6 +103,14 @@ export function graphql(source: "\n  fragment Post on Post {\n    id\n    databa
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query getFirstPost {\n    posts(first: 1) {\n      nodes {\n        ...Post\n      }\n    }\n  }\n"): (typeof documents)["\n  query getFirstPost {\n    posts(first: 1) {\n      nodes {\n        ...Post\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query getPickupPosts {\n    posts(where: { categoryName: \"pickup\" }) {\n      nodes {\n        ...Post\n      }\n    }\n  }\n"): (typeof documents)["\n  query getPickupPosts {\n    posts(where: { categoryName: \"pickup\" }) {\n      nodes {\n        ...Post\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query getTechPosts {\n    posts(where: { categoryName: \"tech\" }) {\n      nodes {\n        ...Post\n      }\n    }\n  }\n"): (typeof documents)["\n  query getTechPosts {\n    posts(where: { categoryName: \"tech\" }) {\n      nodes {\n        ...Post\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
