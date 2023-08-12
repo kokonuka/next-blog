@@ -18,9 +18,7 @@ const TechPostList = () => {
       .then((res) => {
         let unsplashImages: string[] = [];
         res.data.results.map((obj: any) => {
-          // unsplashImages.push(obj.urls.regular);
-          unsplashImages.push(obj.urls.small_s3);
-          console.log(obj.urls);
+          unsplashImages.push(obj.urls.regular);
         });
         setUnsplashImages(unsplashImages);
       });
