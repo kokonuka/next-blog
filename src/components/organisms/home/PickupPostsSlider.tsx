@@ -11,7 +11,7 @@ export const PickupPostsSlider = () => {
   if (error) return <Box>データの読み込みに失敗しました。</Box>;
 
   return (
-    <Box as="section" mt="14">
+    <Box as="section" mt="14" px={{ base: "4", lg: "0" }}>
       <Box>
         <Text
           fontSize={{ base: "2xl", md: "4xl" }}
