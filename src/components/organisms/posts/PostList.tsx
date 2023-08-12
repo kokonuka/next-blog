@@ -1,12 +1,13 @@
-import { useState } from "react";
-import client from "../../lib/graphqlClient";
+import React, { useEffect, useState } from "react";
+import client from "../../../lib/graphqlClient";
 import { FragmentType, graphql } from "@/gql/generated";
-import { Text, Box } from "@chakra-ui/react";
-import { Card } from "../molecules/Card";
 import { PostFragment } from "@/gql/fragments/post";
+import { Box } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroller";
-import { Loader } from "../molecules/Loader";
-import { Heading } from "../atoms/Heading";
+import axios from "axios";
+import { Loader } from "../../molecules/Loader";
+import { BoxCard } from "@/components/molecules/BoxCard";
+import { Heading } from "../../atoms/Heading";
 
 type Props = {};
 
@@ -24,10 +25,25 @@ export const allPostsWithVariablesQueryDocument = graphql(`
   }
 `);
 
-export const Posts: React.FC<Props> = () => {
+export const PostList: React.FC<Props> = () => {
   const [posts, setPosts] = useState<FragmentType<typeof PostFragment>[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [endCursor, setEndCursor] = useState("");
+  const [unsplashImages, setUnsplashImages] = useState([""]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.unsplash.com/search/photos?query=tech&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESSKEY}`
+      )
+      .then((res) => {
+        let unsplashImages: string[] = [];
+        res.data.results.map((obj: any) => {
+          unsplashImages.push(obj.urls.regular);
+        });
+        setUnsplashImages(unsplashImages);
+      });
+  }, []);
 
   const loadMore = async (page: number) => {
     const { data } = await client.query({
@@ -59,7 +75,13 @@ export const Posts: React.FC<Props> = () => {
             gridGap="5"
           >
             {posts.map((post, i) => (
-              <Card post={post} key={i} loading={false} />
+              <BoxCard
+                post={post}
+                loading={false}
+                i={i}
+                unsplashImages={unsplashImages}
+                key={i}
+              />
             ))}
           </Box>
         </InfiniteScroll>
