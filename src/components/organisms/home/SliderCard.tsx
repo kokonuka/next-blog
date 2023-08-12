@@ -9,17 +9,17 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FragmentType, useFragment } from "@/gql/generated";
-import { getFormattedDateTimeDiff } from "../../lib/getFormattedDateTimeDiff";
-import { TagLink } from "../atoms/TagLink";
+import { getFormattedDateTimeDiff } from "../../../lib/getFormattedDateTimeDiff";
+import { TagLink } from "../../atoms/TagLink";
 import { PostFragment } from "@/gql/fragments/post";
-import LinkImage from "./LinkImage";
+import LinkImage from "../../molecules/LinkImage";
 
 type Props = {
   post?: FragmentType<typeof PostFragment>;
   loading: boolean;
 };
 
-export const Card: React.FC<Props> = (props) => {
+export const SliderCard: React.FC<Props> = (props) => {
   const post = useFragment(PostFragment, props.post);
   const loading = props.loading;
 
@@ -38,14 +38,14 @@ export const Card: React.FC<Props> = (props) => {
     >
       <Skeleton isLoaded={!loading}>
         <Box
-          pt={{ base: "50%", md: "60%", lg: "65%", xl: "70%" }}
+          pt={{ base: "50%", md: "60%", lg: "50%", xl: "60%" }}
           position="relative"
         >
           {post && <LinkImage post={post} />}
         </Box>
       </Skeleton>
       <Box px="3" py="5" flex="1" display="flex" flexDirection="column">
-        <Box flex="1" minH="20">
+        <Box>
           <SkeletonText isLoaded={!loading}>
             <Text fontSize="xs" fontWeight="bold" color="gray.400">
               {getFormattedDateTimeDiff(post?.date! || "")}
@@ -54,7 +54,7 @@ export const Card: React.FC<Props> = (props) => {
               as={NextLink}
               href={`/posts/${post?.databaseId}`}
               mt="1"
-              fontSize="xl"
+              fontSize={{ base: "medium", md: "xl" }}
               fontWeight="bold"
               display="inline-block"
               _hover={{ opacity: "0.4" }}
@@ -63,7 +63,12 @@ export const Card: React.FC<Props> = (props) => {
             </Link>
           </SkeletonText>
         </Box>
-        <Box mt="4" display="flex" gap="3" flexWrap="wrap">
+        <Box
+          mt={{ base: "2", md: "4" }}
+          display="flex"
+          columnGap="3"
+          flexWrap="wrap"
+        >
           {post?.tags?.nodes.map((tag, i) => (
             <TagLink tag={tag} key={i} />
           ))}

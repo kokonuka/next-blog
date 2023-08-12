@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import NextLink from "next/link";
 import { load } from "cheerio";
 import { Box, Link, Skeleton, Text, useColorModeValue } from "@chakra-ui/react";
@@ -8,7 +7,7 @@ import { formatDate } from "@/lib/formatDate";
 import Tags from "@/components/molecules/Tags";
 import { FragmentType, useFragment } from "@/gql/generated";
 import { PostFragment } from "@/gql/fragments/post";
-import { TagFragment } from "@/components/atoms/TagLink";
+import LinkImage from "@/components/molecules/LinkImage";
 
 type Props = {
   post?: FragmentType<typeof PostFragment>;
@@ -19,7 +18,6 @@ const HeadCard = (props: Props) => {
   const post = useFragment(PostFragment, props.post);
   const loading = props.loading;
   const [excerpt, setExcerpt] = useState("");
-  const defaultPostImage = "https://source.unsplash.com/random";
 
   useEffect(() => {
     const $ = load(post?.excerpt ?? "");
@@ -40,31 +38,9 @@ const HeadCard = (props: Props) => {
       }}
       overflow="hidden"
     >
-      <Skeleton isLoaded={!loading} h="100%">
-        <Box
-          w="100%"
-          paddingTop={{ base: "60%", md: "50%" }}
-          position="relative"
-        >
-          <Link
-            as={NextLink}
-            href={`/posts/${post?.databaseId}`}
-            position="absolute"
-            top="0"
-            h="100%"
-            w="100%"
-            _hover={{ bg: "white" }}
-            opacity="0.2"
-            zIndex="1"
-          ></Link>
-          <Image
-            src={post?.featuredImage?.node.mediaItemUrl ?? defaultPostImage}
-            alt="post"
-            fill
-            style={{
-              objectFit: "cover",
-            }}
-          />
+      <Skeleton isLoaded={!loading}>
+        <Box pt={{ base: "60%", md: "50%" }} position="relative">
+          {post && <LinkImage post={post} />}
         </Box>
       </Skeleton>
       <Box py={{ base: "5", md: "12" }} px="5">
