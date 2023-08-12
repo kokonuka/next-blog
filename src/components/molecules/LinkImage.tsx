@@ -27,7 +27,7 @@ const LinkImage = ({ databaseId, imageUrl }: Props) => {
         src={imageUrl}
         alt="post"
         fill
-        sizes="(max-width:992px) 100vw,(max-width:1200px) 50vw, 33vw"
+        // sizes="(max-width:992px) 100vw,(max-width:1200px) 50vw, 33vw"
         style={{
           objectFit: isSvgUrl(imageUrl) ? "contain" : "cover",
         }}
