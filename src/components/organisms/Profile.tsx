@@ -21,7 +21,7 @@ export const Profile = () => {
       <Box display="flex" justifyContent="center">
         <Avatar
           size="2xl"
-          name="Dan Abrahmov"
+          name="sun"
           src="images/image_01.jpg"
           objectFit="contain"
         />
