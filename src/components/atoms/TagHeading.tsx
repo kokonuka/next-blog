@@ -4,10 +4,10 @@ type Props = {
   text: string;
 };
 
-export const Heading: React.FC<Props> = ({ text }) => {
+export const TagHeading: React.FC<Props> = ({ text }) => {
   return (
     <Text fontSize="3xl" fontWeight="bold" textAlign="center">
-      {text}
+      「{text}」
     </Text>
   );
 };
