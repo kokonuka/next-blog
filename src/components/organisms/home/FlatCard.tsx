@@ -53,7 +53,9 @@ const FlatCard = (props: Props) => {
           {post && (
             <LinkImage
               databaseId={post.databaseId}
-              imageUrl={post.featuredImage?.node.mediaItemUrl ?? unsplashImage}
+              imageUrl={
+                post.featuredImage?.node.mediaItemUrl ?? unsplashImages[i]
+              }
             />
           )}
         </Box>
