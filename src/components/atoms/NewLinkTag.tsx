@@ -17,7 +17,7 @@ const NewLinkTag = (props: Props) => {
       href={`/tags/${tag?.id}`}
       fontSize={{ base: "sm", md: "medium" }}
     >
-      {tag.name},
+      {tag.name}
     </Link>
   );
 };

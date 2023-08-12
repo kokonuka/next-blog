@@ -21,7 +21,7 @@ export const TagLink: React.FC<Props> = (props) => {
     <Link
       as={NextLink}
       href={`/tags/${tag?.id}`}
-      fontSize="sm"
+      fontSize={{ base: "xs", md: "sm" }}
       color="blue.400"
       w="auto"
       h="auto"

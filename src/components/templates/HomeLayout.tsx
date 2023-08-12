@@ -1,6 +1,5 @@
 import { Header } from "../organisms/Header";
 import { Footer } from "../organisms/Footer";
-import { Mainvisual } from "../organisms/Mainvisual";
 import { Container, Box } from "@chakra-ui/react";
 
 type Props = {
@@ -14,8 +13,8 @@ export const HomeLayout: React.FC<Props> = ({ children }) => {
       <Container
         maxW="7xl"
         pt={{ base: "0", lg: "14" }}
-        px={{ base: "0", lg: "8" }}
         pb="14"
+        px={{ base: "0", lg: "4" }}
         display={{ base: "block", lg: "flex" }}
         flex="1"
       >
