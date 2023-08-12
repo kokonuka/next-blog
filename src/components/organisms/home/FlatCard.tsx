@@ -41,6 +41,7 @@ const FlatCard = (props: Props) => {
       py="10"
     >
       <Skeleton isLoaded={!loading}>
+        {unsplashImage}
         <Box
           w={{ base: "100%", md: "200px" }}
           paddingTop="50%"
