@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import NextLink from "next/link";
 import { load } from "cheerio";
-import { Box, Link, Skeleton, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Link,
+  Skeleton,
+  SkeletonText,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { AiOutlineCalendar, AiOutlineTag } from "react-icons/ai";
 import { formatDate } from "@/lib/formatDate";
 import { FragmentType, useFragment } from "@/gql/generated";
@@ -68,30 +75,32 @@ const HeadCard = (props: Props) => {
         </Box>
       </Skeleton>
       <Box py={{ base: "5", md: "12" }} px="5">
-        <Box>
-          <Link as={NextLink} href={`/posts/${post?.databaseId}`}>
-            <Text
-              fontSize={{ base: "xl", md: "3xl" }}
-              fontWeight="bold"
-              lineHeight="1.8"
-            >
-              {post?.title}
-            </Text>
-          </Link>
-        </Box>
-        <Box mt="2" display="flex" gap="5">
-          <Box display="flex" alignItems="center" gap="2">
-            <Text color="blue.500" fontSize={{ base: "lg", md: "2xl" }}>
-              <AiOutlineCalendar />
-            </Text>
-            <Text fontSize={{ base: "sm", md: "medium" }}>
-              {formatDate(post?.date ?? "")}
-            </Text>
+        <SkeletonText isLoaded={!loading}>
+          <Box>
+            <Link as={NextLink} href={`/posts/${post?.databaseId}`}>
+              <Text
+                fontSize={{ base: "xl", md: "3xl" }}
+                fontWeight="bold"
+                lineHeight="1.8"
+              >
+                {post?.title}
+              </Text>
+            </Link>
           </Box>
-          <Box display="flex" alignItems="center" gap="2">
-            <PostCardTags tags={post?.tags?.nodes} />
+          <Box mt="2" display="flex" gap="5">
+            <Box display="flex" alignItems="center" gap="2">
+              <Text color="blue.500" fontSize={{ base: "lg", md: "2xl" }}>
+                <AiOutlineCalendar />
+              </Text>
+              <Text fontSize={{ base: "sm", md: "medium" }}>
+                {formatDate(post?.date ?? "")}
+              </Text>
+            </Box>
+            <Box display="flex" alignItems="center" gap="2">
+              <PostCardTags tags={post?.tags?.nodes} />
+            </Box>
           </Box>
-        </Box>
+        </SkeletonText>
         <Box
           mt={{ base: "5", lg: "8" }}
           fontSize={{ base: "sm", md: "medium" }}
