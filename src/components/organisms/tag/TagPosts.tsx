@@ -1,3 +1,4 @@
+import { TagHeading } from "@/components/atoms/TagHeading";
 import { graphql } from "@/gql/generated";
 import { useQuery } from "@apollo/client";
 import { Box } from "@chakra-ui/react";
@@ -27,7 +28,7 @@ export const TagPosts: React.FC<Props> = ({ id }) => {
 
   return (
     <Box as="section">
-      <Heading text={data?.tag?.name!} />
+      <TagHeading text={data?.tag?.name!} />
       <TagPostList id={id} />
     </Box>
   );

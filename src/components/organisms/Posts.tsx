@@ -6,6 +6,7 @@ import { Card } from "../molecules/Card";
 import { PostFragment } from "@/gql/fragments/post";
 import InfiniteScroll from "react-infinite-scroller";
 import { Loader } from "../molecules/Loader";
+import { Heading } from "../atoms/Heading";
 
 type Props = {};
 
@@ -44,14 +45,7 @@ export const Posts: React.FC<Props> = () => {
 
   return (
     <Box as="section">
-      <Text
-        color="gray.700"
-        fontSize="3xl"
-        fontWeight="bold"
-        textAlign="center"
-      >
-        Posts
-      </Text>
+      <Heading text="Latest" />
       <Box mt="10">
         <InfiniteScroll
           pageStart={0}
