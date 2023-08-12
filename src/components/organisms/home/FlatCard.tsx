@@ -40,9 +40,9 @@ const FlatCard = (props: Props) => {
       display={{ base: "", md: "flex" }}
       py="10"
     >
+      {unsplashImage}
       <img src={unsplashImage} alt="" />
       <Skeleton isLoaded={!loading}>
-        {unsplashImage}
         <Box
           w={{ base: "100%", md: "200px" }}
           paddingTop="50%"
