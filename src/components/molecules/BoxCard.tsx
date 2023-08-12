@@ -27,20 +27,16 @@ export const BoxCard: React.FC<Props> = (props) => {
   const loading = props.loading;
   const i = props.i;
   const unsplashImages = props.unsplashImages;
-  const [unsplashImage, setdUnsplashImage] = useState("");
   const defaultImage = "https://source.unsplash.com/random";
 
-  useEffect(() => {
+  const getUnsplashImage = () => {
     if (unsplashImages.length === 0) {
-      setdUnsplashImage(defaultImage);
-      return;
+      return defaultImage;
     }
-    setdUnsplashImage(
-      unsplashImages.length > i
-        ? unsplashImages[i]
-        : unsplashImages[unsplashImages.length - 1]
-    );
-  }, [i, unsplashImages]);
+    return unsplashImages.length > i
+      ? unsplashImages[i]
+      : unsplashImages[unsplashImages.length - 1];
+  };
 
   return (
     <Box
@@ -60,7 +56,9 @@ export const BoxCard: React.FC<Props> = (props) => {
           {post && (
             <LinkImage
               databaseId={post.databaseId}
-              imageUrl={post.featuredImage?.node.mediaItemUrl ?? unsplashImage}
+              imageUrl={
+                post.featuredImage?.node.mediaItemUrl ?? getUnsplashImage()
+              }
             />
           )}
         </Box>

@@ -26,7 +26,9 @@ const HeadCard = (props: Props) => {
   const post = useFragment(PostFragment, props.post);
   const loading = props.loading;
   const [excerpt, setExcerpt] = useState("");
-  const [unsplashImage, setUnsplashImage] = useState("");
+  const [unsplashImage, setUnsplashImage] = useState(
+    "https://source.unsplash.com/random"
+  );
 
   useEffect(() => {
     if (loading) return;

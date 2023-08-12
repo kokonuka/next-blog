@@ -25,21 +25,17 @@ export const SliderCard: React.FC<Props> = (props) => {
   const loading = props.loading;
   const i = props.i;
   const unsplashImages = props.unsplashImages;
-  const [unsplashImage, setdUnsplashImage] = useState("");
   const defaultImage = "https://source.unsplash.com/random";
 
-  useEffect(() => {
-    if (!i) return;
-    if (unsplashImages?.length === 0) {
-      setdUnsplashImage(defaultImage);
-      return;
+  const getUnsplashImage = () => {
+    if (!i) return "";
+    if (unsplashImages.length === 0) {
+      return defaultImage;
     }
-    setdUnsplashImage(
-      unsplashImages.length > i
-        ? unsplashImages[i]
-        : unsplashImages[unsplashImages.length - 1]
-    );
-  }, [i, unsplashImages]);
+    return unsplashImages.length > i
+      ? unsplashImages[i]
+      : unsplashImages[unsplashImages.length - 1];
+  };
 
   return (
     <Box
@@ -53,15 +49,13 @@ export const SliderCard: React.FC<Props> = (props) => {
       overflow="hidden"
     >
       <Skeleton isLoaded={!loading}>
-        <Box
-          // pt={{ base: "50%", md: "60%", lg: "50%", xl: "60%" }}
-          pt="60%"
-          position="relative"
-        >
+        <Box pt="60%" position="relative">
           {post && (
             <LinkImage
               databaseId={post.databaseId}
-              imageUrl={post.featuredImage?.node.mediaItemUrl ?? unsplashImage}
+              imageUrl={
+                post.featuredImage?.node.mediaItemUrl ?? getUnsplashImage()
+              }
             />
           )}
         </Box>
