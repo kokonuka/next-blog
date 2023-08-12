@@ -12,6 +12,7 @@ import { FragmentType, useFragment } from "@/gql/generated";
 import { PostFragment } from "@/gql/fragments/post";
 import LinkImage from "../../molecules/LinkImage";
 import { formatDate } from "@/lib/formatDate";
+import PriorityLinkImage from "@/components/molecules/PriorityLinkImage";
 
 type Props = {
   post?: FragmentType<typeof PostFragment>;
@@ -51,7 +52,13 @@ export const SliderCard: React.FC<Props> = (props) => {
       <Skeleton isLoaded={!loading}>
         <Box pt="60%" position="relative">
           {post && (
-            <LinkImage
+            // <LinkImage
+            //   databaseId={post.databaseId}
+            //   imageUrl={
+            //     post.featuredImage?.node.mediaItemUrl ?? getUnsplashImage()
+            //   }
+            // />
+            <PriorityLinkImage
               databaseId={post.databaseId}
               imageUrl={
                 post.featuredImage?.node.mediaItemUrl ?? getUnsplashImage()
