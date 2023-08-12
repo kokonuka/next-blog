@@ -9,10 +9,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FragmentType, useFragment } from "@/gql/generated";
-import { getFormattedDateTimeDiff } from "../../../lib/getFormattedDateTimeDiff";
-import { TagLink } from "../../atoms/TagLink";
 import { PostFragment } from "@/gql/fragments/post";
 import LinkImage from "../../molecules/LinkImage";
+import { formatDate } from "@/lib/formatDate";
 
 type Props = {
   post?: FragmentType<typeof PostFragment>;
@@ -28,8 +27,6 @@ export const SliderCard: React.FC<Props> = (props) => {
       as="article"
       h="100%"
       bg={useColorModeValue("white", "gray.800")}
-      display="flex"
-      flexDirection="column"
       cursor="pointer"
       border={useColorModeValue("", "1px")}
       borderColor={useColorModeValue("gray.200", "gray.700")}
@@ -44,35 +41,24 @@ export const SliderCard: React.FC<Props> = (props) => {
           {post && <LinkImage post={post} />}
         </Box>
       </Skeleton>
-      <Box px="3" py="5" flex="1" display="flex" flexDirection="column">
-        <Box>
-          <SkeletonText isLoaded={!loading}>
-            <Text fontSize="xs" fontWeight="bold" color="gray.400">
-              {getFormattedDateTimeDiff(post?.date! || "")}
-            </Text>
+      <Box px="3" pt="2" pb="5">
+        <SkeletonText isLoaded={!loading}>
+          <Box mt="1">
             <Link
               as={NextLink}
               href={`/posts/${post?.databaseId}`}
               mt="1"
               fontSize={{ base: "medium", md: "xl" }}
               fontWeight="bold"
-              display="inline-block"
               _hover={{ opacity: "0.4" }}
             >
               {post?.title}
             </Link>
-          </SkeletonText>
-        </Box>
-        <Box
-          mt={{ base: "2", md: "4" }}
-          display="flex"
-          columnGap="3"
-          flexWrap="wrap"
-        >
-          {post?.tags?.nodes.map((tag, i) => (
-            <TagLink tag={tag} key={i} />
-          ))}
-        </Box>
+          </Box>
+          <Text mt="4" fontSize="xs" fontWeight="bold" color="gray.600">
+            {formatDate(post?.date ?? "")}
+          </Text>
+        </SkeletonText>
       </Box>
     </Box>
   );

@@ -4,10 +4,10 @@ import { load } from "cheerio";
 import { Box, Link, Skeleton, Text, useColorModeValue } from "@chakra-ui/react";
 import { AiOutlineCalendar, AiOutlineTag } from "react-icons/ai";
 import { formatDate } from "@/lib/formatDate";
-import Tags from "@/components/molecules/Tags";
 import { FragmentType, useFragment } from "@/gql/generated";
 import { PostFragment } from "@/gql/fragments/post";
 import LinkImage from "@/components/molecules/LinkImage";
+import PostCardTags from "@/components/molecules/PostCardTags";
 
 type Props = {
   post?: FragmentType<typeof PostFragment>;
@@ -65,10 +65,7 @@ const HeadCard = (props: Props) => {
             </Text>
           </Box>
           <Box display="flex" alignItems="center" gap="2">
-            <Text color="blue.500" fontSize={{ base: "lg", md: "2xl" }}>
-              <AiOutlineTag />
-            </Text>
-            <Tags tags={post?.tags?.nodes} />
+            <PostCardTags tags={post?.tags?.nodes} />
           </Box>
         </Box>
         <Box
