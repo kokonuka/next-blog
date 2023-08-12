@@ -20,7 +20,7 @@ const PostCardTags = (props: Props) => {
       <Text color="blue.500" fontSize={{ base: "lg", md: "2xl" }}>
         <AiOutlineTag />
       </Text>
-      <Box display="flex">
+      <Box display="flex" flexWrap="wrap">
         {tags?.map((tag, i) => (
           <>
             <NewLinkTag tag={tag} key={i} />
