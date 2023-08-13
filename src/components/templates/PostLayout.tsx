@@ -14,7 +14,7 @@ export const PostLayout = ({ children }: Props) => {
         <Container
           as="main"
           maxW="6xl"
-          pt={{ base: "5", lg: "14" }}
+          pt={{ base: "calc(2.5rem + 57px)", lg: "calc(3.5rem + 57px)" }}
           pb="16"
           px={{ base: "0", lg: "4" }}
           display="flex"
