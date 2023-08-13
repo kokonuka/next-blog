@@ -2,10 +2,13 @@ import { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import client from "../../lib/graphqlClient";
 import { FragmentType, graphql, useFragment } from "@/gql/generated";
 import { PostPageFragment as PostPageFragmentType } from "@/gql/generated/graphql";
+import { PostPageFragment } from "@/gql/fragments/postPage";
 import { CheerioAPI, load } from "cheerio";
-import { Head } from "../../components/Head";
-import { PostPageFragment } from "@/components/organisms/post/Post";
+import { Box } from "@chakra-ui/react";
 import { PostLayout } from "@/components/templates/PostLayout";
+import { Head } from "../../components/Head";
+import { Content } from "@/components/organisms/post/Content";
+import { SideMenu } from "@/components/organisms/post/SideMenu";
 
 export const allPostsQueryDocument = graphql(`
   query allPostsQuery($endCursor: String!) {
@@ -43,7 +46,12 @@ const PostPage: NextPage<Props> = ({ post: propsPost, content }) => {
         title={`${post.title} | sun develop`}
         description="Webエンジニアの備忘録"
       />
-      <PostLayout post={post} content={content} />
+      <PostLayout>
+        <Box display={{ base: "block", lg: "flex" }}>
+          <Content post={post} content={content} />
+          <SideMenu content={content} />
+        </Box>
+      </PostLayout>
     </>
   );
 };

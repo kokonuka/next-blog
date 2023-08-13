@@ -1,11 +1,8 @@
-import { useEffect } from "react";
 import "zenn-content-css";
 import { PostPageFragment as PostPageFragmentType } from "@/gql/generated/graphql";
-import { FragmentType } from "@/gql/generated";
-import { Box, useColorModeValue } from "@chakra-ui/react";
-import Prism from "prismjs";
-import { Tags } from "./Tags";
-import { TagButtonFragment } from "@/components/atoms/TagButton";
+import { Box } from "@chakra-ui/react";
+import RecommendedPostList from "./RecommendedPostList";
+import PostContent from "./PostContent";
 
 type Props = {
   post: PostPageFragmentType;
@@ -13,31 +10,14 @@ type Props = {
 };
 
 export const Content: React.FC<Props> = ({ post, content }) => {
-  useEffect(() => {
-    const highlight = async () => {
-      await Prism.highlightAll();
-    };
-    highlight();
-  }, [post]);
-
   return (
     <Box
+      as="main"
       width={{ base: "100%", lg: "70%" }}
-      bg={useColorModeValue("white", "gray.800")}
-      p="5"
-      py="10"
-      border={useColorModeValue("", "1px")}
-      borderColor={useColorModeValue("gray.200", "gray.700")}
-      borderRadius={useColorModeValue("", "lg")}
+      px={{ base: "4", lg: "0" }}
     >
-      <Tags
-        tags={post.tags?.nodes as FragmentType<typeof TagButtonFragment>[]}
-      />
-      <Box
-        dangerouslySetInnerHTML={{ __html: content }}
-        className="znc"
-        py="10"
-      ></Box>
+      <PostContent post={post} content={content} />
+      <RecommendedPostList post={post} />
     </Box>
   );
 };

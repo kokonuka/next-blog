@@ -39,12 +39,12 @@ export const SideMenu = ({ content }: Props) => {
 
   return (
     <Box
+      as="aside"
       pl="5"
       width={{ base: "100%", lg: "30%" }}
       display={{ base: "none", lg: "block" }}
     >
       <Box
-        bg={useColorModeValue("white", "gray.800")}
         p="5"
         border={useColorModeValue("", "1px")}
         borderColor={useColorModeValue("gray.200", "gray.700")}
