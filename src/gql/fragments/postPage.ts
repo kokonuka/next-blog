@@ -21,7 +21,7 @@ export const PostPageFragment = graphql(`
     }
     tags {
       nodes {
-        ...TagButton
+        ...TagItem
       }
     }
   }
