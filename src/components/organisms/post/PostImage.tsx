@@ -7,7 +7,7 @@ type Props = {
   post: PostPageFragmentType;
 };
 
-export const Image: React.FC<Props> = ({ post }) => {
+export const PostImage: React.FC<Props> = ({ post }) => {
   const mediaItemUrl = post?.featuredImage?.node?.mediaItemUrl;
   const defaultPostImage = "https://source.unsplash.com/random";
   const isSvg = mediaItemUrl && isSvgUrl(mediaItemUrl);
