@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import { FragmentType } from "@/gql/generated";
 import { PostPageFragment } from "@/gql/generated/graphql";
-import { Box, useColorModeValue } from "@chakra-ui/react";
+import { Box, Text, useColorModeValue } from "@chakra-ui/react";
 import Prism from "prismjs";
 import { PostImage } from "./PostImage";
-import { Tags } from "./Tags";
-import { Header } from "./Header";
-import { TagButtonFragment } from "@/components/atoms/TagButton";
+import { AiOutlineCalendar } from "react-icons/ai";
+import PostCardTags from "@/components/molecules/PostCardTags";
+import { formatDate } from "@/lib/formatDate";
 
 type Props = {
   post: PostPageFragment;
@@ -27,19 +26,34 @@ const PostContent = ({ post, content }: Props) => {
       borderColor={useColorModeValue("gray.200", "gray.700")}
       borderRadius={useColorModeValue("", "lg")}
     >
-      <PostImage post={post} />
-      <Header
-        title={post.title ? post.title : ""}
-        date={post.date ? post.date : ""}
-      />
-      <Tags
-        tags={post.tags?.nodes as FragmentType<typeof TagButtonFragment>[]}
-      />
-      <Box
-        dangerouslySetInnerHTML={{ __html: content }}
-        className="znc"
-        py="10"
-      ></Box>
+      <Box px={{ base: "4", lg: "0" }}>
+        <Text fontSize={{ base: "2xl", lg: "4xl" }} fontWeight="bold">
+          {post.title}
+        </Text>
+        <Box mt="2" display="flex" gap="5">
+          <Box display="flex" alignItems="center" gap="2">
+            <Text color="blue.500" fontSize={{ base: "lg", md: "2xl" }}>
+              <AiOutlineCalendar />
+            </Text>
+            <Text fontSize={{ base: "sm", md: "medium" }}>
+              {formatDate(post?.date ?? "")}
+            </Text>
+          </Box>
+          <Box display="flex" alignItems="center" gap="2">
+            <PostCardTags tags={post?.tags?.nodes} />
+          </Box>
+        </Box>
+      </Box>
+      <Box mt="5">
+        <PostImage post={post} />
+      </Box>
+      <Box px={{ base: "4", lg: "0" }}>
+        <Box
+          dangerouslySetInnerHTML={{ __html: content }}
+          className="znc"
+          py="10"
+        ></Box>
+      </Box>
     </Box>
   );
 };

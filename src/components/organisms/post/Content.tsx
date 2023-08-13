@@ -11,11 +11,7 @@ type Props = {
 
 export const Content: React.FC<Props> = ({ post, content }) => {
   return (
-    <Box
-      as="main"
-      width={{ base: "100%", lg: "70%" }}
-      px={{ base: "4", lg: "0" }}
-    >
+    <Box as="main" width={{ base: "100%", lg: "70%" }}>
       <PostContent post={post} content={content} />
       <RecommendedPostList post={post} />
     </Box>
