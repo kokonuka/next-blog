@@ -1,7 +1,8 @@
 import React from "react";
+import NextLink from "next/link";
 import { PostFragment } from "@/gql/fragments/post";
 import { FragmentType, useFragment } from "@/gql/generated";
-import { Box, Skeleton, Text } from "@chakra-ui/react";
+import { Box, Skeleton, Link } from "@chakra-ui/react";
 import PostCardDate from "@/components/molecules/PostCardDate";
 import PostCardTags from "@/components/molecules/PostCardTags";
 import PriorityLinkImage from "@/components/molecules/PriorityLinkImage";
@@ -53,9 +54,15 @@ const FlatCard = (props: Props) => {
         </Box>
       </Skeleton>
       <Box mt={{ base: "5", md: "0" }} pl={{ base: "0", md: "10" }}>
-        <Text fontWeight="bold" fontSize="xl" lineHeight="1.8">
+        <Link
+          as={NextLink}
+          href={`/posts/${post.databaseId}`}
+          fontWeight="bold"
+          fontSize="xl"
+          lineHeight="1.8"
+        >
           {post.title}
-        </Text>
+        </Link>
         <Box mt="2" display="flex">
           <Box pr="2">
             <PostCardDate post={post} />
