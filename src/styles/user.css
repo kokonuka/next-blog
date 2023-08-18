@@ -2,6 +2,11 @@
   display: none !important;
 }
 
+pre {
+  padding: 1em;
+  margin: 0.5em 0;
+}
+
 .znc pre > code {
   padding: 0 !important;
 }
