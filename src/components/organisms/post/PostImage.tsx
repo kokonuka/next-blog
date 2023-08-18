@@ -13,30 +13,34 @@ export const PostImage: React.FC<Props> = ({ post }) => {
   const isSvg = mediaItemUrl && isSvgUrl(mediaItemUrl);
 
   return (
-    <Box px="3" pt={isSvg ? "14" : "50%"} position="relative">
-      {isSvg ? (
-        <NextImage
-          src={mediaItemUrl || defaultPostImage}
-          alt="article"
-          width={1980}
-          height={1150}
-          style={{
-            width: "100%",
-            height: mediaItemUrl ? "100px" : "400px",
-            objectFit: mediaItemUrl ? "contain" : "cover",
-          }}
-        />
-      ) : (
-        <NextImage
-          src={mediaItemUrl || defaultPostImage}
-          alt="article"
-          fill
-          style={{
-            objectFit:
-              mediaItemUrl && isSvgUrl(mediaItemUrl) ? "contain" : "cover",
-          }}
-        />
+    <>
+      {mediaItemUrl && (
+        <Box px="3" pt={isSvg ? "14" : "50%"} position="relative">
+          {isSvg ? (
+            <NextImage
+              src={mediaItemUrl || defaultPostImage}
+              alt="article"
+              width={1980}
+              height={1150}
+              style={{
+                width: "100%",
+                height: mediaItemUrl ? "100px" : "400px",
+                objectFit: mediaItemUrl ? "contain" : "cover",
+              }}
+            />
+          ) : (
+            <NextImage
+              src={mediaItemUrl || defaultPostImage}
+              alt="article"
+              fill
+              style={{
+                objectFit:
+                  mediaItemUrl && isSvgUrl(mediaItemUrl) ? "contain" : "cover",
+              }}
+            />
+          )}
+        </Box>
       )}
-    </Box>
+    </>
   );
 };
