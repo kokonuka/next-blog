@@ -43,14 +43,14 @@ export const Profile = () => {
           <Text fontWeight="bold" fontSize="lg" textAlign="center">
             sun
           </Text>
-          <Link
+          {/* <Link
             href={`https://twitter.com/${process.env.NEXT_PUBLIC_TWITTER_ACCOUNT_NAME}`}
             target="_blank"
             fontSize="2xl"
             color="blue.400"
           >
             <AiOutlineTwitter />
-          </Link>
+          </Link> */}
           <Link
             href={`https://github.com/${process.env.NEXT_PUBLIC_GITHUB_ACCOUNT_NAME}`}
             target="_blank"
