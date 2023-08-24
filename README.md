@@ -1,25 +1,10 @@
-# npm
+Node.js バージョン
+v18.16.0
 
-## Chakra UI
-- @chakra-ui/react
-- @emotion/react
-- @emotion/styled
-- framer-motion
+GraphQL のクエリから型を生成する
 
-## 進捗バー
-- nprogress
-- @types/nprogress
+```
+$ npm run codegen
+$ npm run codegen:watch
 
-## タイピングアニメーション
-- typed.js
-
-## ローディング
-- react-loader-spinner
-
-## アイコン
-- react-icons
-- @chakra-ui/icons
-
-## エディター表現
-- cheerio
-- highlight.js
+```
