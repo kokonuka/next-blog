@@ -58,6 +58,7 @@ const PostPage: NextPage<Props> = ({ post: propsPost, content }) => {
           as="aside"
           mt={{ base: "14", lg: "0" }}
           w={{ base: "100%", lg: "320px" }}
+          display={{ base: "none", lg: "block" }}
         >
           <SideMenu content={content} />
         </Box>
