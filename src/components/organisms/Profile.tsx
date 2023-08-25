@@ -17,6 +17,8 @@ export const Profile = () => {
         base: useColorModeValue("gray.200", "gray.700"),
         lg: useColorModeValue("gray.200", "gray.700"),
       }}
+      position="sticky"
+      top="3.5rem"
     >
       <Box display="flex" justifyContent="center">
         <Avatar

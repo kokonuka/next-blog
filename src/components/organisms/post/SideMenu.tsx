@@ -38,19 +38,16 @@ export const SideMenu = ({ content }: Props) => {
   }, [content]);
 
   return (
-    <Box
-      as="aside"
-      pl="5"
-      width={{ base: "100%", lg: "30%" }}
-      display={{ base: "none", lg: "block" }}
-    >
+    <Box position="sticky" top="3.5rem">
       <Box
-        p="5"
         border={useColorModeValue("", "1px")}
         borderColor={useColorModeValue("gray.200", "gray.700")}
         borderRadius={useColorModeValue("", "lg")}
+        p={useColorModeValue("0", "5")}
+        position="sticky"
+        top="3.5rem"
       >
-        <Heading as="h2" fontSize="xl">
+        <Heading as="h2" fontSize="xl" textAlign="center">
           目次
         </Heading>
         <Box mt="5">
