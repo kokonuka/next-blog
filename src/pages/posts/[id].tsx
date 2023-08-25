@@ -47,8 +47,18 @@ const PostPage: NextPage<Props> = ({ post: propsPost, content }) => {
         description="Webエンジニアの備忘録"
       />
       <PostLayout>
-        <Box display={{ base: "block", lg: "flex" }}>
+        <Box
+          as="main"
+          width={{ base: "100%", lg: "calc(100% - 320px)" }}
+          pr={{ base: "0", lg: "40px", xl: "80px" }}
+        >
           <Content post={post} content={content} />
+        </Box>
+        <Box
+          as="aside"
+          mt={{ base: "14", lg: "0" }}
+          w={{ base: "100%", lg: "320px" }}
+        >
           <SideMenu content={content} />
         </Box>
       </PostLayout>

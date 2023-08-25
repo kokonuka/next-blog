@@ -26,7 +26,11 @@ const Home: NextPage<Props> = () => {
           <TechPostList />
           <CheatSheetPostList />
         </Box>
-        <Box mt={{ base: "14", lg: "0" }} w={{ base: "100%", lg: "320px" }}>
+        <Box
+          as="aside"
+          mt={{ base: "14", lg: "0" }}
+          w={{ base: "100%", lg: "320px" }}
+        >
           <Profile />
         </Box>
       </HomeLayout>

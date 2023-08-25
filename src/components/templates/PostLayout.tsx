@@ -12,14 +12,11 @@ export const PostLayout = ({ children }: Props) => {
       <Header />
       <Box flex="1">
         <Container
-          as="main"
           maxW="7xl"
           pt={{ base: "calc(2.5rem + 57px)", lg: "calc(3.5rem + 57px)" }}
-          pb="16"
+          pb="14"
           px={{ base: "0", lg: "4" }}
-          display="flex"
-          flexDirection="column"
-          flex="1"
+          display={{ base: "block", lg: "flex" }}
         >
           {children}
         </Container>
