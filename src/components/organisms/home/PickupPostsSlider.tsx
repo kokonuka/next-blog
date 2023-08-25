@@ -35,7 +35,7 @@ export const PickupPostsSlider = () => {
           fontWeight="bold"
           textAlign="center"
         >
-          PICKUP
+          Feature
         </Text>
       </Box>
       <Box mt="5">

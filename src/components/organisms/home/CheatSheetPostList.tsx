@@ -39,7 +39,7 @@ const CheatSheetPostList = () => {
         fontWeight="bold"
         textAlign="center"
       >
-        CheaSheet
+        Memo
       </Text>
       <Box as="ul">
         {data?.posts?.nodes.map((post, i) => (
