@@ -6,7 +6,6 @@ import {
   Heading,
   Button,
   useColorModeValue,
-  Slide,
 } from "@chakra-ui/react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaRegFileAlt } from "react-icons/fa";
@@ -46,7 +45,15 @@ export const Header = () => {
   }, [scrollEvent]);
 
   return (
-    <Slide direction="top" in={isHeaderShown} style={{ zIndex: 10 }}>
+    <Box
+      position="fixed"
+      top="0"
+      left="0"
+      w="100%"
+      transform={isHeaderShown ? "translateY(0%)" : "translateY(-100%)"}
+      transition="all 1s ease-in"
+      zIndex="1"
+    >
       <Box
         as="header"
         py="2"
@@ -89,6 +96,6 @@ export const Header = () => {
           </Box>
         </Container>
       </Box>
-    </Slide>
+    </Box>
   );
 };
