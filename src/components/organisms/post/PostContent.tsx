@@ -21,11 +21,7 @@ const PostContent = ({ post, content }: Props) => {
   }, [post]);
 
   return (
-    <Box
-      border={useColorModeValue("", "1px")}
-      borderColor={useColorModeValue("gray.200", "gray.700")}
-      borderRadius={useColorModeValue("", "lg")}
-    >
+    <Box>
       <Box px={{ base: "4", lg: "0" }}>
         <Text fontSize={{ base: "2xl", lg: "4xl" }} fontWeight="bold">
           {post.title}
