@@ -16,7 +16,7 @@ const PostCardDate = (props: Props) => {
       <Text fontSize={{ base: "lg", md: "2xl" }} color="rgba(255, 255, 255, 0.443)">
         <AiOutlineCalendar />
       </Text>
-      <Text fontSize={{ base: "sm", md: "medium" }}>
+      <Text fontSize={{ base: "xs", md: "medium" }}>
         {formatDate(post?.date ?? "")}
       </Text>
     </Box>
