@@ -18,7 +18,7 @@ const FlatCard = (props: Props) => {
 
   return (
     <Box
-      py="10"
+      py={{ base: "5", md: "10" }}
     >
       <Box mt={{ base: "5", md: "0" }} pl={{ base: "0", md: "10" }}>
         <Link
