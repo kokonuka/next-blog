@@ -16,7 +16,6 @@ export const Header = () => {
   const [isHeaderShown, setIsHeaderShown] = useState(true);
   const [lastPosition, setLastPosition] = useState(0);
   const headerHeight = 57;
-  const bg = useColorModeValue("white", "rgba(0, 0, 0, 0.1)");
   const borderColor = useColorModeValue("gray.200", "gray.700");
   const color = useColorModeValue("gray.500", "gray.400");
   const _hover = { color: useColorModeValue("gray.600", "gray.500") };
@@ -57,9 +56,6 @@ export const Header = () => {
       <Box
         as="header"
         py="2"
-        bg={bg}
-        borderBottom="1px"
-        borderColor={borderColor}
         backdropFilter="blur(20px)"
       >
         <Container maxW="7xl" display="flex" justifyContent="space-between">

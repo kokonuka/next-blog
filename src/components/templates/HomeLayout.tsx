@@ -15,7 +15,6 @@ export const HomeLayout: React.FC<Props> = ({ children }) => {
         pt={{ base: "57px", lg: "calc(3.5rem + 57px)" }}
         pb="14"
         px={{ base: "0", lg: "4" }}
-        display={{ base: "block", lg: "flex" }}
         flex="1"
       >
         {children}

@@ -16,6 +16,7 @@ const NewLinkTag = (props: Props) => {
       as={NextLink}
       href={`/tags/${tag?.id}`}
       fontSize={{ base: "sm", md: "medium" }}
+      borderBottom="1px solid rgba(255, 255, 255, 0.13)"
     >
       {tag.name}
     </Link>

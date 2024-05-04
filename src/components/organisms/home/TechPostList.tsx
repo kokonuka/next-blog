@@ -8,21 +8,6 @@ import FlatCard from "./FlatCard";
 
 const TechPostList = () => {
   const { data, loading, error } = useQuery(getTechPostsQueryDocuments);
-  const [unsplashImages, setUnsplashImages] = useState([""]);
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://api.unsplash.com/search/photos?query=tech&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESSKEY}`
-      )
-      .then((res) => {
-        let unsplashImages: string[] = [];
-        res.data.results.map((obj: any) => {
-          unsplashImages.push(obj.urls.regular);
-        });
-        setUnsplashImages(unsplashImages);
-      });
-  }, []);
 
   if (error) return <Text>読み込めませんでした</Text>;
 
@@ -36,7 +21,6 @@ const TechPostList = () => {
                 post={post}
                 loading={loading}
                 i={i}
-                unsplashImages={unsplashImages}
               />
             )}
           </>
