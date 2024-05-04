@@ -30,8 +30,8 @@ const FlatCard = (props: Props) => {
         >
           {post.title}
         </Link>
-        <Box mt="2" display="flex">
-          <Box pr="2">
+        <Box mt="2" display="flex" gap="5">
+          <Box>
             <PostCardDate post={post} />
           </Box>
           <PostCardTags tags={post.tags?.nodes} />

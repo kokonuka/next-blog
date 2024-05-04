@@ -14,7 +14,7 @@ export const Footer = () => {
       <Container maxW="7xl">
         <Box>
           <Text fontSize="xs" textAlign="center">
-            © 2023 Sun Blog All Rights Reserved.
+            © 2023 sundev All Rights Reserved.
           </Text>
         </Box>
       </Container>

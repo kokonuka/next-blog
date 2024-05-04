@@ -13,9 +13,7 @@ const Home: NextPage<Props> = () => {
     <>
       <Head title="sun develop" description="Webエンジニアの備忘録" />
       <HomeLayout>
-        <Box
-          as="main"
-        >
+        <Box as="main">
           <TechPostList />
           <CheatSheetPostList />
         </Box>

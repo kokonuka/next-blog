@@ -17,7 +17,7 @@ const PostCardTags = (props: Props) => {
 
   return (
     <Box display="flex" alignItems="center" gap="2">
-      <Text color="blue.500" fontSize={{ base: "lg", md: "2xl" }}>
+      <Text fontSize={{ base: "lg", md: "2xl" }} color="rgba(255, 255, 255, 0.443)">
         <AiOutlineTag />
       </Text>
       <Box display="flex" flexWrap="wrap">
@@ -25,7 +25,7 @@ const PostCardTags = (props: Props) => {
           <>
             <NewLinkTag tag={tag} key={i} />
             <Text pr="2" mt="-1px">
-              {tags.length - 1 !== i && ","}
+              {tags.length - 1 !== i && ""}
             </Text>
           </>
         ))}

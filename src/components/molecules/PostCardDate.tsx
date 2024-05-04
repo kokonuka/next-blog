@@ -13,7 +13,7 @@ const PostCardDate = (props: Props) => {
 
   return (
     <Box display="flex" alignItems="center" gap="2">
-      <Text color="blue.500" fontSize={{ base: "lg", md: "2xl" }}>
+      <Text fontSize={{ base: "lg", md: "2xl" }} color="rgba(255, 255, 255, 0.443)">
         <AiOutlineCalendar />
       </Text>
       <Text fontSize={{ base: "sm", md: "medium" }}>

@@ -13,7 +13,7 @@ export const SearchLayout: React.FC<Props> = ({ children }) => {
       <Box
         as="main"
         pt={{ base: "calc(2.5rem + 57px)", lg: "calc(3.5rem + 57px)" }}
-        bg={useColorModeValue("white", "gray.800")}
+        bg={useColorModeValue("white", "rgb(25, 25, 25)")}
         flex="1"
         display="flex"
         flexDirection="column"
