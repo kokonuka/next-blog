@@ -25,7 +25,7 @@ const FlatCard = (props: Props) => {
           as={NextLink}
           href={`/posts/${post.databaseId}`}
           fontWeight="bold"
-          fontSize="xl"
+          fontSize={{ base: "medium", md: "xl" }}
           lineHeight="1.8"
         >
           {post.title}

@@ -12,9 +12,9 @@ export const HomeLayout: React.FC<Props> = ({ children }) => {
       <Header />
       <Container
         maxW="4xl"
-        pt="20"
+        pt={{ base: "6", lg: "20" }}
         pb="14"
-        px={{ base: "0", lg: "4" }}
+        px="12"
         flex="1"
       >
         {children}
