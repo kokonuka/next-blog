@@ -16,7 +16,7 @@ const styles = {
     body: {
       fontFamily: "body",
       color: mode("gray.800", "whiteAlpha.900")(props),
-      bg: mode("blackAlpha.50", "gray.900")(props),
+      bg: mode("blackAlpha.50", "rgb(25, 25, 25)")(props),
     },
   }),
 };
