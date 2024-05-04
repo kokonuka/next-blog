@@ -47,7 +47,6 @@ const CheatSheetPostList = () => {
             post={post}
             loading={loading}
             i={i}
-            unsplashImages={unsplashImages}
             key={i}
           />
         ))}

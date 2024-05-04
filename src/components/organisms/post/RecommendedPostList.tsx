@@ -73,7 +73,6 @@ const RecommendedPostList = ({ post }: Props) => {
               post={post}
               loading={loading}
               i={i}
-              unsplashImages={unsplashImages}
               key={i}
             />
           ))
