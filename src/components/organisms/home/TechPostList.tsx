@@ -11,10 +11,10 @@ const TechPostList = () => {
   if (error) return <Text>読み込めませんでした</Text>;
 
   return (
-    <Box as="section">
+    <Box as="section" pt={{ base: '10', md: '8' }}>
       <Box as="ul">
         {data?.posts?.nodes.map((post, i) => (
-          <Box key={i} mt={{ base: '8', md: '20' }}>
+          <Box key={i} mt={{ base: '8', md: '16' }}>
             <FlatCard post={post} loading={loading} i={i} />
           </Box>
         ))}
