@@ -76,7 +76,7 @@ export const Posts = () => {
       {id && (
         <Box
           pb="16"
-          bg={useColorModeValue("blackAlpha.50", "gray.900")}
+          bg={useColorModeValue("blackAlpha.50", "rgb(25, 25, 25)")}
           flex="1"
         >
           <Container maxW="6xl" pt="10">
