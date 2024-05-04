@@ -51,7 +51,7 @@ export const Header = () => {
       left="0"
       w="100%"
       transform={isHeaderShown ? "translateY(0%)" : "translateY(-100%)"}
-      transition="all 1s ease-in"
+      transition="all 0.1s ease-in"
       zIndex="1"
     >
       <Box
